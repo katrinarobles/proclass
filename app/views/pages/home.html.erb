@@ -1,2 +1,10 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 m-2">
+      <h1>Welcome to ProClass,</h1>
+      <!-- <h1>Pages#home</h1> -->
+      <p> a fancy scheduling management system for fitness instructors like yourself so your clients can easily connect to you and your classes!</p>
+      <%= link_to "Login", new_user_session_path %> || <%= link_to "Sign Up", new_user_registration_path %>
+    </div>
+  </div>
+</div>
