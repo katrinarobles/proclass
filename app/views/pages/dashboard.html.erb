@@ -4,6 +4,7 @@
       <h1> Welcome <%= current_user.first_name.split(" ").first.capitalize %>,</h1>
       <!-- <h1>Pages#home</h1> -->
       <p> This is your dashboard</p>
+      <p><%= cl_image_tag current_user.photo.key, height: 300, width: 400, crop: :fill %>
       <p>Name: <%= current_user.first_name.split(" ").first.capitalize %></p>
       <p>Last Name: <%= current_user.last_name.split(" ").first.capitalize %></p>
       <p>Phone <%= current_user.phone %></p>
@@ -11,8 +12,13 @@
       <p>Bio: <%= current_user.bio%></p>
       <p><%= current_user[:teacher] ?  "Teacher" : "" %></p>
 
-      <p><%= link_to 'Edit Your Account', edit_user_registration_path %></p>
+      <p><%= link_to 'Create a Course', new_course_path %></p>
 
+      <p>Your list of courses: <% current_user.courses.each do |course| %>
+        <p><%= course.name %> || <%= link_to "Remove", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
+          || <%= link_to "Edit", edit_course_path(course) %>
+        </p>
+      <% end %>
 
     </div>
   </div>
