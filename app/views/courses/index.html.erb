@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 m-2">
+      <% @courses.each do |course| %>
+        <%= course.name %> - <%= course.user.first_name %>
+      <% end %>
+    </div>
+  </div>
+</div>

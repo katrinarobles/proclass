@@ -15,7 +15,7 @@
       <p><%= link_to 'Create a Course', new_course_path %></p>
 
       <p>Your list of courses: <% current_user.courses.each do |course| %>
-        <p><%= course.name %> || <%= link_to "Remove", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
+        <p><%= link_to course.name, course_path(course) %> || <%= link_to "Delete", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
           || <%= link_to "Edit", edit_course_path(course) %>
         </p>
       <% end %>
