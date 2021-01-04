@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   belongs_to :user
+  has_many :occurences, dependent: :destroy
   validates :name, presence: true
   validates :description, presence: true, length: { maximum: 300 }
 
