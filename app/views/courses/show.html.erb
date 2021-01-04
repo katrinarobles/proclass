@@ -5,6 +5,17 @@
       <p> <%= @course.description %> </p>
       <p> <%= @course.duration %> minutes</p>
       <p> <%= @course.teacher %></p>
+      <p> <%= link_to 'Create an event for this course', new_course_occurence_path(@course.id) %></p>
+
+      <h4> Classes </h4>
+      <% @course.occurences.each do |occurence| %>
+        <p> <%= occurence.date %> on <%= occurence.time %> </p>
+        <p> <%= occurence.id %> </p>
+        <p> €<%= occurence.price %> </p>
+        <p> Location <%= occurence.location %> </p>
+        <p> Capacity <%= occurence.capacity %> </p>
+        <p> <%= link_to 'Update this class', edit_course_occurence_path(@course, occurence) %> || <%= link_to "Delete", course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } %> </p>
+      <% end %>
     </div>
   </div>
 </div>

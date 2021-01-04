@@ -1,12 +1,13 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :find_course, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_course, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @courses = Course.all
+    @courses = policy_scope(Course)
   end
 
   def show
+    console
   end
 
   def new
@@ -47,7 +48,7 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:name, :description, :duration)
   end
 
-  def find_course
+  def set_course
     @course = Course.find(params[:id])
     authorize @course
   end
