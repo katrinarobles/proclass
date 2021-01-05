@@ -1,7 +1,9 @@
 class OccurencesController < ApplicationController
+  before_action :set_occurence, only: [ :show, :edit, :update, :destroy]
   before_action :find_course, only: [:show, :new, :edit, :update, :destroy]
+
+
   def show
-    authorize @occurence
   end
 
   def new
@@ -12,7 +14,6 @@ class OccurencesController < ApplicationController
     @occurence = Occurence.new(occurence_params)
     @course = Course.find(params[:course_id])
     @occurence.course = @course
-    authorize @occurence
     if @occurence.save
       redirect_to @course, notice: 'Created Event successfully'
     else
@@ -24,7 +25,6 @@ class OccurencesController < ApplicationController
   end
 
   def update
-    @course = Course.find(params[:course_id])
     if @occurence.update(occurence_params)
       redirect_to @course, notice: 'Updated Event successfully'
     else
@@ -33,10 +33,8 @@ class OccurencesController < ApplicationController
   end
 
   def destroy
-    @occurence = Occurence.find(params[:id])
-    @course = Course.find(params[:course_id])
     @occurence.destroy
-    redirect_to dashboard_path, notice: 'Deleted event successfully!'
+    redirect_to @course, notice: 'Deleted event successfully!'
   end
 
   private
@@ -47,6 +45,9 @@ class OccurencesController < ApplicationController
 
   def find_course
     @course = Course.find(params[:course_id])
-    authorize @course
+  end
+
+  def set_occurence
+    @occurence = Occurence.find(params[:id])
   end
 end

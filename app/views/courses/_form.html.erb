@@ -4,7 +4,7 @@
       <%= simple_form_for [ @course ] do |f| %>
         <%= f.input :name %>
         <%= f.input :description %>
-        <%= f.input :duration %>
+        <%= f.input :duration, label: "Duration in minutes" %>
         <%= f.submit "Create a Course", class: "btn btn-primary" %>
       <% end %>
     </div>
