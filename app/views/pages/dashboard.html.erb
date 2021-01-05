@@ -1,25 +1,30 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6 m-2">
-      <h1> Welcome <%= current_user.first_name.split(" ").first.capitalize %>,</h1>
-      <!-- <h1>Pages#home</h1> -->
-      <p> This is your dashboard</p>
-      <p><%= cl_image_tag current_user.photo.key, height: 300, width: 400, crop: :fill %>
-      <p>Name: <%= current_user.first_name.split(" ").first.capitalize %></p>
-      <p>Last Name: <%= current_user.last_name.split(" ").first.capitalize %></p>
-      <p>Phone <%= current_user.phone %></p>
+<div class="header-container">
+  <h1> Welcome <%= current_user.first_name.split(" ").first.capitalize %>,</h1>
+  <p> This is your dashboard</p>
+</div>
+
+<div class="dashboard-container">
+  <div class="cards">
+      <p>Name: <strong> <%= current_user.first_name.split(" ").first.capitalize %>
+          <%= current_user.last_name.split(" ").first.capitalize %> </strong></p>
+      <p>Phone: <%= current_user.phone %></p>
       <p>Email: <%= current_user.email %></p>
       <p>Bio: <%= current_user.bio%></p>
-      <p><%= current_user[:teacher] ?  "Teacher" : "" %></p>
+      <p><%= link_to 'Update Your Account', edit_user_registration_path %></p>
+  </div>
+  <div class="cards">
+      <% if current_user.teacher? %>
+          <p>Title: <strong>Teacher</strong></p>
+          <p><%= link_to 'Create a Course', new_course_path, class: "btn btn-primary" %></p>
+  </div>
 
-      <p><%= link_to 'Create a Course', new_course_path %></p>
-
-      <p>Your list of courses: <% current_user.courses.each do |course| %>
-        <p><%= link_to course.name, course_path(course) %> || <%= link_to "Delete", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="cards">
+      <p>Your list of courses: <% current_user.courses.each do |course| %> </p>
+        <p><%= link_to course.name, course_path(course) %>
           || <%= link_to "Edit", edit_course_path(course) %>
+          || <%= link_to "Delete", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
         </p>
       <% end %>
-
-    </div>
+    <% end %>
   </div>
 </div>

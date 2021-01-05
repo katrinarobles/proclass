@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-6 m-2">
-      <p> <%= @occurence.course.name %> </p>
-      <p> <%= @occurence.course.detail %> </p>
-      <p> <%= @occurence.course.teacher%> </p>
-      <p> Date: <%= @occurence.date %>  Time: <%= @occurence.time%> </p>
+      <h2><%= @course.name %> </h2>
+      <p> Class Details: <%= @course.description %> </p>
+      <p> Teacher: <%= @course.teacher%> </p>
+      <p> Date: <%= @occurence.date %> </p>
       <p> €<%= @occurence.price %> </p>
       <p> Location: <%= @occurence.location %></p>
-      <p> <%= @occurence.course.duration%></p>
+      <p> <%= @course.duration%> minutes</p>
     </div>
   </div>
 </div>

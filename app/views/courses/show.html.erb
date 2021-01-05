@@ -3,18 +3,22 @@
     <div class="col-6 m-2">
       <h2> <%= @course.name %> </h2>
       <p> <%= @course.description %> </p>
-      <p> <%= @course.duration %> minutes</p>
-      <p> <%= @course.teacher %></p>
-      <p> <%= link_to 'Create an event for this course', new_course_occurence_path(@course.id) %></p>
+      <p> Details: <%= @course.duration %> minutes</p>
+      <p> Teacher: <%= @course.teacher %></p>
+      <% if current_user.id == @course.user_id %>
+        <p> <%= link_to 'Create an event for this course', new_course_occurence_path(@course.id) %></p>
+      <% end %>
 
-      <h4> Classes </h4>
-      <% @course.occurences.each do |occurence| %>
-        <p> <%= occurence.date %> on <%= occurence.time %> </p>
-        <p> <%= occurence.id %> </p>
-        <p> €<%= occurence.price %> </p>
-        <p> Location <%= occurence.location %> </p>
-        <p> Capacity <%= occurence.capacity %> </p>
-        <p> <%= link_to 'Update this class', edit_course_occurence_path(@course, occurence) %> || <%= link_to "Delete", course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } %> </p>
+      <h4> Events </h4>
+      <% @course.occurences.order(date: :asc).each do |occurence| %>
+            <p> Date: <%= occurence.date %> </p>
+            <p> Location: <%= occurence.location %> </p>
+            <p> Capacity: <%= occurence.capacity %> </p>
+            <p>
+                  <%= link_to "See more Details", course_occurence_path(occurence.course, occurence) %> ||
+                  <%= link_to 'Update this class', edit_course_occurence_path(occurence.course, occurence) %> ||
+                  <%= link_to "Delete", course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } %>
+            </p>
       <% end %>
     </div>
   </div>

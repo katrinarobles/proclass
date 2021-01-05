@@ -3,22 +3,21 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @courses = policy_scope(Course)
+    @courses = Course.all
   end
 
   def show
+    @course.occurences.order(date: :asc)
     console
   end
 
   def new
     @course = Course.new
-    authorize @course
   end
 
   def create
     @course = Course.new(course_params)
     @course.user = current_user
-    authorize @course
     if @course.save
       redirect_to @course, notice: 'Created Course successfully'
     else
@@ -50,7 +49,5 @@ class CoursesController < ApplicationController
 
   def set_course
     @course = Course.find(params[:id])
-    authorize @course
   end
-
 end

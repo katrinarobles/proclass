@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_163816) do
+ActiveRecord::Schema.define(version: 2021_01_05_095517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,6 @@ ActiveRecord::Schema.define(version: 2021_01_04_163816) do
   end
 
   create_table "occurences", force: :cascade do |t|
-    t.date "date"
-    t.time "time"
     t.integer "capacity"
     t.integer "price"
     t.string "location"
@@ -64,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_163816) do
     t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "date"
     t.index ["course_id"], name: "index_occurences_on_course_id"
   end
 
