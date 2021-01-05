@@ -1,13 +1,17 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6 m-2">
-      <h2><%= @course.name %> </h2>
-      <p> Class Details: <%= @course.description %> </p>
-      <p> Teacher: <%= @course.teacher%> </p>
-      <p> Date: <%= @occurence.date %> </p>
-      <p> €<%= @occurence.price %> </p>
-      <p> Location: <%= @occurence.location %></p>
-      <p> <%= @course.duration%> minutes</p>
-    </div>
+<div class="header-container">
+  <h2><%= @course.name %> </h2>
+  <p> Date: <%= @occurence.date %> </p>
+</div>
+<div class="main-container">
+  <div class="occur-info cards">
+    <p> Details:</p>
+      <p><em><%= @course.description %> </em></p>
+    <p> Teacher: <%= @course.teacher%> </p>
+    <p> €<%= @occurence.price %> </p>
+    <p> Location: <%= @occurence.location %></p>
+    <p> <%= @course.duration%> minutes</p>
+  </div>
+  <div class="occur-attendees cards">
+    <h2> This is where the list of attendees will be listed</h2>
   </div>
 </div>

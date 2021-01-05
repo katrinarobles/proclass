@@ -7,7 +7,7 @@ const datePicker = () => {
     altInput: true,
     altFormat: "F j, Y D H:i",
     mode: "multiple",
-    dateFormat: "D M d at H:i",
+    dateFormat: "M d at H:i D",
   });
 };
 
