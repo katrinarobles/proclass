@@ -7,7 +7,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course.occurences.order(date: :asc)
     console
   end
 

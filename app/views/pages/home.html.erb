@@ -7,6 +7,12 @@
       <% if !user_signed_in? %>
         <%= link_to "Login", new_user_session_path %> || <%= link_to "Sign Up", new_user_registration_path %>
       <% end %>
+      <h2> Courses</h2>
+      <% @courses.each do |course| %>
+        <% course.occurences.each do |occurence| %>
+          <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= course.name %> - <%= course.teacher %> || <%= occurence.date %> || <%= occurence.location %> <% end %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

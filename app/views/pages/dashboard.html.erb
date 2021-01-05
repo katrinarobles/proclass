@@ -3,7 +3,7 @@
   <p> This is your dashboard</p>
 </div>
 
-<div class="dashboard-container">
+<div class="main-container">
   <div class="cards">
       <p>Name: <strong> <%= current_user.first_name.split(" ").first.capitalize %>
           <%= current_user.last_name.split(" ").first.capitalize %> </strong></p>
@@ -22,6 +22,7 @@
       <p>Your list of courses: <% current_user.courses.each do |course| %> </p>
         <p><%= link_to course.name, course_path(course) %>
           || <%= link_to "Edit", edit_course_path(course) %>
+          || <%= link_to "Add Event", new_course_occurence_path(course.id)%>
           || <%= link_to "Delete", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
         </p>
       <% end %>

@@ -1,0 +1,47 @@
+ .cards {
+    margin: 2%;
+    background: white;
+    padding: 1%;
+    border-radius: 3%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .occur-info {
+    width: 30%;
+    @media (max-width: 600px) {
+      width: 90%;
+      padding: 2%;
+    }
+  }
+
+  .occur-attendees {
+    width: 65%;
+    @media (max-width: 600px) {
+      width: 90%;
+      padding: 2%;
+    }
+  }
+
+.event-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: 600px) {
+      display: block;
+      padding: 2%;
+    }
+}
+
+.event-cards {
+  border: black solid 0.5px;
+  border-radius: 3%;
+  // background: #f4f4f4;
+  padding: 2%;
+  margin: 3%;
+  .links {
+    text-align: center;
+    // background: white;
+
+  }
+}
