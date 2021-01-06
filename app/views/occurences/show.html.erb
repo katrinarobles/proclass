@@ -3,15 +3,39 @@
   <p> Date: <%= @occurence.date %> </p>
 </div>
 <div class="main-container">
-  <div class="occur-info cards">
+  <div class="split-cards1 cards">
     <p> Details:</p>
       <p><em><%= @course.description %> </em></p>
     <p> Teacher: <%= @course.teacher%> </p>
     <p> €<%= @occurence.price %> </p>
     <p> Location: <%= @occurence.location %></p>
     <p> <%= @course.duration%> minutes</p>
+    <p> <% if current_user.bookings.where(occurence_id: @occurence.id).first %>
+          <%=  link_to "Already Booked", dashboard_path, class: "btn btn-ghost" %></p>
+        <% elsif @occurence.capacity == @occurence.users %>
+          <p>Full</p>
+          <p> Please contact teacher for more information</p>
+
+        <% else %>
+          <%= link_to "Book", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
+        <% end %>
   </div>
-  <div class="occur-attendees cards">
-    <h2> This is where the list of attendees will be listed</h2>
+  <div class="split-cards2 cards">
+    <h2> Attendees </h2>
+    <p> <%= @occurence.bookings.count %> / <%= @occurence.capacity %> </p>
+    <table class="attendees-list">
+      <tr>
+        <th> First Name</th>
+        <th> Last Name</th>
+        <th> Email </th>
+      </tr>
+      <% @occurence.users.each do |client| %>
+        <tr>
+          <td> <%= client.first_name.split(" ").first.capitalize %> </td>
+          <td> <%= client.last_name.split(" ").first.capitalize %> </td>
+          <td> <%= client.email %> </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

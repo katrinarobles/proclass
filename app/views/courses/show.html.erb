@@ -21,7 +21,7 @@
           <div class="event-cards">
               <p> <strong><%= occurence.date %></strong></p>
               <p> Location: <%= occurence.location %> </p>
-              <p> Capacity: <%= occurence.capacity %> </p>
+              <p> Booked: <%= occurence.users.count %>/<%= occurence.capacity %> </p>
             <div class="links">
               <p> <%= link_to "See More", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
               <p><%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %> ||
