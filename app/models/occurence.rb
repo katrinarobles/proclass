@@ -4,4 +4,8 @@ class Occurence < ApplicationRecord
   has_many :users, through: :bookings
   validates :date, presence: true
 
+  def real_date
+    Time.parse(self.date)
+  end
+
 end

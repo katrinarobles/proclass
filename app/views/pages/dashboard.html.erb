@@ -4,7 +4,7 @@
 </div>
 
 <div class="main-container">
-  <div class="split-cards1 cards">
+  <div class="cards">
       <p>Name: <strong> <%= current_user.first_name.split(" ").first.capitalize %>
           <%= current_user.last_name.split(" ").first.capitalize %> </strong></p>
       <p>Phone: <%= current_user.phone %></p>
@@ -17,13 +17,20 @@
         <p><%= link_to 'Create a Course', new_course_path, class: "btn btn-primary" %></p>
     </div>
 
-    <div class="split-cards2 cards">
+    <div class="cards">
         <p>Your list of courses: <% current_user.courses.each do |course| %> </p>
           <p><%= link_to course.name, course_path(course), class: "btn btn-ghost" %>
             <%= link_to new_course_occurence_path(course.id) do %> <i aria-hidden="true" class="far fa-calendar-plus" title="add event"></i> <% end %>
             || <%= link_to edit_course_path(course) do %><i class="far fa-edit"></i> <% end %>
             || <%= link_to course_path(course), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
           </p>
+        <% end %>
+    </div>
+
+    <div class="cards">
+        <p>Classes you've registered:  <% current_user.bookings.each do |booking| %> </p>
+            <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
+            || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
         <% end %>
     </div>
 
