@@ -10,6 +10,7 @@
 
   .split-cards1  {
     width: 30%;
+    height: 30%;
     @media (max-width: 600px) {
       width: 90%;
       padding: 2%;
@@ -26,7 +27,7 @@
 
 .event-main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   @media (max-width: 600px) {
       display: block;
       padding: 2%;

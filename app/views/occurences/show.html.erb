@@ -1,5 +1,5 @@
 <div class="header-container">
-  <h2><%= @course.name %> </h2>
+  <h2><%= link_to @course.name, course_path(@course) %> </h2>
   <p> Date: <%= @occurence.date %> </p>
 </div>
 <div class="main-container">
@@ -11,10 +11,10 @@
     <p> Location: <%= @occurence.location %></p>
     <p> <%= @course.duration%> minutes</p>
     <p> <% if current_user.bookings.where(occurence_id: @occurence.id).first %>
-          <%=  link_to "Already Booked", dashboard_path, class: "btn btn-ghost" %></p>
+           <strong>Already Booked</strong></p>
         <% elsif @occurence.capacity == @occurence.users %>
           <p>Full</p>
-          <p> Please contact teacher for more information</p>
+          <p> Please contact <%= @course.teacher %> for more information</p>
 
         <% else %>
           <%= link_to "Book", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
