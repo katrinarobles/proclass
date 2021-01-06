@@ -7,7 +7,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    console
   end
 
   def new

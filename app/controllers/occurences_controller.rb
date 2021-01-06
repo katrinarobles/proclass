@@ -3,7 +3,6 @@ class OccurencesController < ApplicationController
   before_action :find_course, only: [:show, :new, :edit, :update, :destroy]
 
   def show
-    console
   end
 
   def new
