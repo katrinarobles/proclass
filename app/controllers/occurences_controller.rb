@@ -2,8 +2,8 @@ class OccurencesController < ApplicationController
   before_action :set_occurence, only: [ :show, :edit, :update, :destroy]
   before_action :find_course, only: [:show, :new, :edit, :update, :destroy]
 
-
   def show
+    console
   end
 
   def new
