@@ -29,7 +29,7 @@
 
     <div class="cards">
         <p>Classes you've registered:  <% current_user.bookings.each do |booking| %> </p>
-            <p><strong><%= Time.parse(booking.occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
+            <p><strong><%= booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
             || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
         <% end %>
     </div>

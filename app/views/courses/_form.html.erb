@@ -3,7 +3,8 @@
     <div class="col-6 m-2">
       <%= simple_form_for [ @course ] do |f| %>
         <%= f.input :name %>
-        <%= f.input :description %>
+        <%= f.input :description,
+                    hint: "write all the details needed for your class ex: if price is 0, write the class is Free or Donation in this box"%>
         <%= f.input :duration, label: "Duration in minutes" %>
         <%= f.submit "Submit Course", class: "btn btn-primary" %>
       <% end %>

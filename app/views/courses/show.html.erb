@@ -19,7 +19,7 @@
         <% @course.occurences.order(date: :asc).each do |occurence| %>
           <% if Time.parse(occurence.date) > Time.now %>
           <div class="event-cards">
-              <p> <strong><%= Time.parse(occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %></strong></p>
+              <p> <strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
               <p> Location: <%= occurence.location %> </p>
               <p> Booked: <%= occurence.users.count %>/<%= occurence.capacity %> </p>
             <div class="links">

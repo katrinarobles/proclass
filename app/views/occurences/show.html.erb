@@ -1,17 +1,19 @@
 <div class="header-container">
   <h2><%= link_to @course.name, course_path(@course) %> </h2>
-  <p> Date: <%= Time.parse(@occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %> </p>
+  <p> Date: <%= @occurence.dateparse.strftime("%^a, %e %^b %H:%M") %> </p>
 </div>
 <div class="main-container">
   <div class="split-cards1 cards">
     <p> Details:</p>
       <p><em><%= @course.description %> </em></p>
-    <p> Teacher: <%= @course.teacher%> </p>
+    <p> Teacher: <%= current_user == @course.user ? "You" : @course.teacher %> </p>
     <p> €<%= @occurence.price %> </p>
     <p> Location: <%= @occurence.location %></p>
     <p> <%= @course.duration%> minutes</p>
     <center>
-        <p> <% if current_user.bookings.where(occurence_id: @occurence.id).first %>
+        <p> <% if current_user == @course.user %>
+                <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence) %>
+            <% elsif current_user.bookings.where(occurence_id: @occurence.id).first %>
                <strong>Already Booked</strong></p>
             <% elsif @occurence.capacity == @occurence.users %>
               <p>Full</p>
