@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-6 m-2">
+        <h2> Courses</h2>
+        <%= search_form_for @q do |f| %>
+            <div class="field">
+                  <%= f.search_field :name_or_description_or_duration_or_user_first_name_or_user_last_name_cont %>
+                  <%= f.submit %>
+            </div>
+        <% end %>
+
       <% @courses.each do |course| %>
-        <%= course.name %> - <%= course.user.first_name %>
+
+        <p><%= link_to course.name, course_path(course) %> - <%= course.user.first_name %> <%= course.user.last_name %></p>
       <% end %>
     </div>
   </div>

@@ -2,17 +2,22 @@
   <div class="row justify-content-center">
     <div class="col-6 m-2">
       <h1>Welcome to ProClass,</h1>
-      <!-- <h1>Pages#home</h1> -->
       <p> a fancy scheduling management system for fitness instructors like yourself so your clients can easily connect to you and your classes!</p>
       <% if !user_signed_in? %>
         <%= link_to "Login", new_user_session_path %> || <%= link_to "Sign Up", new_user_registration_path %>
       <% end %>
+
       <h2> Courses</h2>
+
       <% @courses.each do |course| %>
         <% course.occurences.each do |occurence| %>
-          <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= course.name %> - <%= course.teacher %> || <%= Time.parse(occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %> || <%= occurence.location %> <% end %>
+          <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= course.name %> - <%= course.teacher %>
+            || <%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %>
+            || <%= occurence.location %> <% end %>
         <% end %>
       <% end %>
+
+
     </div>
   </div>
 </div>

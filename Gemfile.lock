@@ -182,6 +182,10 @@ GEM
       rake (>= 0.8.7)
       thor (~> 1.0)
     rake (13.0.2)
+    ransack (2.4.1)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -250,6 +254,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.4.2)
@@ -275,6 +280,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.0)
+  ransack
   redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
@@ -285,6 +291,7 @@ DEPENDENCIES
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
+  will_paginate (~> 3.3.0)
 
 RUBY VERSION
    ruby 2.6.6p146

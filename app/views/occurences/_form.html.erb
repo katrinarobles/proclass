@@ -6,6 +6,8 @@
           <%= f.input :price %>
           <%= f.input :capacity %>
           <%= f.input :location %>
+          <%= f.input :repeat, label: "Repeats?", collection: ['never', 'every week', 'every month'], selected: ['never'] %>
+          <%= f.input :end_date, label: false, input_html: { placeholder:"repeat until", class: "datepicker"} %>
           <%= f.submit class: "btn btn-outline-success" %>
       <% end %>
     </div>
