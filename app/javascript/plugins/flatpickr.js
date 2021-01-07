@@ -5,9 +5,9 @@ const datePicker = () => {
     enableTime: true,
     time_24hr: true,
     altInput: true,
-    altFormat: "F j, Y D H:i",
-    mode: "multiple",
-    dateFormat: "M d at H:i D",
+    altFormat: "F j, Y H:i",
+    // mode: "multiple",
+    // dateFormat: "M d at H:i D",
   });
 };
 

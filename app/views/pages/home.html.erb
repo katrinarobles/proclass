@@ -10,7 +10,7 @@
       <h2> Courses</h2>
       <% @courses.each do |course| %>
         <% course.occurences.each do |occurence| %>
-          <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= course.name %> - <%= course.teacher %> || <%= occurence.date %> || <%= occurence.location %> <% end %>
+          <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= course.name %> - <%= course.teacher %> || <%= Time.parse(occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %> || <%= occurence.location %> <% end %>
         <% end %>
       <% end %>
     </div>
