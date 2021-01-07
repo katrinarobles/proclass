@@ -10,16 +10,16 @@
       <p> Teacher: <%= @course.teacher %></p>
       <% if current_user.id == @course.user_id %>
         <p> <%= link_to "Add events for #{@course.name}", new_course_occurence_path(@course.id), class: "btn btn-primary" %></p>
-        <p> <%= link_to "Edit details", edit_course_path(@course), class: "btn btn-primary" %></p>
+        <p> <%= link_to "Edit details", edit_course_path(@course), class: "btn btn-ghost" %></p>
       <% end %>
   </div>
   <div class="split-cards2 cards">
       <h4> Events </h4>
       <div class="event-main">
-        <% @course.occurences.each do |occurence| %>
+        <% @course.occurences.order(date: :asc).each do |occurence| %>
           <% if Time.parse(occurence.date) > Time.now %>
           <div class="event-cards">
-              <p> <strong><%= occurence.date %></strong></p>
+              <p> <strong><%= Time.parse(occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %></strong></p>
               <p> Location: <%= occurence.location %> </p>
               <p> Booked: <%= occurence.users.count %>/<%= occurence.capacity %> </p>
             <div class="links">

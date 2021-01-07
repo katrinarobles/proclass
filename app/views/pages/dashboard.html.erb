@@ -4,7 +4,7 @@
 </div>
 
 <div class="main-container">
-  <div class="cards">
+  <div class="split-cards1 cards">
       <p>Name: <strong> <%= current_user.first_name.split(" ").first.capitalize %>
           <%= current_user.last_name.split(" ").first.capitalize %> </strong></p>
       <p>Phone: <%= current_user.phone %></p>
@@ -29,7 +29,7 @@
 
     <div class="cards">
         <p>Classes you've registered:  <% current_user.bookings.each do |booking| %> </p>
-            <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
+            <p><strong><%= Time.parse(booking.occurence.date).to_formatted_s(:rfc822).gsub(/\:00\s\+0100/, "") %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
             || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
         <% end %>
     </div>
