@@ -22,7 +22,9 @@ ActiveStorage.start()
 
 // External imports
 // import { placesAutocomplete } from '../components/places'
+import "bootstrap";
 import { datePicker } from '../plugins/flatpickr';
+// import { placesAutocomplete } from '../components/places'
 
 
 // Internal imports, e.g:
