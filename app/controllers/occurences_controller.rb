@@ -2,6 +2,10 @@ class OccurencesController < ApplicationController
   before_action :set_occurence, only: [ :show, :edit, :update, :destroy]
   before_action :find_course, only: [:show, :new, :edit, :update, :destroy]
 
+  def index
+    @occurences = Occurence.all.order(date: :asc).paginate(:per_page => 8, :page => params[:page])
+  end
+
   def show
   end
 

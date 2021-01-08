@@ -7,31 +7,39 @@
       <p> Details:</p>
       <p><em> <%= @course.description %></em> </p>
       <p> <%= @course.duration %> minutes</p>
-      <p> Teacher: <%= @course.teacher %></p>
+      <p> Teacher: <%= current_user == @course.user ? "You" : @course.teacher %></p>
       <% if current_user.id == @course.user_id %>
         <p> <%= link_to "Add events for #{@course.name}", new_course_occurence_path(@course.id), class: "btn btn-primary" %></p>
         <p> <%= link_to "Edit details", edit_course_path(@course), class: "btn btn-ghost" %></p>
       <% end %>
   </div>
-  <div class="split-cards2 cards">
+    <div class="split-cards2 cards">
       <h4> Events </h4>
       <div class="event-main">
         <% @course.occurences.order(date: :asc).each do |occurence| %>
           <% if Time.parse(occurence.date) > Time.now %>
-          <div class="event-cards">
-              <p> <strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
-              <p> Location: <%= occurence.location %> </p>
-              <p> Booked: <%= occurence.users.count %>/<%= occurence.capacity %> </p>
-            <div class="links">
-              <p> <%= link_to "See More", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
-              <p><%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %> ||
-                <%= link_to course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+            <div class="event-cards">
+                <p> <strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
+                <p> Location: <%= occurence.location %> </p>
+                <p> Booked: <%= occurence.users.count %>/<%= occurence.capacity %> </p>
+                <div class="links">
+                    <p> <%= link_to "See More", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
+                    <p> <% if current_user == @course.user %>
+                        <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %> ||
+                        <%= link_to course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+                    <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+                        <strong>Already Booked</strong></p>
+                    <% elsif occurence.capacity == occurence.users.count %>
+                        <p>Fully Booked</p>
+                    <% else %>
+                        <%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn btn-primary" %>
+                    <% end %>
+                </div>
             </div>
           <% end %>
-          </div>
         <% end %>
       </div>
-  </div>
+    </div>
 </div>
 
 

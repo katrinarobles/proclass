@@ -9,14 +9,13 @@
 
       <h2> Courses</h2>
 
-      <% @courses.each do |course| %>
-        <% course.occurences.each do |occurence| %>
-          <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= course.name %> - <%= course.teacher %>
+      <% @occurences.each do |occurence| %>
+       <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= occurence.course.name %> - <%= occurence.course.teacher %>
             || <%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %>
             || <%= occurence.location %> <% end %>
+        </p>
         <% end %>
-      <% end %>
-
+    <%= will_paginate @occurences, :container => false %>
 
     </div>
   </div>

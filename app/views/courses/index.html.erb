@@ -1,18 +1,45 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6 m-2">
-        <h2> Courses</h2>
-        <%= search_form_for @q do |f| %>
-            <div class="field">
-                  <%= f.search_field :name_or_description_or_duration_or_user_first_name_or_user_last_name_cont %>
-                  <%= f.submit %>
-            </div>
+<div class="header-container">
+    <%= search_form_for @q, url: courses_path do |f| %>
+     <div class="form-container">
+      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any, "Search by: " %>
+      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any %>
+
+      <p class ="form-btn">Date: <%= f.search_field :date_cont, class: 'datepicker2' %></p>
+      <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
+     </div>
+    <% end %>
+</div>
+
+        <table class="events-list">
+          <tr>
+            <th> <i class="fas fa-sort"></i> <%= sort_link(@q, :course_name, 'Course Name') %></th>
+            <th> <i class="fas fa-sort"></i> <%= sort_link(@q, :course_user_last_name, 'Teacher') %></th>
+            <th> <i class="fas fa-sort"></i> <%= sort_link(@q, :date, 'Time') %> </th>
+            <th> Location </th>
+            <th></th>
+          </tr>
+
+        <% @occurences.each do |occurence| %>
+          <tr>
+            <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
+            <td><%= occurence.course.teacher %></td>
+            <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
+            <td><small><%= occurence.location %></small></td>
+            <td style="text-align: center">
+                    <% if current_user == occurence.course.user %>
+                        <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                    <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+                        <small><strong>Booked</strong></small>
+                    <% elsif occurence.capacity == occurence.users.count %>
+                        Full
+                    <% else %>
+                        <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                    <% end %>
+            </td>
+          </tr>
         <% end %>
+        </table>
 
-      <% @courses.each do |course| %>
-
-        <p><%= link_to course.name, course_path(course) %> - <%= course.user.first_name %> <%= course.user.last_name %></p>
-      <% end %>
-    </div>
-  </div>
+<div class="header-container">
+    <%= will_paginate @occurences, :container => false %>
 </div>
