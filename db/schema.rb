@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_163231) do
+ActiveRecord::Schema.define(version: 2021_01_08_173712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_163231) do
     t.string "date"
     t.string "repeat", default: "never"
     t.string "end_date"
+    t.boolean "online", default: false
     t.index ["course_id"], name: "index_occurences_on_course_id"
   end
 

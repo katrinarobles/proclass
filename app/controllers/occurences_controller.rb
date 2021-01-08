@@ -52,6 +52,7 @@ class OccurencesController < ApplicationController
   end
 
   def edit
+    console
   end
 
   def update
@@ -70,7 +71,7 @@ class OccurencesController < ApplicationController
   private
 
   def occurence_params
-    params.require(:occurence).permit(:date, :time, :capacity, :price, :location, :repeat, :end_date)
+    params.require(:occurence).permit(:date, :time, :capacity, :price, :location, :repeat, :end_date, :online)
   end
 
   def find_course

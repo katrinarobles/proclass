@@ -1,12 +1,12 @@
 <div class="header-container">
     <%= search_form_for @q, url: courses_path do |f| %>
      <div class="form-container">
-      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any, "Search by: " %>
-      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any %>
+      <%= f.label :online_or_date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any, "Search by: " %>
+      <%= f.search_field :online_or_date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any %>
 
       <p class ="form-btn">Date: <%= f.search_field :date_cont, class: 'datepicker2' %></p>
+      </div>
       <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
-     </div>
     <% end %>
 </div>
 

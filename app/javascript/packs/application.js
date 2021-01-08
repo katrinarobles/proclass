@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
@@ -18,9 +19,12 @@ ActiveStorage.start()
 // WRITE YOUR OWN JS STARTING FROM HERE 👇
 // ----------------------------------------------------
 
+
 // External imports
-import "bootstrap";
+// import { placesAutocomplete } from '../components/places'
 import { datePicker } from '../plugins/flatpickr';
+
+
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
