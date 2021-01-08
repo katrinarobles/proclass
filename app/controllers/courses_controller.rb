@@ -3,7 +3,10 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @courses = Course.all
+    # @courses = Course.all
+    @q = Occurence.ransack(params[:q])
+    # @courses = @q.result.includes(:user).page(params[:page])
+    @occurences = @q.result.includes(:course).page(params[:page]).paginate(:per_page => 8, :page => params[:page])
   end
 
   def show

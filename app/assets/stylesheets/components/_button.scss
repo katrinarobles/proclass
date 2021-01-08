@@ -11,3 +11,39 @@
 .btn-ghost:hover {
   opacity: 1;
 }
+
+.btn-clear {
+    color: #4A4A4A;
+    background-color: white;
+    border-color: #4A4A4A;
+    margin-right: 1%;
+}
+
+.btn-clear:hover {
+    color: black;
+    border-color: black;
+
+}
+
+.btn-primary-small {
+    font-size: 0.375em;
+    color: #fff;
+    background-color: #167FFB;
+    border-color: #167FFB;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+
+.btn-primary-small:hover {
+    color: white;
+    opacity: 0.7;
+}
+
+.form-btn {
+    width: 15%;
+    margin: 0.5% auto;
+    display: flex;
+    letter-spacing: 3px;
+}
