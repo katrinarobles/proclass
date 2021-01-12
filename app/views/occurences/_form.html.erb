@@ -5,7 +5,12 @@
           <%= f.input :date, input_html: {class: "datepicker"} %>
           <%= f.input :price %>
           <%= f.input :capacity %>
-          <%= f.input :location, label: false, required: true, input_html: { placeholder:"where?", class: "address-input", type: "search"} %>
+          <%= f.input :location,
+                hint: 'if this class is ONLY online, leave the location blank',
+                label: 'Location',
+                required: false,
+                input_html: { placeholder:"Where?", class: "address-input", type: "search"} %>
+          <%= f.input :online, collection: [true, false], selected: [false] %>
           <%= f.input :repeat, label: "Repeats?", collection: ['never', 'every week', 'every month'], selected: ['never'] %>
           <%= f.input :end_date, label: false, input_html: { placeholder:"repeat until", class: "datepicker"} %>
           <%= f.submit class: "btn btn-outline-success" %>

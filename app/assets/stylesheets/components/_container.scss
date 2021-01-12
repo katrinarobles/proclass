@@ -17,6 +17,12 @@
 
 .form-container {
     display: flex;
-    width: 50%;
+    justify-content: space-around;
+    width: 75%;
+    // height: 30px;
     margin: 1% auto;
+    @media (max-width: 600px) {
+    display: block;
+    padding-left: 5%;
+  }
 }

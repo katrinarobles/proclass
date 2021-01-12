@@ -7,12 +7,15 @@
         <%= link_to "Login", new_user_session_path %> || <%= link_to "Sign Up", new_user_registration_path %>
       <% end %>
 
-      <h2> Courses</h2>
+      <h2><%= link_to "Check out more courses", courses_path %> </h2>
+
 
       <% @occurences.each do |occurence| %>
        <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= occurence.course.name %> - <%= occurence.course.teacher %>
             || <%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %>
-            || <%= occurence.location %> <% end %>
+            || <%= occurence.online? ? 'ONLINE' : "---" %>
+            || <%= occurence.location? ? occurence.location.first(25) : "---" %>
+                 <% end %>
         </p>
         <% end %>
     <%= will_paginate @occurences, :container => false %>

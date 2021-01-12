@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
     @occurence = Occurence.find(params[:occurence_id])
     @booking.occurence = @occurence
     if @booking.save
-      redirect_to course_occurence_path(@course, @occurence), notice: 'Created Event successfully'
+      redirect_back(fallback_location: course_occurence_path(@course, @occurence))
     else
       render :new
     end

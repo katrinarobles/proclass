@@ -19,9 +19,11 @@
         <% @course.occurences.order(date: :asc).each do |occurence| %>
           <% if Time.parse(occurence.date) > Time.now %>
             <div class="event-cards">
-                <p> <strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
-                <p> Location: <%= occurence.location %> </p>
-                <p> Booked: <%= occurence.users.count %>/<%= occurence.capacity %> </p>
+                <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
+                    <small>
+                        <strong><%= occurence.online? ? 'ONLINE' : "---" %></strong>
+                        <br><%= occurence.location? ? occurence.location.first(25) : "---" %>
+                        <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
                 <div class="links">
                     <p> <%= link_to "See More", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
                     <p> <% if current_user == @course.user %>
@@ -34,6 +36,7 @@
                     <% else %>
                         <%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn btn-primary" %>
                     <% end %>
+                        </small>
                 </div>
             </div>
           <% end %>
@@ -41,5 +44,3 @@
       </div>
     </div>
 </div>
-
-
