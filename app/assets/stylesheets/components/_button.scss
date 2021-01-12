@@ -42,8 +42,10 @@
 }
 
 .form-btn {
-    width: 15%;
-    margin: 0.5% auto;
+    margin: 0 auto;
     display: flex;
     letter-spacing: 3px;
+     @media (max-width: 600px) {
+    display: block;
+  }
 }

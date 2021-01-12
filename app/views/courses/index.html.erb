@@ -1,9 +1,10 @@
 <div class="header-container">
     <%= search_form_for @q, url: courses_path do |f| %>
      <div class="form-container">
-      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any, "Search by: " %>
+      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any, "Search by:", class: 'form-btn' %>
       <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any %>
-
+      <%= f.label :online_eq, 'online?', class: 'form-btn' %>
+      <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
       <p class ="form-btn">Date: <%= f.search_field :date_cont, class: 'datepicker2' %></p>
       <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
      </div>
@@ -12,9 +13,9 @@
 
         <table class="events-list">
           <tr>
-            <th> <i class="fas fa-sort"></i> <%= sort_link(@q, :course_name, 'Course Name') %></th>
-            <th> <i class="fas fa-sort"></i> <%= sort_link(@q, :course_user_last_name, 'Teacher') %></th>
-            <th> <i class="fas fa-sort"></i> <%= sort_link(@q, :date, 'Time') %> </th>
+            <th> <%= sort_link(@q, :course_name) do %> Course Name <i class="fas fa-sort"></i> <% end %> </th>
+            <th> <%= sort_link(@q, :course_user_last_name) do %> Teacher <i class="fas fa-sort"></i> <% end %></th>
+            <th> <%= sort_link(@q, :date) do %> Date <i class="fas fa-sort"></i> <% end %> </th>
             <th> Location </th>
             <th></th>
           </tr>
@@ -24,7 +25,7 @@
             <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
             <td><%= occurence.course.teacher %></td>
             <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
-            <td><small><%= occurence.location %></small></td>
+            <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
             <td style="text-align: center">
                     <% if current_user == occurence.course.user %>
                         <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
