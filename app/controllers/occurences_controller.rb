@@ -70,7 +70,7 @@ class OccurencesController < ApplicationController
   private
 
   def occurence_params
-    params.require(:occurence).permit(:date, :time, :capacity, :price, :location, :repeat, :end_date)
+    params.require(:occurence).permit(:date, :time, :capacity, :price, :location, :online, :repeat, :end_date)
   end
 
   def find_course
