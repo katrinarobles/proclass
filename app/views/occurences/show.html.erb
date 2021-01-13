@@ -36,7 +36,7 @@
   </div>
   <div class="split-cards2 cards">
     <h2> Attendees </h2>
-    <p> <%= @occurence.bookings.count %> / <%= @occurence.capacity %> </p>
+    <p><i class="fas fa-users"></i> <%= @occurence.bookings.count %> / <%= @occurence.capacity %> </p>
     <% if current_user.id == @course.user_id %>
         <table class="attendees-list">
           <tr>
@@ -44,11 +44,11 @@
             <th> Last Name</th>
             <th> Email </th>
           </tr>
-          <% @occurence.users.each do |client| %>
+          <% @occurence.users.each do |user| %>
             <tr>
-              <td> <%= client.first_name.split(" ").first.capitalize %> </td>
-              <td> <%= client.last_name.split(" ").first.capitalize %> </td>
-              <td> <%= client.email %> </td>
+              <td> <%= user.first_name.split(" ").first.capitalize %> </td>
+              <td> <%= user.last_name.split(" ").first.capitalize %> </td>
+              <td> <%= user.email %> </td>
             </tr>
           <% end %>
         </table>
