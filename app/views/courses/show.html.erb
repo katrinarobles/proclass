@@ -1,5 +1,7 @@
 <div class="header-container">
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('<%= cl_image_path @course.photo.key %>')">
   <h2> <%= @course.name %> </h2>
+    </div>
 </div>
 
 <div class="main-container">
@@ -30,7 +32,8 @@
                         <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %> ||
                         <%= link_to course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
                     <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-                        <strong>Already Booked</strong></p>
+                        <strong>Already Booked</strong>
+                        <%= link_to 'UnRegister?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
                     <% elsif occurence.capacity == occurence.users.count %>
                         <p>Fully Booked</p>
                     <% else %>

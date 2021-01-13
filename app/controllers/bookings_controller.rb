@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
     @occurence = Occurence.find(params[:occurence_id])
     @booking.occurence = @occurence
     if @booking.save
-      redirect_back(fallback_location: course_occurence_path(@course, @occurence))
+      redirect_back(fallback_location: course_occurence_path(@course, @occurence), notice: 'Booked successfully!')
     else
       render :new
     end
@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to dashboard_path, notice: 'Deleted course successfully!'
+    redirect_back(fallback_location: dashboard_path, notice: 'Unregistered successfully!')
   end
 
   private

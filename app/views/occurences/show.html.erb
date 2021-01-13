@@ -1,13 +1,19 @@
 <div class="header-container">
-  <h2><%= link_to @course.name, course_path(@course) %> </h2>
-  <p> Date: <%= @occurence.dateparse.strftime("%^a, %e %^b %H:%M") %> </p>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('<%= cl_image_path @course.photo.key %>')">
+        <div class="details">
+            <h2><%= link_to @course.name, course_path(@course) %> </h2>
+            <p> Date: <%= @occurence.dateparse.strftime("%^a, %e %^b %H:%M") %> </p>
+        </div>
+    </div>
 </div>
+
 <div class="main-container">
   <div class="split-cards1 cards">
     <p> Details:</p>
       <p><em><%= @course.description %> </em></p>
     <p> Teacher: <%= current_user == @course.user ? "You" : @course.teacher %> </p>
     <p> €<%= @occurence.price %> </p>
+    <p> Date: <strong><%= @occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
     <p> Location:
                 <small><%= @occurence.location? ? @occurence.location : "---" %>
                 <br><strong><%= @occurence.online? ? 'ONLINE' : "---" %></strong>
