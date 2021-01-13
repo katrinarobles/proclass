@@ -26,7 +26,18 @@ class OccurencesController < ApplicationController
   end
 
   def create_more
-    if @occurence.repeat == 'every week'
+    if @occurence.repeat == 'every day'
+        occurence_date = DateTime.parse(params[:occurence][:date])
+        end_date = params[:occurence][:end_date] == nil ? Date.today + 3.months : params[:occurence][:end_date]
+        loop do
+            occurence_date += 1.day
+            break if occurence_date > Date.parse(end_date)
+            occurence = Occurence.new(occurence_params)
+            occurence.date = occurence_date
+            occurence.course = @course
+            occurence.save
+        end
+    elsif @occurence.repeat == 'every week'
       occurence_date = DateTime.parse(params[:occurence][:date])
       end_date = params[:occurence][:end_date] == nil ? Date.today + 3.months : params[:occurence][:end_date]
       loop do

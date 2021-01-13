@@ -11,7 +11,7 @@
                 required: false,
                 input_html: { placeholder:"Where?", class: "address-input", type: "search"} %>
           <%= f.input :online, collection: [true, false], selected: [false] %>
-          <%= f.input :repeat, label: "Repeats?", collection: ['never', 'every week', 'every month'], selected: ['never'] %>
+          <%= f.input :repeat, label: "Repeats?", collection: ['never', 'every day', 'every week', 'every month'], selected: ['never'] %>
           <%= f.input :end_date, label: false, input_html: { placeholder:"repeat until", class: "datepicker"} %>
           <%= f.submit class: "btn btn-outline-success" %>
       <% end %>

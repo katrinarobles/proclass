@@ -1,16 +1,14 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6 m-2">
+<div class="header-container">
       <h1>Welcome to ProClass,</h1>
       <p> a fancy scheduling management system for fitness instructors like yourself so your clients can easily connect to you and your classes!</p>
       <% if !user_signed_in? %>
-        <%= link_to "Login", new_user_session_path %> || <%= link_to "Sign Up", new_user_registration_path %>
+        <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
       <% end %>
 
-      <h2><%= link_to "Check out more courses", courses_path %> </h2>
+      <p><%= link_to courses_path, class: 'btn btn-ghost' do %>
+        Check out more courses <i class="fas fa-search"></i>
+        <% end %></p>
     </div>
-  </div>
-</div>
 
     <div class="event-main home-container">
       <% @occurences.each do |occurence| %>
@@ -24,15 +22,19 @@
                 <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
                 <br><%= occurence.online? ? 'ONLINE' : "---" %>
                 <br><small><%= occurence.location? ? occurence.location.first(25) : "---" %></small></p>
-                <% if current_user == occurence.course.user %>
-                            <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                <% if user_signed_in? %>
+                    <% if current_user == occurence.course.user %>
+                                <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                    <% elsif occurence.capacity == occurence.users.count %>
+                        Full
                     <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
                         <small><strong>Already Booked</strong></small>
                         <%= link_to 'UnRegister?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
-                    <% elsif occurence.capacity == occurence.users.count %>
-                        Full
                     <% else %>
-                        <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                            <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                    <% end %>
+                <% else %>
+                    <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %>
                 <% end %>
             </div>
         </div>

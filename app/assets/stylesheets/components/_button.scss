@@ -1,7 +1,7 @@
 .btn-ghost {
   color: #4A4A4A;
   border: 1px solid #4A4A4A;
-  padding: 2% 5%;
+  padding: 1% 2%;
   border-radius: 50px;
   font-weight: lighter;
   opacity: 0.6;
@@ -10,6 +10,17 @@
 
 .btn-ghost:hover {
   opacity: 1;
+}
+
+.btn-sign-up {
+  color: white;
+  background-color: #ec7544;
+  border-color: #ec7544;
+}
+
+.btn-sign-up:hover {
+    opacity: 0.8;
+    color: #4A4A4A;
 }
 
 .btn-clear {
@@ -49,3 +60,4 @@
     display: block;
   }
 }
+
