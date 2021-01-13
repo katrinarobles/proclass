@@ -2,10 +2,12 @@
       <h1>Welcome to ProClass,</h1>
       <p> a fancy scheduling management system for fitness instructors like yourself so your clients can easily connect to you and your classes!</p>
       <% if !user_signed_in? %>
-        <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %>
+        <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
       <% end %>
 
-      <h2><%= link_to "Check out more courses", courses_path %> </h2>
+      <p><%= link_to courses_path, class: 'btn btn-ghost' do %>
+        Check out more courses <i class="fas fa-search"></i>
+        <% end %></p>
     </div>
 
     <div class="event-main home-container">
