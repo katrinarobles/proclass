@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :courses, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :occurences, through: :bookings
+
+  def start_time
+    self.courses.date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
 end
