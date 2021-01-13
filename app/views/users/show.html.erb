@@ -1,0 +1,4 @@
+<div class="header-container">
+    <p><%= cl_image_tag @user.photo.key,  class: "avatar-large" %></p>
+    <h2> <%= @user.first_name.split(" ").first.capitalize %> <%= @user.last_name.split(" ").first.capitalize %>
+</div>
