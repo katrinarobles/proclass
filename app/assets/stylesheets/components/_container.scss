@@ -15,6 +15,11 @@
   }
 }
 
+.home-container {
+    width: 80%;
+    margin: auto;
+}
+
 .form-container {
     display: flex;
     justify-content: space-around;
@@ -24,5 +29,5 @@
     @media (max-width: 600px) {
     display: block;
     padding-left: 5%;
-  }
+    }
 }

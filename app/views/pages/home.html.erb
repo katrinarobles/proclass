@@ -8,18 +8,34 @@
       <% end %>
 
       <h2><%= link_to "Check out more courses", courses_path %> </h2>
-
-
-      <% @occurences.each do |occurence| %>
-       <p><%= link_to course_occurence_path(occurence.course, occurence) do %> <%= occurence.course.name %> - <%= occurence.course.teacher %>
-            || <%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %>
-            || <%= occurence.online? ? 'ONLINE' : "---" %>
-            || <%= occurence.location? ? occurence.location.first(25) : "---" %>
-                 <% end %>
-        </p>
-        <% end %>
-    <%= will_paginate @occurences, :container => false %>
-
     </div>
   </div>
 </div>
+
+    <div class="event-main home-container">
+      <% @occurences.each do |occurence| %>
+        <div class="event-cards home-card">
+            <%= link_to course_occurence_path(occurence.course, occurence) do %>
+                <%= cl_image_tag occurence.course.photo.key, class: 'home-photo-card'%>
+            <% end %>
+            <div class="card-body">
+                <h5 class="card-title"><%= occurence.course.name %></h5>
+                <p class="card-text"><small><%= occurence.course.teacher %></small>
+                <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
+                <br><%= occurence.online? ? 'ONLINE' : "---" %>
+                <br><small><%= occurence.location? ? occurence.location.first(25) : "---" %></small></p>
+                <% if current_user == occurence.course.user %>
+                            <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                    <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+                        <small><strong>Already Booked</strong></small>
+                        <%= link_to 'UnRegister?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
+                    <% elsif occurence.capacity == occurence.users.count %>
+                        Full
+                    <% else %>
+                        <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                <% end %>
+            </div>
+        </div>
+      <% end %>
+    </div>
+<%= will_paginate @occurences, :container => false %>

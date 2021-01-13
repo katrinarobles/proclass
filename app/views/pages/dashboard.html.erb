@@ -29,8 +29,11 @@
 
     <div class="cards">
         <p>Classes you've registered:  <% current_user.bookings.each do |booking| %> </p>
-            <p><strong><%= booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
-            || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+          <% if Time.parse(booking.occurence.date) > Time.now %>
+            <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
+                - <%= link_to booking.course.name, course_path(booking.course) %> with <%= booking.course.teacher %>
+                || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+          <% end %>
         <% end %>
     </div>
 
@@ -42,9 +45,11 @@
 
     <div class="split-cards2 cards">
         <p>Your list of classes: <% current_user.bookings.each do |booking| %> </p>
-          <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
+          <% if Time.parse(occurence.date) > Time.now %>
+            <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= booking.course.teacher %>
             || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
-          </p>
+            </p>
+          <% end %>
         <% end %>
   <% end %>
     </div>
