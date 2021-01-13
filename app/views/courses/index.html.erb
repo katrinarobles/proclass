@@ -23,7 +23,7 @@
         <% @occurences.each do |occurence| %>
           <tr>
             <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
-            <td><%= occurence.course.teacher %></td>
+            <td><%= link_to occurence.course.teacher, user_path(occurence.course.user) %></td>
             <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
             <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
             <td style="text-align: center">

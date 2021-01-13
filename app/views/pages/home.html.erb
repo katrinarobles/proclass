@@ -18,7 +18,7 @@
             <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= occurence.course.name %></h5>
-                <p class="card-text"><small><%= occurence.course.teacher %></small>
+                <p class="card-text"><small><%= link_to occurence.course.teacher, user_path(occurence.course.user) %></small>
                 <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
                 <br><%= occurence.online? ? 'ONLINE' : "---" %>
                 <br><small><%= occurence.location? ? occurence.location.first(25) : "---" %></small></p>
