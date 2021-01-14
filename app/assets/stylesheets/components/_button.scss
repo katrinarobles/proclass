@@ -1,3 +1,6 @@
+.btn-primary:hover {
+    opacity: 0.8;
+}
 .btn-ghost {
   color: #4A4A4A;
   border: 1px solid #4A4A4A;
@@ -19,7 +22,8 @@
 
 .btn-login:hover {
     opacity: 0.5;
-    color: white;
+    color: black;
+    border-color: black;
 }
 
 .btn-sign-up {
