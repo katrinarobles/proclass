@@ -28,10 +28,8 @@
           <%= f.input :phone,
                       required: true,
                       input_html: { autocomplete: "phone" }%>
-          <%= f.label :teacher do %>
-            <%= f.check_box :teacher, as: :boolean, unchecked_value: false, checked_value: true %>
-              <span class="label-text">Are you signing up as a teacher?</span>
-          <% end %>
+        <%= f.check_box :teacher, as: :boolean, unchecked_value: false, checked_value: true %>
+        <%= f.label :teacher, 'Are you signing up as a teacher?' %>
 
           <%= f.input :bio,
                       hint: ("Feel free to fill these out later"),
