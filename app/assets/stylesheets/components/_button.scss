@@ -12,6 +12,16 @@
   opacity: 1;
 }
 
+.btn-login {
+    background-color: #6c6c6c;
+    color: white;
+}
+
+.btn-login:hover {
+    opacity: 0.5;
+    color: white;
+}
+
 .btn-sign-up {
   color: white;
   background-color: #ec7544;
