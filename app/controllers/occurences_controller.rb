@@ -1,5 +1,6 @@
 class OccurencesController < ApplicationController
-  before_action :set_occurence, only: [ :show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show]
+  before_action :set_occurence, only: [:show, :edit, :update, :destroy]
   before_action :find_course, only: [:show, :new, :edit, :update, :destroy]
 
   def index

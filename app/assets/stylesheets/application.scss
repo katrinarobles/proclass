@@ -19,11 +19,14 @@ body {
   h1, h2, h3, h4, h5 {
     font-family: "Poppins", "Helvetica", "sans-serif";
   }
+  height: 100vh;
 }
 a {
   text-decoration: none;
+  color: #707070;
 }
 
 a:hover {
   text-decoration: none;
+    color: #B0B0B0;
 }

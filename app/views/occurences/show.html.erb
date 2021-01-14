@@ -20,16 +20,20 @@
             </small>
     <p> <%= @course.duration%> minutes</p>
     <center>
-        <p> <% if current_user == @course.user %>
-                <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence) %>
-            <% elsif current_user.bookings.where(occurence_id: @occurence.id).first %>
-               <strong>Already Booked</strong></p>
-            <% elsif @occurence.capacity == @occurence.users.count %>
-              <p><strong>Fully Booked</strong></p>
-              <p> Please contact <%= @course.teacher %> for more information</p>
+        <p><% if user_signed_in? %>
+                <% if current_user == @course.user %>
+                    <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence) %>
+                <% elsif current_user.bookings.where(occurence_id: @occurence.id).first %>
+                   <strong>Already Booked</strong></p>
+                <% elsif @occurence.capacity == @occurence.users.count %>
+                  <p><strong>Fully Booked</strong></p>
+                  <p> Please contact <%= @course.teacher %> for more information</p>
 
+                <% else %>
+                  <%= link_to "Book", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
+                <% end %>
             <% else %>
-              <%= link_to "Book", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
+                <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
             <% end %>
         <p> <%= link_to "See more times", course_path(@course), class: "btn btn-ghost" %> </p>
     </center>
@@ -37,36 +41,46 @@
   <div class="split-cards2 cards">
     <h2> Attendees </h2>
     <p><i class="fas fa-users"></i> <%= @occurence.bookings.count %> / <%= @occurence.capacity %> </p>
-    <% if current_user.id == @course.user_id %>
-        <table class="attendees-list">
-          <tr>
-            <th> First Name</th>
-            <th> Last Name</th>
-            <th> Email </th>
-          </tr>
-          <% @occurence.users.each do |user| %>
-            <tr>
-              <td> <%= user.first_name.split(" ").first.capitalize %> </td>
-              <td> <%= user.last_name.split(" ").first.capitalize %> </td>
-              <td> <%= user.email %> </td>
-            </tr>
-          <% end %>
-        </table>
-    <% else %>
+    <% if user_signed_in? %>
+        <% if current_user.id == @course.user_id %>
+            <table class="attendees-list">
+              <tr>
+                <th> First Name</th>
+                <th> Last Name</th>
+                <th> Email </th>
+              </tr>
+              <% @occurence.users.each do |user| %>
+                <tr>
+                  <td> <%= user.first_name.split(" ").first.capitalize %> </td>
+                  <td> <%= user.last_name.split(" ").first.capitalize %> </td>
+                  <td> <%= user.email %> </td>
+                </tr>
+              <% end %>
+            </table>
+        <% else %>
+            <center>
+                <p><% if current_user.bookings.where(occurence_id: @occurence.id).first %>
+                       <strong>Thank You for Booking</strong></p>
+                    <% elsif @occurence.capacity == @occurence.users.count %>
+                      <h1><i class="far fa-sad-cry"></i></h1>
+                      <p>Fully Booked </p>
+                      <p> Please contact <%= @course.teacher %> for more information</p>
+                      <p>or</p>
+                    <% else %>
+                      <%= link_to "Join Now!", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
+                        <p>or</p>
+                    <% end %>
+                <p> <%= link_to "See more times", course_path(@course), class: "btn btn-ghost" %> </p>
+            </center>
+        <% end %>
+    <% else%>
         <center>
-            <p><% if current_user.bookings.where(occurence_id: @occurence.id).first %>
-                   <strong>Thank You for Booking</strong></p>
-                <% elsif @occurence.capacity == @occurence.users.count %>
-                  <h1><i class="far fa-sad-cry"></i></h1>
-                  <p>Fully Booked </p>
-                  <p> Please contact <%= @course.teacher %> for more information</p>
-                  <p>or</p>
-                <% else %>
-                  <%= link_to "Join Now!", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
-                    <p>or</p>
-                <% end %>
-            <p> <%= link_to "See more times", course_path(@course), class: "btn btn-ghost" %> </p>
-    </center>
+         <p> Please login to access more details </p>
+         <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
+         <p> or don't have an account yet?</p>
+         <p> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
+        </center>
     <% end %>
+
   </div>
 </div>
