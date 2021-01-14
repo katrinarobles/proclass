@@ -34,10 +34,22 @@
         <%= f.input :phone,
                     required: true,
                     input_html: { autocomplete: "phone" }%>
-        <%= f.input :bio,
-                    input_html: { autocomplete: "bio" }%>
-        <%= f.check_box :teacher,{class:"form-check-input", type:"checkbox"}, true, false %>
-        <%= f.label :teacher,'Are you a teacher?', class:"form-check-label" %>
+        <%= f.label :teacher do %>
+            <%= f.check_box :teacher, as: :boolean, unchecked_value: false, checked_value: true %>
+              <span class="label-text">Are you signing up as a teacher?</span>
+          <% end %>
+
+          <%= f.input :bio,
+                      hint: ("Feel free to fill these out later"),
+                      input_html: { autocomplete: "bio" }%>
+          <%= f.input :facebook,
+                      input_html: { autocomplete: "facebook url" }%>
+          <%= f.input :instagram,
+                      input_html: { autocomplete: "instagram url" }%>
+          <%= f.input :blog,
+                      input_html: { autocomplete: "blog url" }%>
+          <%= f.input :website,
+                      input_html: { autocomplete: "any other website url" }%>
       </div>
 
       <div class="form-actions">
