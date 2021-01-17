@@ -1,8 +1,8 @@
 <div class="header-container">
     <%= search_form_for @q, url: courses_path do |f| %>
      <div class="form-container">
-      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any, "Search by:", class: 'form-btn' %>
-      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_first_name_and_course_user_last_name_i_cont_any %>
+      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_i_cont_any, "Search by:", class: 'form-btn' %>
+      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_i_cont_any %>
       <%= f.label :online_eq, 'online?', class: 'form-btn' %>
       <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
       <p class ="form-btn">Date: <%= f.search_field :date_cont, class: 'datepicker2' %></p>

@@ -16,6 +16,11 @@ const datePicker = () => {
     altFormat: "F j, Y",
     minDate: "today",
   });
+  flatpickr(".datepicker3", {
+    time_24hr: true,
+    altInput: true,
+    altFormat: "F j, Y",
+  });
 };
 
 export { datePicker };
