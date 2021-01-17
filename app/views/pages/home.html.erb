@@ -6,9 +6,10 @@
         <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
       <% end %>
 
-      <p><%= link_to courses_path, class: 'btn btn-ghost' do %>
+      <p><%= link_to courses_path, class: 'btn btn-search' do %>
         SEARCH <i class="fas fa-search"></i>
         <% end %></p>
+        <h2> Classes Happening Now!</h2>
     </div>
 
     <div class="event-main home-container">
@@ -41,3 +42,9 @@
         </div>
       <% end %>
     </div>
+<div class="header-container">
+    <p><%= link_to courses_path, class: 'btn btn-search' do %>
+        SEARCH <i class="fas fa-search"></i>
+        <% end %>
+    </p>
+</div>

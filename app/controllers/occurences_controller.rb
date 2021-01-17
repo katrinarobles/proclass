@@ -1,10 +1,13 @@
 class OccurencesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
   before_action :set_occurence, only: [:show, :edit, :update, :destroy]
-  before_action :find_course, only: [:show, :new, :edit, :update, :destroy]
+  before_action :find_course, only: [:show, :new, :create, :edit, :update, :destroy]
 
   def index
-    @occurences = Occurence.all.order(date: :asc).paginate(:per_page => 8, :page => params[:page])
+    @course = Course.find(params[:course_id])
+    @q = Occurence.where(course_id: @course.id).ransack(params[:q])
+    @occurences = @q.result.page(params[:page]).paginate(:per_page => 8, :page => params[:page])
+    # @occurences = Occurence.all.order(date: :asc).paginate(:per_page => 8, :page => params[:page])
   end
 
   def show
@@ -20,7 +23,7 @@ class OccurencesController < ApplicationController
     @occurence.course = @course
     if @occurence.save
       create_more
-      redirect_to @course, notice: 'Created occurence successfully'
+      redirect_to @course, notice: 'Created Event successfully'
     else
       render :new
     end

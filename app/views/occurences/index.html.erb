@@ -1,0 +1,56 @@
+<% if current_user == @course.user %>
+    <div class="header-container">
+        <strong>This page includes ALL of your events for <%= @course.name %> only</strong>
+        <br>including old records
+        <p><%= search_form_for @q, url: course_occurences_path(@course) do |f| %>
+         <div class="form-container">
+          <%= f.label :date_or_location_or_course_name_i_cont_any, "Search by:", class: 'form-btn' %>
+          <%= f.search_field :date_or_location_or_course_name_i_cont_any %>
+          <%= f.label :online_eq, 'online?', class: 'form-btn' %>
+          <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
+          <p class ="form-btn">Date: <%= f.search_field :date_cont, class: 'datepicker3' %></p>
+          <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
+         </div>
+        <% end %>
+    </div>
+
+            <table class="events-list">
+              <tr>
+                <th> <%= sort_link(@q, :course_name) do %> Course Name <i class="fas fa-sort"></i> <% end %> </th>
+                <th> <%= sort_link(@q, :date) do %> Date <i class="fas fa-sort"></i> <% end %> </th>
+                <th> Location </th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+
+            <% if @occurences.exists? %>
+                <% @occurences.each do |occurence| %>
+                  <tr>
+                    <td><%= link_to occurence.course.name, course_path(occurence.course) %></td>
+                    <td><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></td>
+                    <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
+                    <td style="text-align: center"><%= link_to course_occurence_path(occurence.course, occurence) do %><i class="fas fa-clipboard-list"></i> <% end%></td>
+                    <td style="text-align: center">
+                            <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                    </td>
+                    <td style="text-align: center">
+                            <%= link_to course_occurence_path(occurence.course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+            <% else %>
+                <div class="empty-container">
+                    <p>No Results Found. Try another search.</p>
+                </div>
+            <% end %>
+            </table>
+    <div class="flickr_pagination">
+        <%= will_paginate @occurences, :container => false %>
+    </div>
+<% else %>
+    <div class="header-container">
+        <h1> Sorry, you don't have access to this page </h1>
+        <p><i class="far fa-frown fa-3x"></i></p>
+    </div>
+<% end %>
