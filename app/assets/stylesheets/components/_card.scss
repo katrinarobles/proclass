@@ -91,5 +91,8 @@
     background: white;
 }
 
-.teaching {
+.teacher-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -5%;
 }

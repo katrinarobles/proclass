@@ -4,7 +4,6 @@
 .btn-ghost {
   color: #4A4A4A;
   border: 1px solid #4A4A4A;
-  padding: 1% 2%;
   border-radius: 50px;
   font-weight: lighter;
   opacity: 0.6;
@@ -12,6 +11,21 @@
 }
 
 .btn-ghost:hover {
+  opacity: 1;
+}
+
+.btn-search {
+  color: #4A4A4A;
+  border: 1px solid #4A4A4A;
+  padding: 1% 12%;
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+  letter-spacing: 7px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-search:hover {
   opacity: 1;
 }
 

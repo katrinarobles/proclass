@@ -5,7 +5,8 @@
         <% if @user.instagram? %> <a target="blank" href=<%=@user.instagram %>> <i class="fab fa-instagram-square fa-xs"></i></a> <% end %>
         <% if @user.blog? %> <a target="blank" href=<%=@user.blog %>> <i class="fab fa-blogger fa-xs"></i></a> <% end %>
         <% if @user.website? %> <a target="blank" href=<%=@user.website %>> <i class="fas fa-window-maximize fa-xs"></i> </a> <% end %>
-        <a href=<%=@user.email %>><i class="fas fa-envelope-square fa-xs"></i></a> </p>
+        <a href=<%=@user.email %>><i class="fas fa-envelope-square fa-xs"></i></a>
+    </p> </h2>
 </div>
 
 <div class="users-show-container">
@@ -41,5 +42,11 @@
 </div>
 
 <div class="header-container">
+    <p>
+      <% @user.courses.each do |course| %>
+        <%= link_to course.name, course_path(course), class: 'btn btn-ghost' %>
+      <% end %>
+    </p>
+
     <%= @user.bio %>
 </div>
