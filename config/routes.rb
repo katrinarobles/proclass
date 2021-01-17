@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   }
   authenticated :user do
     root 'pages#dashboard', as: :authenticated_root
+    get 'home', to: 'pages#home'
   end
   root to: 'pages#home'
 

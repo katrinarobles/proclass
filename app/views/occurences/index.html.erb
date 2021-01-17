@@ -1,7 +1,7 @@
 <% if current_user == @course.user %>
     <div class="header-container">
-        <strong>This page includes ALL of your events for <%= @course.name %> only</strong>
-        <br>including old records
+        <strong>This page includes ALL of your events for <%= @course.name %> </strong>
+        <br>including past events
         <p><%= search_form_for @q, url: course_occurences_path(@course) do |f| %>
          <div class="form-container">
           <%= f.label :date_or_location_or_course_name_i_cont_any, "Search by:", class: 'form-btn' %>

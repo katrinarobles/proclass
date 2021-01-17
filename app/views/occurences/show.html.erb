@@ -19,8 +19,8 @@
     <p> €<%= @occurence.price %> </p>
     <p> Date: <strong><%= @occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
     <p> Location:
-                <small><%= @occurence.location? ? @occurence.location : "---" %>
-                <br><strong><%= @occurence.online? ? 'ONLINE' : "---" %></strong>
+                <small><%= @occurence.location? ? @occurence.location : "Contact Teacher for Location Details" %>
+                <br><strong><%= @occurence.online? ? 'ONLINE' : " " %></strong>
             </small>
     <p> <%= @course.duration%> minutes</p>
     <center>

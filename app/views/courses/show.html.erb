@@ -11,7 +11,7 @@
       <p> <%= @course.duration %> minutes</p>
       <p> Teacher:
             <% if current_user == @course.user %>
-                "You"
+                You
             <%else %>
                 <%= link_to @course.teacher, user_path(@course.user) %></p>
             <% end %>
@@ -32,8 +32,8 @@
                 <div class="event-cards">
                     <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
                         <small>
-                            <strong><%= occurence.online? ? 'ONLINE' : "---" %></strong>
-                            <br><%= occurence.location? ? occurence.location.first(25) : "---" %>
+                            <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
+                            <br><%= occurence.location? ? occurence.location.first(25) : " " %>
                             <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
                         <div class="links">
                             <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>

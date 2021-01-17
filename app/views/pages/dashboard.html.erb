@@ -9,7 +9,6 @@
           <%= current_user.last_name.split(" ").first.capitalize %> </strong></p>
       <p>Phone: <%= current_user.phone %></p>
       <p>Email: <%= current_user.email %></p>
-      <p>Bio: <%= current_user.bio%></p>
       <p><%= link_to 'Update Your Account', edit_user_registration_path %></p>
 
       <% if current_user.teacher? %>
@@ -37,7 +36,7 @@
         <p>Classes you've registered:  <% current_user.bookings.each do |booking| %> </p>
           <% if Time.parse(booking.occurence.date) > Time.now %>
             <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
-                - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user) %>
+                - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username, booking.course.user.id ) %>
                 || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
           <% end %>
         <% end %>
@@ -52,7 +51,7 @@
     <div class="split-cards2 cards">
         <p>Your list of classes: <% current_user.bookings.each do |booking| %> </p>
           <% if Time.parse(occurence.date) > Time.now %>
-            <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= link_to booking.course.teacher, user_path(booking.course.user) %>
+            <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username, booking.course.user.id) %>
             || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
             </p>
           <% end %>
