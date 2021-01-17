@@ -4,10 +4,11 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'pages#dashboard'
-  resources :users, only: [ :show ]
   resources :courses  do
     resources :occurences do
       resources :bookings, only: [ :create, :destroy ]
     end
   end
+
+  resources :users, only: [ :show ], :path => '/:username'
 end
