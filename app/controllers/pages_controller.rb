@@ -3,7 +3,17 @@ class PagesController < ApplicationController
 
   def home
     # @courses = Course.all
-    @occurences = Occurence.all.order(date: :asc).paginate(:per_page => 8, :page => params[:page])
+    @occurences = Occurence.all.order(date: :asc)
+
+    if @occurences.exists?
+        @markers = @occurences.geocoded.map do |occurence|
+          {
+            lat: occurence.latitude,
+            lng: occurence.longitude
+          }
+        end
+    end
+
   end
 
   def dashboard

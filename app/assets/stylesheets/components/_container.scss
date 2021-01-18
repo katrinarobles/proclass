@@ -21,6 +21,19 @@
 .home-container {
     width: 80%;
     margin: auto;
+    display: flex;
+    @media (max-width: 600px) {
+        display: block;
+        margin: auto;
+        width: 100%;
+  }
+}
+
+.cards-container {
+    width: 50%;
+    @media (max-width: 600px) {
+        width: 100%;
+  }
 }
 
 .form-container {
