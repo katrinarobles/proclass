@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_173906) do
+ActiveRecord::Schema.define(version: 2021_01_18_124814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,8 +66,6 @@ ActiveRecord::Schema.define(version: 2021_01_17_173906) do
     t.integer "capacity"
     t.integer "price"
     t.string "location"
-    t.float "latitude"
-    t.float "longtitude"
     t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -75,6 +73,8 @@ ActiveRecord::Schema.define(version: 2021_01_17_173906) do
     t.string "repeat", default: "never"
     t.string "end_date"
     t.boolean "online", default: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["course_id"], name: "index_occurences_on_course_id"
   end
 

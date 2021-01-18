@@ -12,18 +12,24 @@
         <h2> Classes Happening Now!</h2>
     </div>
 
-    <div class="event-main home-container">
-      <% @occurences.each do |occurence| %>
-        <div class="event-cards home-card">
-            <%= link_to course_path(occurence.course) do %>
-                <%= cl_image_tag occurence.course.photo.key, class: 'home-photo-card'%>
-            <% end %>
-            <div class="card-body">
-                <h5 class="card-title"><%= occurence.course.name %></h5>
-                <p class="card-text"><small><%= link_to occurence.course.teacher, user_path(occurence.course.user.username, occurence.course.user.id) %></small>
-                <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
-                <br><%= occurence.online? ? 'ONLINE' : " " %>
-                <br><small><%= occurence.location? ? occurence.location.first(25) : " " %></small></p>
+  <div class="home-container">
+    <div class="cards-container">
+    <% @occurences.each do |occurence| %>
+        <div class="occurence-home-cards home-card">
+            <div class="photo-card">
+                <%= link_to course_path(occurence.course) do %>
+                    <%= cl_image_tag occurence.course.photo.key, class: 'home-photo-card'%>
+                <% end %>
+            </div>
+
+            <div class="cardy-body">
+                    <h5><%= occurence.course.name %></h5>
+                    <p><small><%= link_to occurence.course.teacher, user_path(occurence.course.user.username, occurence.course.user.id) %>
+                    <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
+                    <br><%= occurence.online? ? 'ONLINE' : " " %>
+                    <br><%= occurence.location? ? occurence.location.first(25) : " " %></small></p>
+            </div>
+            <div class="links-card">
                 <% if user_signed_in? %>
                     <% if current_user == occurence.course.user %>
                                 <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
@@ -36,15 +42,26 @@
                             <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
                     <% end %>
                 <% else %>
-                    <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %>
+                    <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
+                    <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
                 <% end %>
             </div>
         </div>
-      <% end %>
+    <% end %>
     </div>
-<div class="header-container">
-    <p><%= link_to courses_path, class: 'btn btn-search' do %>
-        SEARCH <i class="fas fa-search"></i>
-        <% end %>
-    </p>
+
+    <div class="map-cardy">
+
+        <div id="map"
+             style="width: 100%; height: 70vh; top: 0; position: sticky; object-fit: cover;"
+             data-markers="<%= @markers.to_json %>"
+             data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"> </div>
+    </div>
+  </div>
+    <div class="header-container">
+        <p><%= link_to courses_path, class: 'btn btn-search' do %>
+            SEARCH <i class="fas fa-search"></i>
+            <% end %>
+        </p>
+    </div>
 </div>

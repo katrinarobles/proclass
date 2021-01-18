@@ -53,6 +53,7 @@
   }
 }
 
+
 .card-category {
   background-size: cover;
   background-position: center;
@@ -69,6 +70,47 @@
   }
 }
 
+.occurence-home-cards {
+  display: flex;
+  width: 95%;
+  margin: 1%;
+  border-radius: 5px;
+  align-items: center;
+  @media (max-width: 600px) {
+    display: block;
+    margin: 3%;
+    }
+}
+
+.photo-card {
+    width: 30%;
+    margin-right: 1%;
+    @media (max-width: 600px) {
+        margin-right: 0%;
+        width: 100%;
+    }
+}
+
+.cardy-body {
+    width: 40%;
+    margin: 1%;
+    @media (max-width: 600px) {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.links-card {
+    width: 30%;
+    text-align: center;
+    @media (max-width: 600px) {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+}
+
 .home-card {
   background: white;
 }
@@ -81,6 +123,14 @@
 }
 .home-photo-card:hover {
     opacity: 0.7;
+}
+
+.map-cardy {
+    width: 50%;
+    @media (max-width: 600px) {
+        width: 90%;
+        margin: auto;
+    }
 }
 
 .calendar-card {
