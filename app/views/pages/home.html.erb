@@ -42,7 +42,8 @@
                             <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
                     <% end %>
                 <% else %>
-                    <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %>
+                    <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
+                    <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
                 <% end %>
             </div>
         </div>

@@ -93,18 +93,21 @@
 
 .cardy-body {
     width: 40%;
+    margin: 1%;
     @media (max-width: 600px) {
         width: 100%;
         text-align: center;
-        padding: 1%;
     }
 }
 
 .links-card {
     width: 30%;
+    text-align: center;
     @media (max-width: 600px) {
         width: 100%;
         text-align: center;
+        display: flex;
+        justify-content: center;
     }
 }
 

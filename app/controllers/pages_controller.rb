@@ -13,6 +13,7 @@ class PagesController < ApplicationController
           }
         end
     end
+    console
 
   end
 
