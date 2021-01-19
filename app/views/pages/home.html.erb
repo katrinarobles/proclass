@@ -15,7 +15,7 @@
   <div class="home-container">
     <div class="cards-container">
     <% @occurences.each do |occurence| %>
-        <div id="event-link" class="occurence-home-cards home-card">
+        <div id="event-link" data-occurence="<%= @markers.select{ |marker| marker[:id] == occurence.id }.to_json %>" class="occurence-home-cards home-card">
             <div class="photo-card">
                 <%= link_to course_path(occurence.course) do %>
                     <%= cl_image_tag occurence.course.photo.key, class: 'home-photo-card'%>

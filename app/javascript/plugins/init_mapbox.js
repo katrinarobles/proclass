@@ -30,6 +30,7 @@ const initMapbox = () => {
   }
 
 
+
   if (mapElement) { // only build a map if there's a div#map to inject into
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
@@ -44,29 +45,39 @@ const initMapbox = () => {
         new mapboxgl.Marker()
           .setLngLat([ marker.lng, marker.lat ])
           .setPopup(popup)
-          .addTo(map);
-
-        links.forEach((link) => {
-          link.addEventListener('click', (event) => {
-            for (let i=0; i < markers.length; i++) {
-                if (this.id === markers[i].id) {
-                  let clickedListing = markers[i];
-             flyToEvent(clickedListing);
-             createPopUp(clickedListing);
+          .addTo(map)
+          .getElement().addEventListener('click', (event) => {
+            links.forEach(link => {
+                if (JSON.parse(link.dataset.occurence)[0].id === marker.id) {
+                  console.log('Clicked!')
+                  link.scrollIntoView()
+                  link.style.background = "#ecd6dd";
+                } else {
+                    console.log('not click')
                 }
-            }
-          })
-        });
+            })
+          });
 
-        // const activeItem = document.getElementsByClassName('active');
-        //   if (activeItem[0]) {
-        //     activeItem[0].classList.remove('active');
-        //   }
-        //   this.parentNode.classList.add('active');
+        // .addEventListener('click', (event) => {
+        //     console.log(event.currentTarget)
+        //     })
+
     });
+
+
+
     fitMapToMarkers(map, markers);
     map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
                                       mapboxgl: mapboxgl }));
+
+
+    links.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const marker = JSON.parse(event.currentTarget.dataset.occurence)
+         flyToEvent(map, marker[0]);
+         createPopUp(map, marker[0]);
+      })
+    });
 
 
   }
