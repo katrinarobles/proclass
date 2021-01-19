@@ -15,7 +15,7 @@
   <div class="home-container">
     <div class="cards-container">
     <% @occurences.each do |occurence| %>
-        <div class="occurence-home-cards home-card">
+        <div id="event-link" class="occurence-home-cards home-card">
             <div class="photo-card">
                 <%= link_to course_path(occurence.course) do %>
                     <%= cl_image_tag occurence.course.photo.key, class: 'home-photo-card'%>
@@ -50,18 +50,18 @@
     <% end %>
     </div>
 
-    <div class="map-cardy">
+    <div class="map-cardy" style="height: 70vh; top: 0; position: sticky;">
 
         <div id="map"
-             style="width: 100%; height: 70vh; top: 0; position: sticky; object-fit: cover;"
+             style="width: 100%; height: 70vh; object-fit: cover;"
              data-markers="<%= @markers.to_json %>"
              data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"> </div>
+        <div class="header-container">
+            <p><%= link_to courses_path, class: 'btn btn-search' do %>
+                SEARCH FOR MORE CLASSES<i class="fas fa-search"></i>
+                <% end %>
+            </p>
+        </div>
     </div>
   </div>
-    <div class="header-container">
-        <p><%= link_to courses_path, class: 'btn btn-search' do %>
-            SEARCH <i class="fas fa-search"></i>
-            <% end %>
-        </p>
-    </div>
 </div>
