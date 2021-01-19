@@ -1,0 +1,20 @@
+    <h5><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></h5>
+    <%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %>
+    <br><small><%= occurence.location %>
+    <br><%= occurence.course.teacher %></small>
+    <p><% if user_signed_in? %>
+            <% if current_user == occurence.course.user %>
+                        <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+            <% elsif occurence.capacity == occurence.users.count %>
+                Full
+            <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+                <small><strong>Already Booked</strong></small>
+                <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
+            <% else %>
+                    <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+            <% end %>
+    <% else %>
+        <small><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
+        <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p></small>
+    <% end %>
+
