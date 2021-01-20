@@ -10,11 +10,16 @@ class User < ApplicationRecord
 
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]*\z/ }
   validates_uniqueness_of :username, :case_sensitive => false
-  def start_time
-    self.courses.date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+
+  ransacker :full_name do |parent|
+    Arel::Nodes::InfixOperation.new(
+      '||',
+      Arel::Nodes::InfixOperation.new(
+        '||',
+        parent.table[:first_name], Arel::Nodes.build_quoted(' ')
+      ),
+      parent.table[:last_name]
+    )
   end
 
-  def to_param
-    username
-  end
 end

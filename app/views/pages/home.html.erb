@@ -24,7 +24,7 @@
 
             <div class="cardy-body">
                     <h5><%= occurence.course.name %></h5>
-                    <p><small><%= link_to occurence.course.teacher, user_path(occurence.course.user.username, occurence.course.user.id) %>
+                    <p><small><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %>
                     <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
                     <br><%= occurence.online? ? 'ONLINE' : " " %>
                     <br><%= occurence.location? ? occurence.location.first(25) : " " %></small></p>

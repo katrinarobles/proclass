@@ -22,7 +22,7 @@
         </li>
         <li class="nav-item">
           <% if current_user.teacher? %>
-           <%= link_to "Personal Page", user_path(current_user.username, current_user.id), class: "nav-link" %>
+           <%= link_to "Personal Page", user_path(current_user.username), class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item dropdown">
