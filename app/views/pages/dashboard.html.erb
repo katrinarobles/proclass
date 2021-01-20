@@ -26,7 +26,7 @@
             <%= link_to new_course_occurence_path(course.id) do %> <i aria-hidden="true" class="far fa-calendar-plus" title="add event"></i> <% end %>
             || <%= link_to course_occurences_path(course) do %> <i class="far fa-folder-open" title="see old records"></i> <% end %>
             || <%= link_to edit_course_path(course) do %><i class="far fa-edit" title="edit course"></i> <% end %>
-            || <%= link_to course_path(course), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt" title="delete course"></i> <% end %>
+            || <%= link_to course_path(course), method: :delete, data: { confirm: "Are you sure? Deleting the course will delete all events affiliated " } do %> <i class="far fa-trash-alt" title="delete course"></i> <% end %>
           </div>
         </div>
         <% end %>
