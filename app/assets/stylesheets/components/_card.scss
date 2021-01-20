@@ -127,9 +127,11 @@
 
 .map-cardy {
     width: 50%;
+    margin-bottom: 30%;
     @media (max-width: 600px) {
         width: 90%;
         margin: auto;
+        margin-bottom: 30%;
     }
 }
 

@@ -8,7 +8,10 @@
       <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_and_course_user_last_name_or_course_user_username_i_cont_any %>
       <%= f.label :online_eq, 'online?', class: 'form-btn' %>
       <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
-      <p class ="form-btn">Date: <%= f.search_field :date_cont, class: 'datepicker2' %></p>
+
+
+    <p class ="form-btn"> Date from: <%= f.search_field :date_gteq, class: 'datepicker2' %></p>
+     <p class ="form-btn"> Date to: <%= f.search_field :date_lteq, class: 'datepicker2' %></p>
       <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
      </div>
     <% end %>

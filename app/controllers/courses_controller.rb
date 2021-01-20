@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   def index
     # @courses = Course.all
     @q = Occurence.ransack(params[:q])
-    @occurences = @q.result.includes(:course).page(params[:page]).paginate(:per_page => 8, :page => params[:page])
+    @occurences = @q.result.includes(:course).order(date: :asc).page(params[:page]).paginate(:per_page => 8, :page => params[:page])
   end
 
   def show

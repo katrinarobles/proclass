@@ -49,18 +49,13 @@ const initMapbox = () => {
           .getElement().addEventListener('click', (event) => {
             links.forEach(link => {
                 if (JSON.parse(link.dataset.occurence)[0].id === marker.id) {
-                  console.log('Clicked!')
                   link.scrollIntoView()
                   link.style.background = "#ecd6dd";
                 } else {
-                    console.log('not click')
+                  link.style.background = "white";
                 }
             })
           });
-
-        // .addEventListener('click', (event) => {
-        //     console.log(event.currentTarget)
-        //     })
 
     });
 
