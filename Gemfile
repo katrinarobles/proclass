@@ -23,6 +23,8 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'geocoder'
 
+gem 'select_all-rails'
+
 gem "simple_calendar", "~> 2.0"
 
 gem 'dotenv-rails', groups: [:development, :test]

@@ -1,7 +1,7 @@
 class OccurencesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
   before_action :set_occurence, only: [:show, :edit, :update, :destroy]
-  before_action :find_course, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :find_course, only: [:show, :new, :create, :edit, :update, :destroy, :destroy_multiple]
 
   def index
     @course = Course.find(params[:course_id])
@@ -80,6 +80,14 @@ class OccurencesController < ApplicationController
   def destroy
     @occurence.destroy
     redirect_to @course, notice: 'Deleted occurence successfully!'
+  end
+
+  def destroy_multiple
+    Occurence.destroy(params[:occurence_ids])
+    respond_to do |format|
+      format.html { redirect_to @course }
+      format.json { head :no_content }
+    end
   end
 
   private

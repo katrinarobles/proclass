@@ -28,27 +28,29 @@
 
         <% if @occurences.exists? %>
             <% @occurences.each do |occurence| %>
-              <tr>
-                <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
-                <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
-                <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
-                <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
-                <td style="text-align: center">
-                    <% if user_signed_in? %>
-                        <% if current_user == occurence.course.user %>
-                            <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
-                        <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-                            <small><strong>Booked</strong></small>
-                        <% elsif occurence.capacity == occurence.users.count %>
-                            Full
-                        <% else %>
-                            <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
-                        <% end %>
-                    <% else %>
-                        <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
-                    <% end %>
-                </td>
-              </tr>
+              <% if Time.parse(occurence.date) > Time.now %>
+                <tr>
+                  <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
+                  <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
+                  <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
+                  <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
+                  <td style="text-align: center">
+                      <% if user_signed_in? %>
+                          <% if current_user == occurence.course.user %>
+                              <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                          <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+                              <small><strong>Booked</strong></small>
+                          <% elsif occurence.capacity == occurence.users.count %>
+                              Full
+                          <% else %>
+                              <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                          <% end %>
+                      <% else %>
+                          <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
+                      <% end %>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
         <% else %>
             <div class="empty-container">

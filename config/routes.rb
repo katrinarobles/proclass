@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard'
   resources :courses  do
     resources :occurences do
+      collection do
+        delete 'destroy_multiple'
+      end
       resources :bookings, only: [ :create, :destroy ]
     end
   end
