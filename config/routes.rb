@@ -16,5 +16,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [ :show ], :path => '/:username'
+  get '/:username', to: 'users#show', as: :user
 end

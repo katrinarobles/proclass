@@ -13,7 +13,7 @@
             <% if current_user == @course.user %>
                 You
             <%else %>
-                <%= link_to @course.teacher, user_path(@course.user) %></p>
+                <%= link_to @course.teacher, user_path(@course.user.username) %></p>
             <% end %>
           <% if user_signed_in? %>
               <% if current_user == @course.user %>
@@ -30,6 +30,11 @@
           <% if Time.parse(occurence.date) > Time.now %>
               <% if user_signed_in? %>
                 <div class="event-cards">
+                    <%= form_tag course_occurences_path(occurence.course, occurence) do %>
+                      <%= check_box "Selected", true %>
+                      <%= label_tag "Select" %>
+                  <% end %>
+
                     <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
                         <small>
                             <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>

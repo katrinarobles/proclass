@@ -14,7 +14,7 @@
     <p> Teacher: <% if current_user == @course.user %>
             You
         <% else %>
-        <%= link_to @course.teacher, user_path(@course.user) %>
+        <%= link_to @course.teacher, user_path(@course.user.username) %>
     <% end %> </p>
     <p> €<%= @occurence.price %> </p>
     <p> Date: <strong><%= @occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
