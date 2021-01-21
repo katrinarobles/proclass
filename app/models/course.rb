@@ -1,7 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :user
   has_many :occurences, dependent: :destroy
-  has_many :bookings, through: :occurences
+  has_many :bookings, through: :occurences, dependent: :destroy
   has_one_attached :photo
 
   validates :name, presence: true

@@ -10,12 +10,14 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'pages#dashboard'
+
   resources :courses  do
     resources :occurences do
       collection do
         delete 'destroy_multiple'
       end
-      resources :bookings, only: [ :create, :destroy ]
+      resources :bookings, only: [ :create, :destroy ] do
+      end
     end
   end
 

@@ -5,70 +5,107 @@
 </div>
 
 <div class="main-container">
-  <div class="split-cards1 cards">
-      <p> Details:</p>
-      <p><em> <%= @course.description %></em> </p>
-      <p> <%= @course.duration %> minutes</p>
-      <p> Teacher:
-            <% if current_user == @course.user %>
-                You
-            <%else %>
-                <%= link_to @course.teacher, user_path(@course.user.username) %></p>
-            <% end %>
-          <% if user_signed_in? %>
+    <div class="split-cards1 cards">
+        <p> Details:</p>
+        <p><em> <%= @course.description %></em> </p>
+        <p> <%= @course.duration %> minutes</p>
+        <p> Teacher:
               <% if current_user == @course.user %>
-                <p> <%= link_to "Add events for #{@course.name}", new_course_occurence_path(@course.id), class: "btn btn-primary" %></p>
-                <p> <%= link_to "Edit details", edit_course_path(@course), class: "btn btn-ghost" %>
-                    <%= link_to "See Past Events", course_occurences_path(@course), class: "btn btn-ghost" %></p>
+                  You
+                  <p> <%= link_to "Add events for #{@course.name}", new_course_occurence_path(@course.id), class: "btn btn-primary" %></p>
+                  <p> <%= link_to "Edit details", edit_course_path(@course), class: "btn btn-ghost" %>
+                      <%= link_to "See Past Events", course_occurences_path(@course), class: "btn btn-ghost" %></p>
+              <%else %>
+                  <%= link_to @course.teacher, user_path(@course.user.username) %></p>
               <% end %>
-      <% end %>
-  </div>
+    </div>
+
     <div class="split-cards2 cards">
-      <h4> Events </h4>
-      <div class="event-main">
-        <% @course.occurences.order(date: :asc).each do |occurence| %>
-          <% if Time.parse(occurence.date) > Time.now %>
-              <% if user_signed_in? %>
-                    <div id="selectAll" class="event-cards">
-                      <%= check_box_tag "occurence_ids[]", occurence.id, false, class: 'selectable' %>
-                        <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
-                            <small>
-                                <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
-                                <br><%= occurence.location? ? occurence.location.first(25) : " " %>
-                                <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
-                            <div class="links">
-                                <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
-                                <p> <% if current_user == @course.user %>
-                                    <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %> ||
-                                    <%= link_to course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
-                                <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-                                    <strong>Already Booked</strong>
-                                    <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
-                                <% elsif occurence.capacity == occurence.users.count %>
-                                    <p>Fully Booked</p>
-                                <% else %>
-                                    <%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn btn-primary" %>
-                                <% end %>
+    <% if user_signed_in? %>
+          <% if current_user == @course.user %>
+              <%= form_tag destroy_multiple_course_occurences_path(@course), method: :delete do %>
+
+              <h4> Events </h4> <%= submit_tag "Delete selected", :class => "btn btn-delete", data: { confirm: "Are you sure?" } %>
+
+                  <div class="event-main">
+                      <% @course.occurences.order(date: :asc).each do |occurence| %>
+                          <% if Time.parse(occurence.date) > Time.now %>
+                            <div id="selectAll" class="event-cards">
+                                <%= check_box_tag "occurence_ids[]", occurence.id, false, class: 'selectable' %>
+                                  <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
+                                      <small>
+                                          <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
+                                          <br><%= occurence.location? ? occurence.location.first(25) : " " %>
+                                          <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                                      <div class="links">
+                                          <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
+                                          <p>
+                                              <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %> ||
+                                              <%= link_to course_occurence_path(@course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %>
+                                          </p>
+                                      </div>
                                     </small>
                             </div>
-                    </div>
-
-              <% else %>
-                <div class="event-cards">
-                    <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
-                        <small>
-                            <strong><%= occurence.online? ? 'ONLINE' : "---" %></strong>
-                            <br><%= occurence.location? ? occurence.location.first(25) : "---" %>
-                            <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
-                        </small>
-                    <div class="links">
-                         <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
-                         <p> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
-                    </div>
-                </div>
+                          <% end %>
+                        <% end %>
+                  </div>
               <% end %>
+
+
+            <!-- if user is not the teacher  -->
+          <% else %>
+            <h4> Events </h4>
+
+                <div class="event-main">
+                      <% @course.occurences.order(date: :asc).each do |occurence| %>
+                          <% if Time.parse(occurence.date) > Time.now %>
+                            <div id="selectAll" class="event-cards">
+                                  <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
+                                      <small>
+                                          <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
+                                          <br><%= occurence.location? ? occurence.location.first(25) : " " %>
+                                          <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                                      <div class="links">
+                                          <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
+                                          <p>
+                                            <%if current_user.bookings.where(occurence_id: occurence.id).first %>
+                                                <strong>Already Booked</strong>
+                                                <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
+                                            <% elsif occurence.capacity == occurence.users.count %>
+                                              <p>Fully Booked</p>
+                                            <% else %>
+                                              <%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn btn-primary" %>
+                                            <% end %>
+                                          </p>
+                                      </div>
+                                      </small>
+                            </div>
+                          <% end %>
+                      <% end %>
+                </div>
           <% end %>
-        <% end %>
-      </div>
-    </div>
-</div>
+    <!-- if user is not signed in -->
+    <% else %>
+        <h4> Events </h4>
+              <div class="event-main">
+                  <% @course.occurences.order(date: :asc).each do |occurence| %>
+                      <% if Time.parse(occurence.date) > Time.now %>
+                              <div class="event-cards">
+                                  <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
+                                      <small>
+                                          <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
+                                          <br><%= occurence.location? ? occurence.location.first(25) : " " %>
+                                          <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                                      </small>
+                                      <div class="links">
+                                        <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
+                                        <p> <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
+                                      </div>
+                              </div>
+                      <% end %>
+                  <% end %>
+              </div>
+    <% end %>
+    </div> <!-- end of split-cards2 card div -->
+</div> <!-- end of main div -->
+
