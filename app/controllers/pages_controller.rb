@@ -13,6 +13,7 @@ class PagesController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { occurence: occurence })
       }
     end
+    console
   end
 
   def dashboard
