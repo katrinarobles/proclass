@@ -7,7 +7,6 @@ class OccurencesController < ApplicationController
     @course = Course.find(params[:course_id])
     @q = Occurence.where(course_id: @course.id).ransack(params[:q])
     @occurences = @q.result.page(params[:page]).paginate(:per_page => 8, :page => params[:page])
-    # @occurences = Occurence.all.order(date: :asc).paginate(:per_page => 8, :page => params[:page])
   end
 
   def show

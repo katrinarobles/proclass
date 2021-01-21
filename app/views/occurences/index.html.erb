@@ -4,15 +4,15 @@
         <br>including past events
         <p><%= search_form_for @q, url: course_occurences_path(@course) do |f| %>
          <div class="form-container">
-          <%= f.label :date_or_location_or_course_name_i_cont_any, "Search by:", class: 'form-btn' %>
-          <%= f.search_field :date_or_location_or_course_name_i_cont_any %>
+          <%= f.label :location_or_course_name_i_cont_any, "Search by:", class: 'form-btn' %>
+          <%= f.search_field :location_or_course_name_i_cont_any %>
           <%= f.label :online_eq, 'online?', class: 'form-btn' %>
           <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
 
-
-          <p class ="form-btn"> From: <%= f.search_field :date_gteq_all, class: 'datepicker3' %></p>
-          <p class ="form-btn"> Until: <%= f.search_field :date_lteq_all, class: 'datepicker3' %></p>
-          <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
+          <p class ="form-btn"> From: <%= f.search_field :date_gteq_any, class: 'datepicker3' %></p>
+          <p class ="form-btn"> Until: <%= f.search_field :date_lteq_any, class: 'datepicker3' %></p>
+          <%= link_to "Clear", request.path, class: "btn btn-clear" %>
+          <%= f.submit class: 'btn btn-primary' %>
          </div>
         <% end %>
     </div>

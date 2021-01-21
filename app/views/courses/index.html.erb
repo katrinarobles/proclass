@@ -4,13 +4,12 @@
     <p> </p>
     <%= search_form_for @q, url: courses_path do |f| %>
      <div class="form-container">
-      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all, "Search by:", class: 'form-btn' %>
-      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all %>
+      <%= f.label :location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all, "Search by:", class: 'form-btn' %>
+      <%= f.search_field :location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all %>
       <%= f.label :online_eq, 'online?', class: 'form-btn' %>
       <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
 
-
-    <p class ="form-btn"> Date from: <%= f.search_field :date_gteq, class: 'datepicker2' %></p>
+     <p class ="form-btn"> Date from: <%= f.search_field :date_gteq, class: 'datepicker2' %></p>
      <p class ="form-btn"> Date to: <%= f.search_field :date_lteq, class: 'datepicker2' %></p>
       <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
      </div>

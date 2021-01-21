@@ -11,6 +11,10 @@ class Occurence < ApplicationRecord
     Arel.sql("date(occurences.date)")
   end
 
+  # ransacker :date, type: :date do
+  #   Arel.sql('date(date)')
+  # end
+
   def dateparse
     DateTime.parse(self.date)
   end
