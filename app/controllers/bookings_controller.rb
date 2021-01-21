@@ -8,24 +8,29 @@ class BookingsController < ApplicationController
     @occurence = Occurence.find(params[:occurence_id])
     @booking.occurence = @occurence
     if @booking.save
-      redirect_back(fallback_location: course_occurence_path(@course, @occurence), notice: 'Booked successfully!')
+      if params[:page] == 'home'
+        respond_to do |format|
+          format.js { render template: 'bookings/update_booking_card' }
+        end
+      else
+        redirect_back(fallback_location: course_occurence_path(@course, @occurence), notice: 'Booked successfully!')
+      end
     else
-      render :new
+        render :new
     end
-      # respond_to do |format|
-      #   if @booking.save
-      #     format.js { render template: 'bookings/update_booking_card' }
-      #   else
-      #     render :new
-      #   end
-      # end
 
   end
 
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_back(fallback_location: dashboard_path, notice: 'Unregistered successfully!')
+    if params[:page] == 'home'
+      respond_to do |format|
+          format.js { render template: 'bookings/update_delete_card' }
+        end
+    else
+    redirect_back(fallback_location: dashboard_path, notice: 'Canceled Booking successfully!')
+    end
   end
 
 
