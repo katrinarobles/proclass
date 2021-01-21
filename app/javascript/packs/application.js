@@ -34,6 +34,11 @@ document.addEventListener('turbolinks:load', () => {
   initUpdateNavbarOnScroll();
   initMapbox();
 
+  const alert = document.querySelector('.alert');
+  setTimeout(function(){
+    alert.remove();
+  }, 4000);
+
   const addressInput =  document.querySelector('.address-input')
   if (addressInput) {
     var places = require('places.js');

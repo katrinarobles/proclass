@@ -1,6 +1,11 @@
 .alert {
   position: fixed;
-  bottom: 16px;
+  top: 30%;
   right: 16px;
   z-index: 1000;
+  font-weight: bolder;
+  opacity: 0.8;
+  background: #3fb2ce !important;
+  color: white !important;
+
 }
