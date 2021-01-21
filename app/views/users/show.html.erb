@@ -26,10 +26,16 @@
                         <% elsif occurence.capacity == occurence.users.count %>
                             Full
                         <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-                            <small><strong>Already Booked</strong></small>
-                            <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
+                            <% if Time.parse(occurence.date) > Time.now %>
+                              <small><strong>Already Booked</strong></small>
+                              <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
+                            <% else %>
+                              <i class="fas fa-running"></i>
+                            <% end %>
                         <% else %>
+                            <% if Time.parse(occurence.date) > Time.now %>
                                 <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                            <% end %>
                         <% end %>
                     <% else %>
                         <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>

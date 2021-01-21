@@ -71,7 +71,7 @@ class OccurencesController < ApplicationController
 
   def update
     if @occurence.update(occurence_params)
-      redirect_to @course, notice: 'Updated occurence successfully'
+      redirect_to @course, notice: 'Updated event successfully'
     else
       render :edit
     end
@@ -79,16 +79,17 @@ class OccurencesController < ApplicationController
 
   def destroy
     @occurence.destroy
-    redirect_to @course, notice: 'Deleted occurence successfully!'
+    redirect_to @course, notice: 'Deleted Event successfully!'
   end
 
   def destroy_multiple
     Occurence.destroy(params[:occurence_ids])
     respond_to do |format|
-      format.html { redirect_to @course }
+      format.html { redirect_to @course, notice: 'Deleted Events successfully!' }
       format.json { head :no_content }
     end
   end
+
 
   private
 

@@ -12,6 +12,14 @@ class BookingsController < ApplicationController
     else
       render :new
     end
+      # respond_to do |format|
+      #   if @booking.save
+      #     format.js { render template: 'bookings/update_booking_card' }
+      #   else
+      #     render :new
+      #   end
+      # end
+
   end
 
   def destroy
@@ -19,6 +27,7 @@ class BookingsController < ApplicationController
     @booking.destroy
     redirect_back(fallback_location: dashboard_path, notice: 'Unregistered successfully!')
   end
+
 
   private
   def find_occurence
