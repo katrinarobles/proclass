@@ -33,7 +33,7 @@
                   <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
                   <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
                   <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
-                  <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
+                  <td><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
                   <td style="text-align: center">
                       <% if user_signed_in? %>
                           <% if current_user == occurence.course.user %>
