@@ -4,8 +4,8 @@
     <p> </p>
     <%= search_form_for @q, url: courses_path do |f| %>
      <div class="form-container">
-      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont, "Search by:", class: 'form-btn' %>
-      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont %>
+      <%= f.label :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all, "Search by:", class: 'form-btn' %>
+      <%= f.search_field :date_or_location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all %>
       <%= f.label :online_eq, 'online?', class: 'form-btn' %>
       <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
 

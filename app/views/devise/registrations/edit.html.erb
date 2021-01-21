@@ -26,6 +26,7 @@
                     input_html: { autocomplete: "current-password" } %>
         <%= f.input :photo, as: :file %>
         <%= f.input :username,
+                      hint: 'Must be all lowercase, only letters and numbers',
                       required: true,
                       autofocus: true,
                       input_html: { autocomplete: "username" }%>
