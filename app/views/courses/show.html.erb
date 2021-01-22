@@ -35,7 +35,11 @@
                                   <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
                                       <small>
                                           <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
-                                          <br><%= occurence.location? ? occurence.location.first(25) : " " %>
+                                          <br><% if occurence.location? %>
+                                                <%= link_to occurence.location.first(25), occurence.address, target: "blank" %>
+                                              <% else %>
+                                                &nbsp;
+                                              <% end %>
                                           <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
                                       <div class="links">
                                           <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
