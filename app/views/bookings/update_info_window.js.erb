@@ -1,0 +1,1 @@
+ document.querySelector(`.occurence-home-cards[data-occurence="<%= @markers.select{ |marker| marker[:id] == occurence.id }.to_json %>"]`).innerHTML = `<%= render partial: 'occurences/info_window', locals: {occurence: @occurence, booking: @booking, page: 'home'} %>`
