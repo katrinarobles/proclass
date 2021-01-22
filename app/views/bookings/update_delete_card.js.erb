@@ -1,1 +1,2 @@
- document.querySelector(`.occurence-home-cards[data-occurid='<%= @occurence.id %>']`).innerHTML = `<%= render partial: 'occurences/occurence_card', locals: {occurence: @occurence, page: 'home'} %>`
+document.querySelector(`.occurence-home-cards[data-occurid='<%= @occurence.id %>']`).innerHTML = `<%= render partial: 'occurences/occurence_card', locals: {occurence: @occurence, page: 'home'} %>`
+document.querySelector(`.info-wdw`).innerHTML = `<%= render partial: 'pages/info_window', locals: {occurence: @occurence, booking: @booking, page: 'home'} %>`

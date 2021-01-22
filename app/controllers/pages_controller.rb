@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     # @courses = Course.all
-    @occurences = Occurence.where.not(longitude: nil, latitude: nil).order(date: :asc).limit(10)
+    @occurences = Occurence.where.not(longitude: nil, latitude: nil).order(date: :asc)
 
     @markers = @occurences.geocoded.map do |occurence|
       {
