@@ -21,4 +21,11 @@
   padding: 1% 2%;
   }
 
+  @media (max-width: 600px) {
+    font-size: 0.7em;
+    .location-list {
+      display: none;
+    }
+  }
+
 }

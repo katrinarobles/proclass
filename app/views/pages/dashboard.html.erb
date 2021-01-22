@@ -32,8 +32,9 @@
         <% end %>
     </div>
 
-    <div class="cards">
-        <p>Classes you've registered:  <% current_user.bookings.each do |booking| %> </p>
+    <div class="registered-class cards">
+        <p> Classes you've registered</p>
+          <% current_user.bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
             <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
                 - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
