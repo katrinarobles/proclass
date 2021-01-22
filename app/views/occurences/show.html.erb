@@ -33,6 +33,7 @@
                     <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence) %>
                 <% elsif current_user.bookings.where(occurence_id: @occurence.id).first %>
                    <strong>Already Booked</strong></p>
+                   <p><%= link_to 'Cancel?', course_occurence_booking_path(@occurence.course, @occurence, current_user.bookings.where(occurence_id: @occurence).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete' %></p>
                 <% elsif @occurence.capacity == @occurence.users.count %>
                   <p><strong>Fully Booked</strong></p>
                   <p> Please contact <%= @course.teacher %> for more information</p>
@@ -69,6 +70,7 @@
             <center>
                 <p><% if current_user.bookings.where(occurence_id: @occurence.id).first %>
                        <strong>Thank You for Booking</strong></p>
+                       <p><%= link_to 'Cancel?', course_occurence_booking_path(@occurence.course, @occurence, current_user.bookings.where(occurence_id: @occurence).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete' %>
                     <% elsif @occurence.capacity == @occurence.users.count %>
                       <h1><i class="far fa-sad-cry"></i></h1>
                       <p>Fully Booked </p>

@@ -17,7 +17,9 @@
     <% @occurences.each do |occurence| %>
       <% if Time.parse(occurence.date) > Time.now %>
         <div id="event-link" data-occurid="<%= occurence.id %>" data-occurence="<%= @markers.select{ |marker| marker[:id] == occurence.id }.to_json %>" class="occurence-home-cards home-card">
+
           <%= render partial: 'occurences/occurence_card', locals: {occurence: occurence, page: 'home'} %>
+
         </div>
       <% end %>
     <% end %>

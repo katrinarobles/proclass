@@ -78,7 +78,7 @@ class OccurencesController < ApplicationController
 
   def destroy
     @occurence.destroy
-    redirect_to @course, notice: 'Deleted Event successfully!'
+      redirect_to @course, notice: 'Deleted Event successfully!'
   end
 
   def destroy_multiple

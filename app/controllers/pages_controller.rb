@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     # @courses = Course.all
-    @occurences = Occurence.where.not(longitude: nil, latitude: nil).order(date: :asc)
+    @occurences = Occurence.order(date: :asc)
 
     @markers = @occurences.geocoded.map do |occurence|
       {
@@ -13,7 +13,6 @@ class PagesController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { occurence: occurence })
       }
     end
-    console
   end
 
   def dashboard
