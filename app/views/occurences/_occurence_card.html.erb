@@ -9,7 +9,10 @@
                     <p><small><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %>
                     <br><strong><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></strong>
                     <br><%= occurence.online? ? 'ONLINE' : " " %>
-                    <br><%= occurence.location? ? occurence.location.first(25) : " " %></small></p>
+                    <br><% if occurence.location? %>
+                            <%= link_to occurence.location.first(25), occurence.address, target: "blank" %>
+                        <% end %>
+                    </small></p>
             </div>
             <div class="links-card">
                 <% if user_signed_in? %>
@@ -20,7 +23,6 @@
                     <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
                         <small><strong>Already Booked</strong></small>
                         <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first, page: page),
-                              # id: current_user.bookings.where(occurence_id: occurence.id).first,
                               remote: true,
                               method: :delete,
                               data: { confirm: "Are you sure?" },

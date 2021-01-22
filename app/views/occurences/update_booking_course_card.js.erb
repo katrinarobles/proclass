@@ -1,0 +1,1 @@
+document.querySelector(`.event-cards[data-eventid='<%= @occurence.id %>']`).innerHTML = `<%= render partial: 'occurences/occurence_show_card', locals: {occurence: @occurence, booking: @booking, page: 'courses/show'} %>`
