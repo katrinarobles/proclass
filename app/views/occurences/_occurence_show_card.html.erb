@@ -1,0 +1,29 @@
+<!-- <div class="event-reg-card"> -->
+  <p><strong><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></strong></p>
+    <small>
+        <strong><%= occurence.online? ? 'ONLINE' : " " %></strong>
+        <br><%= occurence.location? ? occurence.location.first(25) : " " %>
+        <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+    <div class="links">
+        <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
+        <p>
+          <%if current_user.bookings.where(occurence_id: occurence.id).first %>
+              <strong>Already Booked</strong>
+              <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first, page: 'courses/show'),
+                        remote: true,
+                        method: :delete,
+                        data: { confirm: "Are you sure?" },
+                        class: 'btn btn-clear' %>
+          <% elsif occurence.capacity == occurence.users.count %>
+            <p>Fully Booked</p>
+          <% else %>
+            <%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id, page: 'courses/show'),
+                  remote: true,
+                  method: :post,
+                  class: "btn btn-primary" %>
+          <% end %>
+        </p>
+    </div>
+    </small>
+<!-- </div>
+ -->
