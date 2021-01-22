@@ -1,3 +1,4 @@
+  <div class="info-wdw">
     <h5><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></h5>
     <%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %>
     <br><small><%= occurence.location %>
@@ -17,4 +18,5 @@
         <small><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
         <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p></small>
     <% end %>
+  </div>
 

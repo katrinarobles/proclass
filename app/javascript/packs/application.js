@@ -35,9 +35,11 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
 
   const alert = document.querySelector('.alert');
-  setTimeout(function(){
-    alert.remove();
-  }, 4000);
+  if(alert){
+    setTimeout(function(){
+      alert.remove();
+    }, 4000);
+  }
 
   const addressInput =  document.querySelector('.address-input')
   if (addressInput) {
