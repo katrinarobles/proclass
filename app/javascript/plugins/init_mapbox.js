@@ -51,19 +51,19 @@ const initMapbox = () => {
                 if (JSON.parse(link.dataset.occurence)[0].id === marker.id) {
                   link.scrollIntoView()
                   link.style.background = "#ecd6dd";
+                  flyToEvent(map, marker)
                 } else {
                   link.style.background = "white";
                 }
             })
           });
-
     });
 
 
 
     fitMapToMarkers(map, markers);
     map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-                                      mapboxgl: mapboxgl }));
+                                      mapboxgl: mapboxgl })).addControl(new mapboxgl.NavigationControl());
 
 
     links.forEach((link) => {

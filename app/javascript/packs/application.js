@@ -35,7 +35,11 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
 
   const alert = document.querySelector('.alert');
+<<<<<<< HEAD
   if(alert) {
+=======
+  if(alert){
+>>>>>>> 0128363c8f167e1b89fd46eb86f2c26e6567b113
     setTimeout(function(){
       alert.remove();
     }, 4000);
