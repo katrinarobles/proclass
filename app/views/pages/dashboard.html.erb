@@ -73,6 +73,9 @@
             Attending:
             <br><%= link_to booking.occurence.course.name, course_occurence_path(booking.occurence.course, booking.occurence) %>
             <br><strong><%= booking.occurence.dateparse.strftime("%H:%M") %></strong>
+            <% if Time.parse(booking.occurence.date) < Time.now %>
+              <p><i class="fas fa-running"></i></p>
+            <% end %>
           </div>
         <% end %>
       <% end %>
