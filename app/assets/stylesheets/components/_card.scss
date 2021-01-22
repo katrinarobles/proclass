@@ -8,27 +8,31 @@
     width: 90%;
   }
 
-  .split-cards1  {
-    width: 30%;
-    height: 30%;
-    background: white;
-    position: sticky;
-    top: 5%;
-    z-index: 999;
-    @media (max-width: 600px) {
-      width: 90%;
-      padding: 2%;
-    }
+.split-cards1  {
+  width: 30%;
+  height: 30%;
+  background: white;
+  position: sticky;
+  top: 5%;
+  z-index: 999;
+  @media (max-width: 600px) {
+    width: 90%;
+    padding: 2%;
   }
+}
 
-  .split-cards2  {
-    width: 65%;
-    @media (max-width: 600px) {
-      width: 90%;
-      padding: 2%;
-    }
+.split-cards2  {
+  width: 65%;
+  @media (max-width: 600px) {
+    width: 90%;
+    padding: 2%;
   }
+}
 
+.registered-class {
+  height: 400px;
+  overflow: scroll;
+}
 .event-main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

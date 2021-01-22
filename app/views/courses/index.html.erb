@@ -21,8 +21,8 @@
             <th> <%= sort_link(@q, :course_name) do %> Course Name <i class="fas fa-sort"></i> <% end %> </th>
             <th> <%= sort_link(@q, :course_user_last_name) do %> Teacher <i class="fas fa-sort"></i> <% end %></th>
             <th> <%= sort_link(@q, :date) do %> Date <i class="fas fa-sort"></i> <% end %> </th>
-            <th> Location </th>
-            <th></th>
+            <th class="location-list"> Location </th>
+            <th class="location-list"></th>
           </tr>
 
         <% if @occurences.exists? %>
@@ -32,8 +32,8 @@
                   <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
                   <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
                   <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
-                  <td><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
-                  <td style="text-align: center">
+                  <td class="location-list"><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
+                  <td class="location-list" style="text-align: center">
                       <% if user_signed_in? %>
                           <% if current_user == occurence.course.user %>
                               <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
