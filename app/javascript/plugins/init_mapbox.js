@@ -63,7 +63,7 @@ const initMapbox = () => {
 
     fitMapToMarkers(map, markers);
     map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-                                      mapboxgl: mapboxgl }));
+                                      mapboxgl: mapboxgl })).addControl(new mapboxgl.NavigationControl());
 
 
     links.forEach((link) => {
