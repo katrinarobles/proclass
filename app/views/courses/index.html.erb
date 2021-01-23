@@ -33,20 +33,8 @@
                   <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
                   <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
                   <td class="location-list"><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
-                  <td class="location-list" style="text-align: center">
-                      <% if user_signed_in? %>
-                          <% if current_user == occurence.course.user %>
-                              <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
-                          <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-                              <small><strong>Booked</strong></small>
-                          <% elsif occurence.capacity == occurence.users.count %>
-                              Full
-                          <% else %>
-                              <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
-                          <% end %>
-                      <% else %>
-                          <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
-                      <% end %>
+                  <td class="location-list" id="booking-column" data-indexoccur="<%= occurence.id %>" style="text-align: center;">
+                    <%= render partial: 'courses/td_booking', locals: {occurence: occurence, page: 'courses'} %>
                   </td>
                 </tr>
               <% end %>

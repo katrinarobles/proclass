@@ -18,6 +18,6 @@ class PagesController < ApplicationController
   def dashboard
     @user = current_user
     @q = Booking.where(user_id: @user.id).ransack(params[:q])
-    @bookings = @q.result.includes(:occurence).page(params[:page])
+    @bookings = @q.result.includes(:occurence).includes(:user).page(params[:page])
   end
 end
