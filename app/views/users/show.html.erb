@@ -48,6 +48,7 @@
 </div>
 
 <div class="header-container">
+  <h4> Check out all my courses:</h4>
     <p>
       <% @user.courses.each do |course| %>
         <%= link_to course.name, course_path(course), class: 'btn btn-ghost' %>
