@@ -16,6 +16,10 @@ class BookingsController < ApplicationController
         respond_to do |format|
           format.js { render template: 'occurences/update_booking_course_card' }
         end
+      elsif params[:page] == 'courses'
+        respond_to do |format|
+          format.js { render template: 'bookings/update_index_card' }
+        end
       else
         redirect_back(fallback_location: course_occurence_path(@course, @occurence), notice: 'Booked successfully!')
       end

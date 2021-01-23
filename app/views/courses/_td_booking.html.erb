@@ -1,44 +1,17 @@
-<tr>
-  <th> <%= sort_link(@q, :course_name) do %> Course Name <i class="fas fa-sort"></i> <% end %> </th>
-  <th> <%= sort_link(@q, :course_user_last_name) do %> Teacher <i class="fas fa-sort"></i> <% end %></th>
-  <th> <%= sort_link(@q, :date) do %> Date <i class="fas fa-sort"></i> <% end %> </th>
-  <th> Location </th>
-  <th></th>
-</tr>
-
-<tr>
-<% if @occurences.exists? %>
-    <% @occurences.each do |occurence| %>
-      <% if Time.parse(occurence.date) > Time.now %>
-        <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
-        <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
-        <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
-        <td><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
-        <td style="text-align: center">
-        <% if user_signed_in? %>
-          <% if current_user == occurence.course.user %>
-            <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
-          <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-            <small><strong>Booked</strong></small>
-          <% elsif occurence.capacity == occurence.users.count %>
-            Full
-          <% else %>
-            <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id, page: 'courses'),
-                          remote: true,
-                          method: :post,
-                          class: "btn-primary-small" %>
-            </small>
-          <% end %>
-        <% else %>
-          <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
-        <% end %>
-        </td>
-<% end %>
+<% if user_signed_in? %>
+    <% if current_user == occurence.course.user %>
+        <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+    <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+        <small><strong>Booked</strong></small>
+    <% elsif occurence.capacity == occurence.users.count %>
+        Full
+    <% else %>
+        <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id, page: 'courses'),
+                remote: true,
+                method: :post,
+                class: "btn-primary-small" %>
+        </small>
     <% end %>
 <% else %>
-    <div class="empty-container">
-        <p>No Results Found. Try another search.</p>
-    </div>
+    <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
 <% end %>
-</tr>
-

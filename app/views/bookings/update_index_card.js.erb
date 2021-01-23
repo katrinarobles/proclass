@@ -1,1 +1,1 @@
-document.querySelector(`.events-list`).innerHTML = `<%= render partial: 'courses/td_booking', locals: {occurence: @occurence, booking: @booking, page: 'courses'} %>`
+document.querySelector(`#booking-column[data-indexoccur="<%= @occurence.id %>"]`).innerHTML = `<%= render partial: 'courses/td_booking', locals: {occurence: @occurence, booking: @booking, page: 'courses'} %>`
