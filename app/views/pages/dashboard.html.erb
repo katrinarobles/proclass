@@ -16,7 +16,7 @@
         <p><%= link_to 'Create a Course', new_course_path, class: "btn btn-primary" %></p>
     </div>
 
-    <div class="cards">
+    <div class="registered-class cards">
         <p>Your list of courses: <% current_user.courses.each do |course| %> </p>
         <div class="teacher-cards">
           <div class="course-part">
@@ -36,7 +36,7 @@
       <table>
         <tr>
           <th>
-            <%= sort_link(@q, :occurence_date) do %>
+            <%= sort_link(@q, :occurence_date,  default_order: { occurence_date: 'asc'}) do %>
               Classes You've Registered: <small> (sort by date)</small>
             <% end %>
           </th>
@@ -104,11 +104,15 @@
       <% @bookings.each do |booking| %>
         <% if booking.occurence.date.to_datetime.to_date == date %>
           <div class='calendar-card'>
-            Attending:
-            <br><%= link_to booking.occurence.course.name, course_occurence_path(booking.occurence.course, booking.occurence) %>
-            <br><strong><%= booking.occurence.dateparse.strftime("%H:%M") %></strong>
             <% if Time.parse(booking.occurence.date) < Time.now %>
+              Attended:
+              <br><%= link_to booking.occurence.course.name, course_occurence_path(booking.occurence.course, booking.occurence) %>
+              <br><strong><%= booking.occurence.dateparse.strftime("%H:%M") %></strong>
               <p><i class="fas fa-running"></i></p>
+            <% else %>
+              Attending:
+              <br><%= link_to booking.occurence.course.name, course_occurence_path(booking.occurence.course, booking.occurence) %>
+              <br><strong><%= booking.occurence.dateparse.strftime("%H:%M") %></strong>
             <% end %>
           </div>
         <% end %>
@@ -117,10 +121,17 @@
         <% course.occurences.each do |occurence| %>
             <% if occurence.date.to_datetime.to_date == date %>
               <div class='calendar-card teaching'>
-                <strong>Teaching:</strong>
-                <br><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %>
-                <br><strong><%= occurence.dateparse.strftime("%H:%M") %></strong>
-                <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                <% if Time.parse(occurence.date) < Time.now %>
+                  <strong>Taught:</strong>
+                  <br><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %>
+                  <br><strong><%= occurence.dateparse.strftime("%H:%M") %></strong>
+                  <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                <% else %>
+                  <strong>Teaching:</strong>
+                  <br><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %>
+                  <br><strong><%= occurence.dateparse.strftime("%H:%M") %></strong>
+                  <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                <% end %>
             <% end %>
         <% end %>
       <% end %>
