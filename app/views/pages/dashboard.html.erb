@@ -33,14 +33,30 @@
     </div>
 
     <div class="registered-class cards">
-        <p> Classes you've registered</p>
-          <% current_user.bookings.each do |booking| %>
+      <table>
+        <tr>
+          <th>
+            <%= sort_link(@q, :occurence_date) do %>
+              Classes You've Registered: <small> (sort by date)</small>
+            <% end %>
+          </th>
+        </tr>
+        <% if @bookings.exists? %>
+          <% @bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
-            <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
-                - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
-                || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+          <tr>
+            <td>
+              <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
+                <small>
+                  - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
+                  || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+                </small>
+            </td>
+          </tr>
+          <% end %>
           <% end %>
         <% end %>
+      </table>
     </div>
 
     <!-- Student's DASHBOARD -->
@@ -50,13 +66,30 @@
     </div>
 
     <div class="split-cards2 cards">
-        <p>Your list of classes: <% current_user.bookings.each do |booking| %> </p>
+        <table>
+        <tr>
+          <th>
+            <%= sort_link(@q, :occurence_date) do %>
+              Classes You've Registered: <small> (sort by date)</small>
+            <% end %>
+          </th>
+        </tr>
+        <% if @bookings.exists? %>
+          <% @bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
-            <p><strong><%= booking.occurence.date %></strong> - <%= link_to booking.course.name, course_occurence_path(booking.course, booking.occurence) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
-            || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
-            </p>
+          <tr>
+            <td>
+              <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
+                <small>
+                  - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
+                  || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+                </small>
+            </td>
+          </tr>
+          <% end %>
           <% end %>
         <% end %>
+      </table>
   <% end %>
     </div>
 </div>
@@ -68,7 +101,7 @@
     <h2> Your Schedule Coming Up </h2>
     <%= calendar(number_of_days: 3) do |date| %>
       <%= date.day %>
-      <% current_user.bookings.each do |booking| %>
+      <% @bookings.each do |booking| %>
         <% if booking.occurence.date.to_datetime.to_date == date %>
           <div class='calendar-card'>
             Attending:
