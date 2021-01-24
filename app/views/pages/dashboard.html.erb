@@ -17,7 +17,7 @@
     </div>
 
     <div class="registered-class cards">
-        <p>Your list of courses: <% current_user.courses.each do |course| %> </p>
+        <p>Your list of courses: <% current_user.courses.order(name: :asc).each do |course| %> </p>
         <div class="teacher-cards">
           <div class="course-part">
             <p><%= link_to course.name, course_path(course), class: "btn btn-ghost" %></p>
@@ -34,41 +34,18 @@
 
     <div class="registered-class cards">
       Classes You've Registered:
-      <table>
-        <tr>
-          <th>
-            <%= sort_link(@q, :occurence_date,  default_order: { occurence_date: 'asc'}) do %>
-              <small>(sort by date)</small>
-            <% end %>
-          </th>
-          <th>
-            <%= sort_link(@q, :user_last_name,  default_order: { user_last_name: 'asc'}) do %>
-            <small>(sort by teacher) </small>
-            <% end %>
-          </th>
-
-        </tr>
-        <% if @bookings.exists? %>
-          <% @bookings.each do |booking| %>
+          <% @sorted_bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
           <tr>
             <td>
               <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
                 <small>
                   - <%= link_to booking.course.name, course_path(booking.course) %>
-                </small>
-            </td>
-            <td>
-              <small>
                 <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
                 || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
                 </small>
-            </td>
-          </tr>
           <% end %>
           <% end %>
-        <% end %>
-      </table>
     </div>
 
     <!-- Student's DASHBOARD -->
@@ -78,30 +55,15 @@
     </div>
 
     <div class="split-cards2 cards">
-        <table>
-        <tr>
-          <th>
-            <%= sort_link(@q, :occurence_date) do %>
-              Classes You've Registered: <small> (sort by date)</small>
-            <% end %>
-          </th>
-        </tr>
-        <% if @bookings.exists? %>
-          <% @bookings.each do |booking| %>
+          <% @sorted_bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
-          <tr>
-            <td>
               <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
                 <small>
                   - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
                   || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
                 </small>
-            </td>
-          </tr>
           <% end %>
           <% end %>
-        <% end %>
-      </table>
   <% end %>
     </div>
 </div>

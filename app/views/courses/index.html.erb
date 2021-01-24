@@ -19,10 +19,10 @@
         <table class="events-list">
           <tr>
             <th> <%= sort_link(@q, :course_name) do %> Course Name <i class="fas fa-sort"></i> <% end %> </th>
-            <th> <%= sort_link(@q, :course_user_last_name) do %> Teacher <i class="fas fa-sort"></i> <% end %></th>
+            <th> <%= sort_link(@q, :course_user_last_name, class: "location-list" ) do %> Teacher <i class="fas fa-sort"></i> <% end %></th>
             <th> <%= sort_link(@q, :date) do %> Date <i class="fas fa-sort"></i> <% end %> </th>
             <th class="location-list"> Location </th>
-            <th class="location-list"></th>
+            <th></th>
           </tr>
 
         <% if @occurences.exists? %>
@@ -30,10 +30,10 @@
               <% if Time.parse(occurence.date) > Time.now %>
                 <tr>
                   <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
-                  <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
+                  <td><%= link_to occurence.course.teacher, user_path(occurence.course.user.username), class: "location-list" %></td>
                   <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
                   <td class="location-list"><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
-                  <td class="location-list" id="booking-column" data-indexoccur="<%= occurence.id %>" style="text-align: center;">
+                  <td id="booking-column" data-indexoccur="<%= occurence.id %>" style="text-align: center;">
                     <%= render partial: 'courses/td_booking', locals: {occurence: occurence, page: 'courses'} %>
                   </td>
                 </tr>
