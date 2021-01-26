@@ -1,3 +1,4 @@
+<%if @user.teacher %>
 <div class="header-container">
     <p><%= cl_image_tag @user.photo.key,  class: "avatar-large" %></p>
     <h2> <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>
@@ -60,7 +61,7 @@
 <% else %>
   <div class="header-container">
     <h2> Oops <i class="far fa-frown"></i></h2>
-      <p><%= @user.first_name %> <%= @user.last_name %> is not a teacher <p>
+      <p><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %> is not a teacher <p>
     <p><%= link_to "Search for other teachers", courses_path, class: 'btn btn-search' %></p>
   </div>
   <% end %>
