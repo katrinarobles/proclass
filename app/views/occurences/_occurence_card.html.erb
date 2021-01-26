@@ -22,7 +22,7 @@
                         Full
                     <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
                         <small><strong>Already Booked</strong></small>
-                        <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first, page: page),
+                        <br><%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first, page: page),
                               remote: true,
                               method: :delete,
                               data: { confirm: "Are you sure?" },
@@ -35,7 +35,6 @@
                             </small>
                     <% end %>
                 <% else %>
-                    <p><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
-                    <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-sign-up' %></p>
+                    <p><%= link_to "Book", new_user_session_path, class: 'btn btn-primary' %></p>
                 <% end %>
 </div>

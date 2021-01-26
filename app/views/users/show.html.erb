@@ -9,51 +9,58 @@
     </p> </h2>
 </div>
 
-<div class="users-show-container">
-    <%= week_calendar(number_of_weeks: 2) do |date| %>
-      <%= date.day %>
-       <% @user.courses.each do |course| %>
-          <% course.occurences.each do |occurence| %>
-            <% if occurence.date.to_datetime.to_date == date %>
-              <div class='calendar-card'>
-                <%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %>
-                <br><strong><%= occurence.dateparse.strftime("%H:%M") %></strong>
-                <br>
-                    <% if user_signed_in? %>
-                        <% if current_user == @user %>
-                                    <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
-                                    <%= link_to course_occurence_path(course, occurence), method: :delete, data: { confirm: "Are you sure you would like to delete?" } do %> <i class="far fa-trash-alt"></i> <% end %>
-                        <% elsif occurence.capacity == occurence.users.count %>
-                            Full
-                        <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
-                            <% if Time.parse(occurence.date) > Time.now %>
-                              <small><strong>Already Booked</strong></small>
-                              <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
-                            <% else %>
-                              <i class="fas fa-running"></i>
-                            <% end %>
-                        <% else %>
-                            <% if Time.parse(occurence.date) > Time.now %>
-                                <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
-                            <% end %>
-                        <% end %>
-                    <% else %>
-                        <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
-                    <% end %>
-              </div>
+  <div class="users-show-container">
+      <%= week_calendar(number_of_weeks: 2) do |date| %>
+        <%= date.day %>
+         <% @user.courses.each do |course| %>
+            <% course.occurences.each do |occurence| %>
+              <% if occurence.date.to_datetime.to_date == date %>
+                <div class='calendar-card'>
+                  <%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %>
+                  <br><strong><%= occurence.dateparse.strftime("%H:%M") %></strong>
+                  <br>
+                      <% if user_signed_in? %>
+                          <% if current_user == @user %>
+                                      <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                                      <%= link_to course_occurence_path(course, occurence), method: :delete, data: { confirm: "Are you sure you would like to delete?" } do %> <i class="far fa-trash-alt"></i> <% end %>
+                          <% elsif occurence.capacity == occurence.users.count %>
+                              Full
+                          <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
+                              <% if Time.parse(occurence.date) > Time.now %>
+                                <small><strong>Already Booked</strong></small>
+                                <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-clear' %>
+                              <% else %>
+                                <i class="fas fa-running"></i>
+                              <% end %>
+                          <% else %>
+                              <% if Time.parse(occurence.date) > Time.now %>
+                                  <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id), method: :post, class: "btn-primary-small" %></small>
+                              <% end %>
+                          <% end %>
+                      <% else %>
+                          <%= link_to "Book", new_user_session_path, class: 'btn btn-primary' %>
+                      <% end %>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-    <% end %>
-</div>
-
-<div class="header-container">
-  <h4> Check out all my courses:</h4>
-    <p>
-      <% @user.courses.each do |course| %>
-        <%= link_to course.name, course_path(course), class: 'btn btn-ghost' %>
       <% end %>
-    </p>
+  </div>
 
-    <%= @user.bio %>
-</div>
+  <div class="header-container">
+    <h4> Check out all my courses:</h4>
+      <p>
+        <% @user.courses.each do |course| %>
+          <%= link_to course.name, course_path(course), class: 'btn btn-ghost' %>
+        <% end %>
+      </p>
+
+      <%= @user.bio %>
+  </div>
+<% else %>
+  <div class="header-container">
+    <h2> Oops <i class="far fa-frown"></i></h2>
+      <p><%= @user.first_name %> <%= @user.last_name %> is not a teacher <p>
+    <p><%= link_to "Search for other teachers", courses_path, class: 'btn btn-search' %></p>
+  </div>
+  <% end %>

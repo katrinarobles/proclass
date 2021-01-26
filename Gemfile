@@ -23,6 +23,8 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'geocoder'
 
+gem 'money-rails'
+gem 'stripe'
 
 gem "simple_calendar", "~> 2.0"
 

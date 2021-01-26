@@ -8,10 +8,7 @@
 }
 .main-container {
   display: flex;
-  // justify-content: space-evenly;
   width: 100%;
-
-
   @media (max-width: 600px) {
     display: block;
     padding-left: 5%;
@@ -21,14 +18,12 @@
 .home-container {
     width: 80%;
     height: 70vh;
-    // overflow: scroll;
     margin: auto;
     display: flex;
     @media (max-width: 600px) {
         display: block;
         margin: auto;
         width: 100%;
-        // overflow: none;
   }
 }
 
