@@ -1,12 +1,12 @@
 <div class="header-container">
-  <h1> Welcome <%= current_user.first_name.split(" ").first.capitalize %>,</h1>
+  <h1> Welcome <%= current_user.first_name.capitalize %>,</h1>
   <p> This is your dashboard</p>
 </div>
 
 <div class="main-container">
   <div class="split-cards1 cards">
-      <p>Name: <strong> <%= current_user.first_name.split(" ").first.capitalize %>
-          <%= current_user.last_name.split(" ").first.capitalize %> </strong></p>
+      <p>Name: <strong> <%= current_user.first_name.capitalize %>
+          <%= current_user.last_name.capitalize %> </strong></p>
       <p>Phone: <%= current_user.phone %></p>
       <p>Email: <%= current_user.email %></p>
       <p><%= link_to 'Update Your Account', edit_user_registration_path %></p>

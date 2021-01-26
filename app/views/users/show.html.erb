@@ -1,14 +1,13 @@
-<% if @user.teacher %>
-  <div class="header-container">
-      <p><%= cl_image_tag @user.photo.key,  class: "avatar-large" %></p>
-      <h2> <%= @user.first_name.split(" ").first.capitalize %> <%= @user.last_name.split(" ").first.capitalize %>
-      <p> <% if @user.facebook? %> <a target="blank" href=<%= @user.facebook %>> <i class="fab fa-facebook-square fa-xs"></i></a> <% end %>
-          <% if @user.instagram? %> <a target="blank" href=<%=@user.instagram %>> <i class="fab fa-instagram-square fa-xs"></i></a> <% end %>
-          <% if @user.blog? %> <a target="blank" href=<%=@user.blog %>> <i class="fab fa-blogger fa-xs"></i></a> <% end %>
-          <% if @user.website? %> <a target="blank" href=<%=@user.website %>> <i class="fas fa-window-maximize fa-xs"></i> </a> <% end %>
-          <a href=<%=@user.email %>><i class="fas fa-envelope-square fa-xs"></i></a>
-      </p> </h2>
-  </div>
+<div class="header-container">
+    <p><%= cl_image_tag @user.photo.key,  class: "avatar-large" %></p>
+    <h2> <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>
+    <p> <% if @user.facebook? %> <a target="blank" href=<%= @user.facebook %>> <i class="fab fa-facebook-square fa-xs"></i></a> <% end %>
+        <% if @user.instagram? %> <a target="blank" href=<%=@user.instagram %>> <i class="fab fa-instagram-square fa-xs"></i></a> <% end %>
+        <% if @user.blog? %> <a target="blank" href=<%=@user.blog %>> <i class="fab fa-blogger fa-xs"></i></a> <% end %>
+        <% if @user.website? %> <a target="blank" href=<%=@user.website %>> <i class="fas fa-window-maximize fa-xs"></i> </a> <% end %>
+        <a href=<%=@user.email %>><i class="fas fa-envelope-square fa-xs"></i></a>
+    </p> </h2>
+</div>
 
   <div class="users-show-container">
       <%= week_calendar(number_of_weeks: 2) do |date| %>
