@@ -1,5 +1,5 @@
 ActionMailer::Base.smtp_settings = {
-  address: ENV['POSTMARK_SMTP_SERVER_'],
+  address: ENV['POSTMARK_SMTP_SERVER'],
   port: '25',
   domain: 'indieclasse.com',
   user_name: ENV['POSTMARK_API_TOKEN'],
