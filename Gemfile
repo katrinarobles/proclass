@@ -27,7 +27,7 @@ gem 'money-rails'
 gem 'stripe'
 
 gem 'letter_opener', group: :development
-gem 'postmark-rails'
+
 
 
 gem "simple_calendar", "~> 2.0"

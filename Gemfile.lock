@@ -113,7 +113,6 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
-    json (2.5.1)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.7.0)
@@ -152,11 +151,6 @@ GEM
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     pg (1.2.3)
-    postmark (1.21.3)
-      json
-    postmark-rails (0.20.0)
-      actionmailer (>= 3.0.0)
-      postmark (~> 1.15)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -301,7 +295,6 @@ DEPENDENCIES
   listen (~> 3.3)
   money-rails
   pg (~> 1.1)
-  postmark-rails
   pry-byebug
   pry-rails
   puma (~> 5.0)
