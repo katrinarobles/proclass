@@ -1,0 +1,4 @@
+Hi <%= @booking.user.first_name %>,
+You've booked your class with <%= @booking.occurence.course.teacher %> at <%= @booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></p>
+If you didn't book this class, please cancel the booking in your dashboard
+http://www.IndieClasse.com

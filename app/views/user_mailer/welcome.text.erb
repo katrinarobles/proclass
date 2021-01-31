@@ -1,0 +1,17 @@
+<% if @user.teacher? %>
+  Hi <%= @user.first_name %>
+
+  Welcome to IndieClasse, where fitness professionals have the proper web tools to allow their clients to easily connect to their classes
+
+
+  We hope IndieClasse keeps you as independent and free as much as your business chose to be,
+  IndieClasse
+<% else %>
+
+  Hi <%= @user.first_name %>,
+
+   Welcome to IndieClasse, where practitioners like you can easily search, sign up, and support your favourite teacher
+   You can find classes you've already signed up for in your Dashboard
+
+  Stay indie and free!
+<% end %>

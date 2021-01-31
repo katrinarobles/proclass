@@ -8,6 +8,8 @@ class BookingsController < ApplicationController
     @occurence = Occurence.find(params[:occurence_id])
     @booking.occurence = @occurence
     if @booking.save
+      mail = BookingMailer.with(booking: @booking).booked
+      mail.deliver_now
       if params[:page] == 'home'
         respond_to do |format|
           format.js { render template: 'bookings/update_booking_card' }

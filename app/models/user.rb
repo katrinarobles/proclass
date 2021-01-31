@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
+  after_create :send_welcome_email
+
   has_one_attached :photo
   has_many :courses, dependent: :destroy
   has_many :bookings, dependent: :destroy
@@ -20,6 +22,12 @@ class User < ApplicationRecord
       ),
       parent.table[:last_name]
     )
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome.deliver_now
   end
 
 end
