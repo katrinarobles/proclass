@@ -147,6 +147,9 @@
     padding: 4%;
     margin: 2%;
     background: white;
+    @media screen and (max-width: 600px) {
+    }
+
 }
 
 .teacher-cards {
