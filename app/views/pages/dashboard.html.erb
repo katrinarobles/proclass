@@ -17,7 +17,9 @@
     </div>
 
     <div class="registered-class cards">
-        <p>Your list of courses: <% current_user.courses.order(name: :asc).each do |course| %> </p>
+      <% if current_user.courses.present? %>
+        <p>Your list of courses:
+          <% current_user.courses.order(name: :asc).each do |course| %> </p>
         <div class="teacher-cards">
           <div class="course-part">
             <p><%= link_to course.name, course_path(course), class: "btn btn-ghost" %></p>
@@ -30,10 +32,14 @@
           </div>
         </div>
         <% end %>
+      <% else %>
+      No courses created yet.
+      <% end %>
     </div>
 
     <div class="registered-class cards">
       Classes You've Registered:
+        <% if @sorted_bookings.present? %>
           <% @sorted_bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
             <div data-dashboard-book="<% booking.id %>" class="dasboard-booking-list">
@@ -43,6 +49,9 @@
             </div>
           <% end %>
           <% end %>
+        <% else %>
+          No Bookings yet
+        <% end %>
     </div>
 
     <!-- Student's DASHBOARD -->
@@ -52,6 +61,7 @@
     </div>
 
     <div class="split-cards2 cards">
+        <% if @sorted_bookings.present? %>
           <% @sorted_bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
               <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
@@ -61,6 +71,9 @@
                 </small>
           <% end %>
           <% end %>
+        <% else %>
+          No bookings yet
+        <% end %>
   <% end %>
     </div>
 </div>
