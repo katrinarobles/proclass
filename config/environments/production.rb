@@ -3,8 +3,9 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
 
   # config.action_mailer.default_url_options = { host: "http://www.indieclasse.com" }
-  config.action_mailer.delivery_method = :smtp
   host = "http://www.indieclasse.com" #replace with your own url
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: host }
 
 # SMTP settings for gmail
