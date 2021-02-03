@@ -13,7 +13,6 @@
 
 <div class="home-container">
     <div class="cards-container">
-    <% if @occurences.present? %>
       <% @occurences.each do |occurence| %>
         <% if Time.parse(occurence.date) > Time.now %>
           <div id="event-link" data-occurid="<%= occurence.id %>" data-occurence="<%= @markers.select{ |marker| marker[:id] == occurence.id }.to_json %>" class="occurence-home-cards home-card">
@@ -37,8 +36,5 @@
                 <% end %>
             </p>
         </div>
-    <% else %>
-     <h2> no classes at the moment</h2>
-    <% end %>
     </div>
 </div>
