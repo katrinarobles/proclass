@@ -38,6 +38,10 @@ class BookingsController < ApplicationController
       respond_to do |format|
           format.js { render template: 'bookings/update_delete_card' }
         end
+    elsif params[:page] == 'dashboard'
+      respond_to do |format|
+          format.js { render template: 'bookings/update_dashboard' }
+        end
     elsif params[:page] == 'courses/show'
       respond_to do |format|
           format.js { render template: 'occurences/update_delete_booking' }

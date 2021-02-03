@@ -1,0 +1,12 @@
+<p><strong>
+  <%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %>
+</strong>
+  <small>
+    - <%= link_to booking.course.name, course_path(booking.course) %>
+  <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
+  || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking),
+             page: 'dashboard',
+             method: :delete,
+             remote: true,
+             data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
+  </small>
