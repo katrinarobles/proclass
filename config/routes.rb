@@ -1,32 +1,11 @@
 Rails.application.routes.draw do
-
-  devise_for :users, :skip => [:registrations]
-
-  devise_for :users, :controllers => {
-    :registrations => "registrations"
+  devise_for :users, controllers: {
+    confirmations: 'confirmations'
   }
-
   authenticated :user do
-    devise_scope :user do
-      root 'pages#dashboard', as: :authenticated_root
-      get 'home', to: 'pages#home'
-    end
+    root 'pages#dashboard', as: :authenticated_root
+    get 'home', to: 'pages#home'
   end
-
-  unauthenticated do
-    devise_scope :user do
-      root to: "registrations#new", :as => "unauthenticated"
-    end
-  end
-
-
-  # devise_for :users, controllers: {
-  #   confirmations: 'confirmations'
-  # }
-  # authenticated :user do
-  #   root 'pages#dashboard', as: :authenticated_root
-  #   get 'home', to: 'pages#home'
-  # end
   root to: 'pages#home'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
