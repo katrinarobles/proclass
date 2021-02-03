@@ -21,6 +21,5 @@ class PagesController < ApplicationController
     # @bookings = @q.result.includes(:occurence).includes(:user).page(params[:page])
     @bookings = Booking.where(user_id: @user.id)
     @sorted_bookings = @bookings.sort_by {|booking| booking.occurence.date }
-    console
   end
 end
