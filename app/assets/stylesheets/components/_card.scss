@@ -6,6 +6,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 90%;
+    @media screen and (max-width: 600px) {
+      padding: 3%;
+    }
   }
 
 .split-cards1  {
@@ -156,4 +159,10 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: -5%;
+    @media screen and (max-width: 600px) {
+      display: block;
+      text-align: center;
+      margin: 2%;
+      margin-bottom: 0%;
+    }
 }

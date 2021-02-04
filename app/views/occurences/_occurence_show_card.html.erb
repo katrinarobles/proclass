@@ -9,11 +9,11 @@
         <p>
           <%if current_user.bookings.where(occurence_id: occurence.id).first %>
               <strong>Already Booked</strong>
-              <%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first, page: 'courses/show'),
+              <p><%= link_to 'Cancel?', course_occurence_booking_path(occurence.course.id, occurence.id, current_user.bookings.where(occurence_id: occurence.id).first, page: 'courses/show'),
                         remote: true,
                         method: :delete,
                         data: { confirm: "Are you sure?" },
-                        class: 'btn btn-clear' %>
+                        class: 'btn btn-clear' %></p>
           <% elsif occurence.capacity == occurence.users.count %>
             <p>Fully Booked</p>
           <% else %>
