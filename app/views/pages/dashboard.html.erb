@@ -14,9 +14,9 @@
       <% if current_user.teacher? %>
         <p>Title: <strong>Teacher</strong></p>
         <p><%= link_to 'Create a Course', new_course_path, class: "btn btn-primary" %></p>
-    </div>
+  </div>
 
-    <div class="registered-class cards">
+  <div class="registered-class cards">
       <% if current_user.courses.present? %>
         <p>Your list of courses:
           <% current_user.courses.order(name: :asc).each do |course| %> </p>
@@ -35,9 +35,9 @@
       <% else %>
       No courses created yet.
       <% end %>
-    </div>
+  </div>
 
-    <div class="registered-class cards">
+  <div class="registered-class cards">
       Classes You've Registered:
         <% if @sorted_bookings.present? %>
           <% @sorted_bookings.each do |booking| %>
@@ -52,7 +52,7 @@
         <% else %>
           No Bookings yet
         <% end %>
-    </div>
+  </div>
 
     <!-- Student's DASHBOARD -->
 
@@ -60,22 +60,22 @@
       <p><%= link_to 'Find a Class', courses_path, class: "btn btn-primary" %></p>
     </div>
 
-    <div class="split-cards2 cards">
+  <div class="split-cards2 cards">
         <% if @sorted_bookings.present? %>
           <% @sorted_bookings.each do |booking| %>
           <% if Time.parse(booking.occurence.date) > Time.now %>
-              <p><strong><%= link_to booking.occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(booking.course, booking.occurence) %></strong>
-                <small>
-                  - <%= link_to booking.course.name, course_path(booking.course) %> with <%= link_to booking.course.teacher, user_path(booking.course.user.username) %>
-                  || <%= link_to course_occurence_booking_path(booking.course.id, booking.occurence.id, booking), method: :delete, data: { confirm: "Are you sure you'd like to cancel?" } do %> <i class="far fa-trash-alt"></i> <% end %></p>
-                </small>
+            <div data-dashboard-book="<% booking.id %>" class="dasboard-booking-list">
+
+              <%= render partial: 'pages/dashboard_booking_card', locals: {booking: booking, page: 'dashboard'} %>
+
+            </div>
           <% end %>
           <% end %>
         <% else %>
           No bookings yet
         <% end %>
   <% end %>
-    </div>
+  </div>
 </div>
 
 
