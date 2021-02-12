@@ -3,7 +3,7 @@
         <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
     <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
         <small><strong>Booked</strong></small>
-    <% elsif occurence.capacity == occurence.users.count %>
+    <% elsif occurence.capacity == occurence.total_bookings_sum %>
         Full
     <% else %>
         <small><%= link_to "Book", course_occurence_bookings_path(occurence.course.id, occurence.id, page: 'courses'),

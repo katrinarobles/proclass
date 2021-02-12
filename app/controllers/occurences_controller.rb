@@ -10,6 +10,7 @@ class OccurencesController < ApplicationController
   end
 
   def show
+    @fake_booking = FakeBooking.new
   end
 
   def new
@@ -103,4 +104,8 @@ class OccurencesController < ApplicationController
   def set_occurence
     @occurence = Occurence.find(params[:id])
   end
+
+  # def fake_booking_params
+  #   params.require(:fake_booking).permit(:fake_first_name, :fake_last_name)
+  # end
 end

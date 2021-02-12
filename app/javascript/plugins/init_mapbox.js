@@ -50,10 +50,7 @@ const initMapbox = () => {
             links.forEach(link => {
                 if (JSON.parse(link.dataset.occurence)[0].id === marker.id) {
                   link.scrollIntoView()
-                  link.style.background = "#ecd6dd";
                   flyToEvent(map, marker)
-                } else {
-                  link.style.background = "white";
                 }
             })
           });

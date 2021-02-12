@@ -30,7 +30,13 @@
     <center>
         <p><% if user_signed_in? %>
                 <% if current_user == @course.user %>
-                    <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence) %>
+                    <p>
+                      <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence), class: "btn btn-ghost" %>
+                    </p>
+                    <strong> Add a non IndieClasse student </strong>
+
+                    <%= render "fake_bookings/form", course: @course, occurence: @occurence %>
+
                 <% elsif current_user.bookings.where(occurence_id: @occurence.id).first %>
                    <strong>Already Booked</strong></p>
                    <p><%= link_to 'Cancel?', course_occurence_booking_path(@occurence.course, @occurence, current_user.bookings.where(occurence_id: @occurence).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete' %></p>
@@ -47,11 +53,13 @@
         <p> <%= link_to "See more times", course_path(@course), class: "btn btn-ghost" %> </p>
     </center>
   </div>
+
+
   <div class="split-cards2 cards">
     <h2> Attendees </h2>
-    <p><i class="fas fa-users"></i> <%= @occurence.bookings.count %> / <%= @occurence.capacity %> </p>
+    <p><i class="fas fa-users"></i> <%= @occurence.total_bookings_sum %> / <%= @occurence.capacity %> </p>
     <% if user_signed_in? %>
-        <% if current_user.id == @course.user_id %>
+        <% if current_user == @course.user %>
             <table class="attendees-list">
               <tr>
                 <th> First Name</th>
@@ -60,10 +68,19 @@
               </tr>
               <% @occurence.users.each do |user| %>
                 <tr>
-                  <td> <%= user.first_name.split(" ").first.capitalize %> </td>
-                  <td> <%= user.last_name.split(" ").first.capitalize %> </td>
+                  <td> <%= user.first_name.capitalize %> </td>
+                  <td> <%= user.last_name.capitalize %> </td>
                   <td> <%= user.email %> </td>
                 </tr>
+              <% end %>
+              <% if @occurence.fake_bookings %>
+              <% @occurence.fake_bookings.each do |fake| %>
+                <tr>
+                  <td> <%= fake.fake_first_name %></td>
+                  <td> <%= fake.fake_last_name %> </td>
+                  <td> <%= fake.fake_email if fake.fake_email %> </td>
+                </tr>
+              <% end %>
               <% end %>
             </table>
         <% else %>
@@ -71,10 +88,10 @@
                 <p><% if current_user.bookings.where(occurence_id: @occurence.id).first %>
                        <strong>Thank You for Booking</strong></p>
                        <p><%= link_to 'Cancel?', course_occurence_booking_path(@occurence.course, @occurence, current_user.bookings.where(occurence_id: @occurence).first), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete' %>
-                    <% elsif @occurence.capacity == @occurence.users.count %>
+                    <% elsif @occurence.capacity == @occurence.total_bookings_sum %>
                       <h1><i class="far fa-sad-cry"></i></h1>
                       <p>Fully Booked </p>
-                      <p> Please contact <%= @course.teacher %> for more information</p>
+                      <p> Please contact <%= @course.teacher %> for further information</p>
                       <p>or</p>
                     <% else %>
                       <%= link_to "Join Now!", course_occurence_bookings_path(@course.id, @occurence.id), method: :post, class: "btn btn-primary" %>
