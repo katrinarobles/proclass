@@ -24,7 +24,7 @@
                           <% if current_user == @user %>
                                       <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
                                       <%= link_to course_occurence_path(course, occurence), method: :delete, data: { confirm: "Are you sure you would like to delete?" } do %> <i class="far fa-trash-alt"></i> <% end %>
-                          <% elsif occurence.capacity == occurence.users.count %>
+                          <% elsif occurence.capacity == occurence.total_bookings_sum %>
                               Full
                           <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
                               <% if Time.parse(occurence.date) > Time.now %>

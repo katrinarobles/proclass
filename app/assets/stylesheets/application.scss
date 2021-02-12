@@ -22,6 +22,7 @@ body {
   h1, h2, h3, h4, h5 {
     font-family: "Poppins", "Helvetica", "sans-serif";
   }
+
 }
 
 a {
@@ -32,4 +33,17 @@ a {
 a:hover {
   text-decoration: none;
     color: #B0B0B0;
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in transparent */
+::-webkit-scrollbar-thumb {
+    background: transparent;
 }

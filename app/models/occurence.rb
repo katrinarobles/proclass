@@ -1,6 +1,7 @@
 class Occurence < ApplicationRecord
   belongs_to :course
   has_many :bookings, dependent: :destroy
+  has_many :fake_bookings, dependent: :destroy
   has_many :users, through: :bookings, dependent: :destroy
   validates :date, presence: true
 
@@ -23,4 +24,7 @@ class Occurence < ApplicationRecord
     "http://www.google.com/maps/place/#{self.latitude},#{self.longitude}/@#{self.latitude},#{self.longitude},17z"
   end
 
+  def total_bookings_sum
+    self.bookings.count + self.fake_bookings.count
+  end
 end

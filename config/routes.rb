@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       collection do
         delete 'destroy_multiple'
       end
+      resources :fake_bookings, only: [:create, :update, :edit, :destroy]
       resources :bookings, only: [ :create, :destroy ] do
       end
     end

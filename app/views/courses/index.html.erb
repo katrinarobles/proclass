@@ -34,7 +34,9 @@
                   <td><%= occurence.dateparse.strftime("%^a, %e %^b %H:%M") %></td>
                   <td class="location-list"><small><%= link_to occurence.location.first(30), occurence.address, target: "blank" %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
                   <td id="booking-column" data-indexoccur="<%= occurence.id %>" style="text-align: center;">
+
                     <%= render partial: 'courses/td_booking', locals: {occurence: occurence, page: 'courses'} %>
+
                   </td>
                 </tr>
               <% end %>

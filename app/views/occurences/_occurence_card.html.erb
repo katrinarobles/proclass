@@ -18,7 +18,7 @@
                 <% if user_signed_in? %>
                     <% if current_user == occurence.course.user %>
                                 <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
-                    <% elsif occurence.capacity == occurence.users.count %>
+                    <% elsif occurence.capacity == occurence.total_bookings_sum %>
                         Full
                     <% elsif current_user.bookings.where(occurence_id: occurence.id).first %>
                         <small><strong>Already Booked</strong></small>
