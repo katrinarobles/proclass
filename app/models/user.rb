@@ -24,9 +24,9 @@ class User < ApplicationRecord
     )
   end
 
-  private
-
   def after_confirmation
     UserMailer.with(user: self).welcome.deliver_later
   end
+  private
+
 end
