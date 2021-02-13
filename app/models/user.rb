@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  after_create :send_welcome_email
+  after_create :after_confirmation
 
   has_one_attached :photo
   has_many :courses, dependent: :destroy
@@ -26,8 +26,7 @@ class User < ApplicationRecord
 
   private
 
-  def send_welcome_email
-    UserMailer.with(user: self).welcome.deliver_now
+  def after_confirmation
+    UserMailer.with(user: self).welcome.deliver_later
   end
-
 end
