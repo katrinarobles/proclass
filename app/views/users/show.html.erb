@@ -49,6 +49,9 @@
   </div>
 
   <div class="header-container">
+    <p>
+      <%= @user.bio %>
+    <p>
     <h4> Check out all my courses:</h4>
       <p>
         <% @user.courses.each do |course| %>
@@ -56,7 +59,6 @@
         <% end %>
       </p>
 
-      <%= @user.bio %>
   </div>
 <% else %>
   <div class="header-container">
