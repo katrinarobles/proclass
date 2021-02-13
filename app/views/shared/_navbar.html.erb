@@ -9,7 +9,7 @@
     <% end %>
   <% end %>
 
-  <% unless current_page?(courses_path) %>
+  <% unless current_page?(courses_path) || current_page?(home_path) %>
         <%= link_to courses_path, class: 'search-navy' do %>
           S  E  A  R  C  H   <i class="fas fa-search"></i>
         <% end %>

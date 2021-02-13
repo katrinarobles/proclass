@@ -22,6 +22,7 @@ ActiveStorage.start()
 import "bootstrap";
 import { datePicker } from '../plugins/flatpickr';
 import { initUpdateNavbarOnScroll } from '../components/navbar';
+import { dynInput } from '../components/dyn_input';
 import { initMapbox } from '../plugins/init_mapbox';
 
 // Internal imports, e.g:
@@ -33,6 +34,11 @@ document.addEventListener('turbolinks:load', () => {
   datePicker();
   initUpdateNavbarOnScroll();
   initMapbox();
+  const registration = document.getElementById('registration');
+
+  if(registration){
+    dynInput();
+  }
 
   const alert = document.querySelector('.alert');
 

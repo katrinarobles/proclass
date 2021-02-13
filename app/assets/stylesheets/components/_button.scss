@@ -8,6 +8,7 @@
   font-weight: lighter;
   opacity: 0.6;
   transition: opacity 0.3s ease;
+  margin: 2%;
 }
 
 .btn-ghost:hover {
@@ -72,6 +73,13 @@
     margin-right: 1%;
 }
 
+.btn-clear2 {
+    color: #4A4A4A;
+    background-color: white;
+    border-color: #4A4A4A;
+    margin-right: 4%;
+}
+
 .btn-clear:hover {
     color: black;
     border-color: black;
@@ -87,7 +95,7 @@
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 2px;
-    margin: 1%;
+    margin: 2%;
 }
 
 .btn-primary-small:hover {

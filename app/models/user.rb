@@ -10,8 +10,8 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :occurences, through: :bookings
 
-  validates :username, presence: true, format: { with: /\A[a-z0-9]*\z/ }
-  validates_uniqueness_of :username, :case_sensitive => false
+  validates :username, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z0-9]*\z/ }
+  # validates_uniqueness_of :username, :case_sensitive => false
 
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new(

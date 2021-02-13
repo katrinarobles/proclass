@@ -76,8 +76,8 @@
               <% if @occurence.fake_bookings %>
               <% @occurence.fake_bookings.each do |fake| %>
                 <tr>
-                  <td> <%= fake.fake_first_name %></td>
-                  <td> <%= fake.fake_last_name %> </td>
+                  <td> <%= fake.fake_first_name.capitalize %></td>
+                  <td> <%= fake.fake_last_name.capitalize %> </td>
                   <td> <%= fake.fake_email if fake.fake_email %> </td>
                 </tr>
               <% end %>
