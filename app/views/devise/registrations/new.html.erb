@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-6 m-2">
+    <div id="registration" class="col-6 m-2">
       <h2>Sign up</h2>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -9,12 +9,12 @@
         <div class="form-inputs">
           <%= f.input :photo, as: :file %>
           <%= f.input :username,
-                      hint: 'Must all be lowercase, only letters and numbers',
+                      hint: 'Only letters and numbers',
                       required: true,
                       input_html: { autocomplete: "username" }%>
           <%= f.input :email,
                       required: true,
-                      autofocus: true,
+                      # autofocus: true,
                       input_html: { autocomplete: "email" }%>
           <%= f.input :password,
                       required: true,
@@ -32,20 +32,25 @@
           <%= f.input :phone,
                       required: true,
                       input_html: { autocomplete: "phone" }%>
-        <%= f.check_box :teacher, as: :boolean, unchecked_value: false, checked_value: true %>
-        <%= f.label :teacher, 'Are you signing up as a teacher?' %>
-
-          <%= f.input :bio,
-                      hint: ("Feel free to fill these out later"),
-                      input_html: { autocomplete: "bio" }%>
-          <%= f.input :facebook,
-                      input_html: { autocomplete: "facebook url" }%>
-          <%= f.input :instagram,
-                      input_html: { autocomplete: "instagram url" }%>
-          <%= f.input :blog,
-                      input_html: { autocomplete: "blog url" }%>
-          <%= f.input :website,
-                      input_html: { autocomplete: "any other website url" }%>
+          <%= f.label :teacher, 'Are you signing up as a teacher?' %>
+          <%= f.input :teacher,
+                      type: :check_box,
+                      as: :boolean,
+                      unchecked_value: false,
+                      checked_value: true %>
+          <div class="hidform" style="display:none">
+            <%= f.input :bio,
+                        hint: ("Feel free to fill these out later"),
+                        input_html: { autocomplete: "bio" } %>
+            <%= f.input :facebook,
+                        input_html: { autocomplete: "facebook url" } %>
+            <%= f.input :instagram,
+                        input_html: { autocomplete: "instagram url" } %>
+            <%= f.input :blog,
+                        input_html: { autocomplete: "blog url" } %>
+            <%= f.input :website,
+                        input_html: { autocomplete: "any other website url" }%>
+          </div>
 
         </div>
 
