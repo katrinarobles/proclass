@@ -1,0 +1,67 @@
+<div class="landing-container">
+  <div class="landing-text-div">
+    <div id="pictureframe">
+      <div id="bird">
+        <div id="body2"></div>
+        <div id="body1"></div>
+        <div id="wing-l"></div>
+        <div id="wing-r"></div>
+      </div>
+      <div id="shadow"></div>
+    </div>
+    <h1 class="landing-text">IndieClasse</h1>
+    <p class="landing-text2">Stay Independent and free</p>
+    <div data-anijs="if: click, do: rubberBand animated, to: #caption">
+      <div id="caption">
+        <%= link_to "Start Free Trial", home_path, class: 'btn btn-sign-up' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="landing-container2">
+    <div class="box-left">
+      <%= image_tag "fitnessinstructors.jpg", alt: "Fitness Instructors", class: "landing-images-fs" %>
+    </div>
+    <div class="box-right">
+      <h3 style="text-align: left;">IndieClasse</h3>
+      <p>is an affordable schedule management tool for freelance fitness instructors to help schedule their clients,
+      manage their classes, and be accessible online.</p>
+      <p>So toss the pen and paper, no more sign-in sheets! Indieclasse keeps you active and organize in the web <i class="fas fa-feather-alt fa-xs"></i>
+      </p>
+    </div>
+</div>
+
+<div class="landing-container3">
+    <div class="box-left">
+      <h3 style="text-align: right;">Create Your Courses</h3>
+      <p>Whether you teach yoga, pilates, crossfit or private classes, IndieClasse allows you 100% control of how to create your individual courses and set up a schedule at your preference: daily, weekly, monthly <i class="fas fa-feather-alt fa-xs"></i></p>
+    </div>
+    <div class="box-right">
+        <%= image_tag "createcourse.png", alt: "Create Course", class: "landing-images" %>
+    </div>
+</div>
+
+<div class="landing-container2">
+    <div class="box-left">
+      <%= image_tag "advertiseclass.png", alt: "Advertise", class: "landing-images adv" %>
+    </div>
+    <div class="box-right">
+      <h3 style="text-align: left;">Advertise Online</h3>
+      <p>Your classes are instantaneously available online! Depending on where you hold your classes, your clients and prospective clients in your area will be able to see details of your classes and can choose to sign up or message you for further details <i class="fas fa-feather-alt fa-xs"></i></p>
+    </div>
+</div>
+
+<div class="landing-container3">
+    <div class="box-left">
+      <h3 style="text-align: right;">Share Your Classes</h3>
+      <p>IndieClasse makes it super easy for clients to search for you and your classes online. You also have your own personal website to share your schedule and bio for easy contact <i class="fas fa-feather-alt fa-xs"></i></p>
+    </div>
+    <div class="box-right">
+      <%= image_tag "shareclass.png", alt: "Share Class", class: "landing-images-fs" %>
+    </div>
+</div>
+
+<div class="footer2">
+  Made with <i class="fas fa-heart fa-xs"></i> info@indieclasse.com
+</div>

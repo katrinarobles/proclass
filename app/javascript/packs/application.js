@@ -23,6 +23,7 @@ import "bootstrap";
 import { datePicker } from '../plugins/flatpickr';
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { dynInput } from '../components/dyn_input';
+import { textified } from '../components/textify';
 import { initMapbox } from '../plugins/init_mapbox';
 
 // Internal imports, e.g:
@@ -34,6 +35,11 @@ document.addEventListener('turbolinks:load', () => {
   datePicker();
   initUpdateNavbarOnScroll();
   initMapbox();
+
+  const bounce = document.querySelector('.bounce');
+  if(bounce) {
+    textified(bounce,'bounce',5500);
+  }
   const registration = document.getElementById('registration');
 
   if(registration){

@@ -41,7 +41,6 @@
     display: flex;
     justify-content: space-around;
     width: 75%;
-    // height: 30px;
     margin: 1% auto;
     @media (max-width: 600px) {
     display: block;
@@ -58,3 +57,56 @@
 .smplfrm-fbooking-container {
 
 }
+
+.landing-container {
+  position: relative;
+  background-color: white;
+  height: 40vh;
+  @media (max-width: 600px) {
+    height: 30vh;
+  }
+}
+
+.landing-container2 {
+  display: flex;
+  background-color: #4f6d75;
+  height: 40vh;
+  color: white;
+  text-align: justify;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 600px) {
+    p {
+      font-size: 0.7em;
+    }
+  }
+}
+  .landing-container3 {
+  display: flex;
+  // background-color: #4f6d75;
+  height: 40vh;
+  // color: white;
+  text-align: justify;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 600px) {
+    p {
+      font-size: 0.7em;
+    }
+  }
+}
+.box-left {
+  width: 50%;
+  margin: 5%;
+  @media (max-width: 600px) {
+    margin: 2%
+  }
+}
+.box-right {
+  width: 50%;
+  margin: 5%;
+  @media (max-width: 600px) {
+    margin: 2%
+  }
+}
+
