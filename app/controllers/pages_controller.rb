@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [:landing, :home]
 
   def home
     # @courses = Course.all
@@ -21,5 +21,8 @@ class PagesController < ApplicationController
     # @bookings = @q.result.includes(:occurence).includes(:user).page(params[:page])
     @bookings = Booking.where(user_id: @user.id)
     @sorted_bookings = @bookings.sort_by {|booking| booking.occurence.date }
+  end
+
+  def landing
   end
 end

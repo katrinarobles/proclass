@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   }
   authenticated :user do
     root 'pages#dashboard', as: :authenticated_root
-    get 'home', to: 'pages#home'
+    get 'landing', to: 'pages#landing'
   end
-  root to: 'pages#home'
+
+  root to: 'pages#landing'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'pages#dashboard'
+  get 'home', to: 'pages#home'
 
   resources :courses  do
     resources :occurences do

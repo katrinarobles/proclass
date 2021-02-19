@@ -4,15 +4,16 @@
     <i class="fas fa-feather-alt fa-2x"></i>
     <% end %>
   <% else %>
-      <%= link_to '/', class: "navbar-brand" do %>
-    <i class="fas fa-feather-alt fa-2x"></i>
-    <% end %>
+    <span> &nbsp; </span>
   <% end %>
 
-  <% unless current_page?(courses_path) || current_page?(home_path) %>
+  <% if user_signed_in? %>
+    <% unless current_page?(courses_path) || current_page?(home_path)%>
         <%= link_to courses_path, class: 'search-navy' do %>
           S  E  A  R  C  H   <i class="fas fa-search"></i>
         <% end %>
+    <% end %>
+  <% else %>
   <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
