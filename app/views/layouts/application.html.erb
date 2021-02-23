@@ -41,9 +41,11 @@
 
   </head>
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <%= yield %>
+    <div class="body-container">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+    </div>
   </body>
   <!-- <div class='footer-container'>
     This site is still under construction <i class="fas fa-wrench"></i>

@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     # @courses = Course.all
-    @occurences = Occurence.where.not(longitude: nil, latitude: nil).order(date: :asc).limit(12)
+    @occurences = Occurence.where.not(longitude: nil, latitude: nil).order(date: :asc).limit(30)
 
     @markers = @occurences.geocoded.map do |occurence|
       {
@@ -17,8 +17,6 @@ class PagesController < ApplicationController
 
   def dashboard
     @user = current_user
-    # @q = Booking.where(user_id: @user.id).ransack(params[:q])
-    # @bookings = @q.result.includes(:occurence).includes(:user).page(params[:page])
     @bookings = Booking.where(user_id: @user.id)
     @sorted_bookings = @bookings.sort_by {|booking| booking.occurence.date }
   end
