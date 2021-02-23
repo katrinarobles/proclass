@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
     # @courses = Course.all
     # list = Occurence.available_today
     @q = Occurence.ransack(params[:q])
-    @occurences = @q.result.includes(:course).where('date >= ?', Time.now).order(date: :asc).page(params[:page]).paginate(:per_page => 8, :page => params[:page])
+    @occurences = @q.result.includes(:course).where('date >= ?', Time.now).order(date: :asc).page(params[:page]).paginate(:per_page => 12, :page => params[:page])
   end
 
   def show
