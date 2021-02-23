@@ -27,4 +27,10 @@ class Occurence < ApplicationRecord
   def total_bookings_sum
     self.bookings.count + self.fake_bookings.count
   end
+
+  def self.available_today
+    Occurence.select do |occur|
+      occur.dateparse > Time.now
+    end
+  end
 end

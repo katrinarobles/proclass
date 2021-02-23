@@ -1,18 +1,20 @@
 <div class="header-container">
-    <h2>Search for your classes:</h2>
-    <p> </p>
-    <p> </p>
     <%= search_form_for @q, url: courses_path do |f| %>
-     <div class="form-container">
+    <div class="forms-container">
+      <div class="form-container">
+        <%= f.search_field :course_name_i_cont_all, placeholder: 'Search by Course', label: false, class: 'input-style'%>
+        <%= f.search_field :location_i_cont_all, placeholder: 'Location', label: false, class: 'input-style' %>
+        <%= f.search_field :course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all, placeholder: 'Teacher', label: false, class: 'input-style' %>
+      </div>
+      <div class="form-container">
+        <%= f.label :online_eq, 'online?'%>
+        <span class="online-dd"><%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %></span>
 
-      <%= f.search_field :location_or_course_name_or_course_user_first_name_or_course_user_last_name_or_course_user_full_name_or_course_user_username_i_cont_all, placeholder: 'Search by', label: false %>
-      <%= f.label :online_eq, 'online?', class: 'form-btn' %>
-      <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
-
-     <p class ="form-btn"> <%= f.search_field :date_gteq, placeholder: 'From', label: false, class: 'datepicker2' %></p>
-     <p class ="form-btn"> <%= f.search_field :date_lteq, placeholder: 'To', label: false, class: 'datepicker2' %></p>
+      <%= f.search_field :date_gteq, placeholder: 'From', label: false, class: 'datepicker2 input-style2' %>
+      <%= f.search_field :date_lteq, placeholder: 'To', label: false, class: 'datepicker2 input-style2' %>
+      </div>
+    </div>
       <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>
-     </div>
     <% end %>
 </div>
 
@@ -27,7 +29,6 @@
 
         <% if @occurences.exists? %>
             <% @occurences.each do |occurence| %>
-              <% if Time.parse(occurence.date) > Time.now %>
                 <tr>
                   <td><%= link_to occurence.course.name, course_occurence_path(occurence.course, occurence) %></td>
                   <td class='location-list'><%= link_to occurence.course.teacher, user_path(occurence.course.user.username) %></td>
@@ -39,7 +40,6 @@
 
                   </td>
                 </tr>
-              <% end %>
             <% end %>
         <% else %>
             <div class="empty-container">

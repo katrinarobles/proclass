@@ -17,24 +17,6 @@
 @import "components/index";
 @import "pages/index";
 
-body {
-    position: relative;
-  h1, h2, h3, h4, h5 {
-    font-family: "Poppins", "Helvetica", "sans-serif";
-  }
-
-}
-
-a {
-  text-decoration: none;
-  color: #707070;
-}
-
-a:hover {
-  text-decoration: none;
-    color: #B0B0B0;
-}
-
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -46,4 +28,21 @@ html {
 /* Optional: show position indicator in transparent */
 ::-webkit-scrollbar-thumb {
     background: transparent;
+}
+
+body {
+  position: relative;
+  h1, h2, h3, h4, h5 {
+    font-family: "Poppins", "Helvetica", "sans-serif";
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #707070;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #B0B0B0;
 }
