@@ -10,8 +10,8 @@
         <%= f.label :online_eq, 'online?'%>
         <span class="online-dd"><%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %></span>
 
-      <%= f.search_field :date_gteq, placeholder: 'From', label: false, class: 'datepicker2 input-style2' %>
-      <%= f.search_field :date_lteq, placeholder: 'To', label: false, class: 'datepicker2 input-style2' %>
+      <%= f.search_field :date_gteq, placeholder: 'From', label: false, class: 'datepicker2 input-style3' %>
+      <%= f.search_field :date_lteq, placeholder: 'To', label: false, class: 'datepicker2 input-style3' %>
       </div>
     </div>
       <%= link_to "Clear", request.path, class: "btn btn-clear" %> <%= f.submit class: 'btn btn-primary' %>

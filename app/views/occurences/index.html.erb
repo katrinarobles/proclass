@@ -3,17 +3,17 @@
         <strong>This page includes ALL of your events for <%= @course.name %> </strong>
         <br>including past events
         <p><%= search_form_for @q, url: course_occurences_path(@course) do |f| %>
-         <div class="form-container">
-          <%= f.label :location_or_course_name_i_cont_any, "Search by:", class: 'form-btn' %>
-          <%= f.search_field :location_or_course_name_i_cont_any %>
-          <%= f.label :online_eq, 'online?', class: 'form-btn' %>
-          <%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %>
-
-          <p class ="form-btn"> From: <%= f.search_field :date_gteq_any, class: 'datepicker3' %></p>
-          <p class ="form-btn"> Until: <%= f.search_field :date_lteq_any, class: 'datepicker3' %></p>
+      <div class="forms-container">
+        <div class="form-container">
+          <%= f.search_field :location_or_course_name_i_cont_any, placeholder: 'Search by Course', label: false, class: 'input-style'%>
+          <%= f.search_field :date_gteq_any, placeholder: 'From', label: false, class: 'datepicker3 input-style3' %>
+          <%= f.search_field :date_lteq_any, placeholder: 'Until', label: false, class: 'datepicker3 input-style3' %>
+          <%= f.label :online_eq, 'online?'%>
+          <span class="online-dd"><%= f.select :online_eq, [['Yes', true], ['No', false]], include_blank: 'All' %></span>
+        </div>
+      </div>
           <%= link_to "Clear", request.path, class: "btn btn-clear" %>
           <%= f.submit class: 'btn btn-primary' %>
-         </div>
         <% end %>
     </div>
 
@@ -21,10 +21,10 @@
               <tr>
                 <th> <%= sort_link(@q, :course_name) do %> Course Name <i class="fas fa-sort"></i> <% end %> </th>
                 <th> <%= sort_link(@q, :date) do %> Date <i class="fas fa-sort"></i> <% end %> </th>
-                <th> Location </th>
+                <th class='location-list'> Location </th>
                 <th>Details</th>
                 <th>Edit</th>
-                <th>Delete</th>
+                <th class='location-list'>Delete</th>
               </tr>
 
             <% if @occurences.exists? %>
@@ -32,13 +32,13 @@
                   <tr>
                     <td><%= link_to occurence.course.name, course_path(occurence.course) %></td>
                     <td><%= link_to occurence.dateparse.strftime("%^a, %e %^b %H:%M"), course_occurence_path(occurence.course, occurence) %></td>
-                    <td><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
+                    <td class='location-list'><small><%= occurence.location.first(30) %> || <strong><%= occurence.online? ? 'ONLINE' : "" %></strong></small></td>
                     <td style="text-align: center"><%= link_to course_occurence_path(occurence.course, occurence) do %><i class="fas fa-clipboard-list"></i> <% end%></td>
                     <td style="text-align: center">
-                            <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
+                      <%= link_to edit_course_occurence_path(occurence.course, occurence) do %><i class="far fa-edit"></i> <% end %>
                     </td>
-                    <td style="text-align: center">
-                            <%= link_to course_occurence_path(occurence.course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %>
+                    <td class='location-list' style="text-align: center">
+                      <%= link_to course_occurence_path(occurence.course, occurence), method: :delete, data: { confirm: "Are you sure?" } do %> <i class="far fa-trash-alt"></i> <% end %>
                     </td>
                   </tr>
                 <% end %>
