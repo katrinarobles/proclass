@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
 
   def update
     if @course.update(course_params)
-      redirect_to @course
+      redirect_back(fallback_location: @course, notice: 'Updated Course successfully')
     else
       render :edit
     end
