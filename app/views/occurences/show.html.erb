@@ -66,7 +66,7 @@
                 <th> Last Name</th>
                 <th> Email </th>
               </tr>
-              <% @occurence.users.each do |user| %>
+              <% @occurence.users.order(last_name: 'ASC').each do |user| %>
                 <tr>
                   <td> <%= user.first_name.capitalize %> </td>
                   <td> <%= user.last_name.capitalize %> </td>
@@ -74,7 +74,7 @@
                 </tr>
               <% end %>
               <% if @occurence.fake_bookings %>
-              <% @occurence.fake_bookings.each do |fake| %>
+              <% @occurence.fake_bookings.order(fake_last_name: 'ASC').each do |fake| %>
                 <tr>
                   <td> <%= fake.fake_first_name.capitalize %></td>
                   <td> <%= fake.fake_last_name.capitalize %> </td>
