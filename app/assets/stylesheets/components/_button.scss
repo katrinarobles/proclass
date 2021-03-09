@@ -15,6 +15,17 @@
   opacity: 1;
 }
 
+.btn-icon {
+  color: #4A4A4A;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  padding: 0 !important;
+}
+
+.btn-icon:hover {
+  opacity: 1;
+}
+
 .btn-delete {
   color: white;
   background: #8d1416;

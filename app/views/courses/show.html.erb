@@ -13,12 +13,17 @@
               <% if current_user == @course.user %>
                   You
                   <p> <%= link_to "Add events for #{@course.name}", new_course_occurence_path(@course.id), class: "btn btn-primary" %></p>
-                  <p> <%= link_to "Edit details of #{@course.name}", edit_course_path(@course), class: "btn btn-ghost" %></p>
+                  <button type="button" class="btn btn-ghost" data-toggle="modal" data-target="#editCourse">
+                    Edit <%= @course.name %>
+                  </button>
+
                   <p> <%= link_to "See Past Events", course_occurences_path(@course), class: "btn btn-ghost" %></p>
-              <%else %>
+              <% else %>
                   <%= link_to @course.teacher, user_path(@course.user.username) %></p>
               <% end %>
     </div>
+    <!-- Modal -->
+    <%= render partial: 'pages/info_update_modal', locals: {course: @course}  %>
 
     <div class="split-cards2 cards">
     <% if user_signed_in? %>

@@ -16,6 +16,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @course = Course.new
     @user = current_user
     @bookings = Booking.where(user_id: @user.id)
     @sorted_bookings = @bookings.sort_by {|booking| booking.occurence.date }
