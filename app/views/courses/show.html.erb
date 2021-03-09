@@ -40,7 +40,7 @@
                                               <% else %>
                                                 &nbsp;
                                               <% end %>
-                                          <br><i class="fas fa-users"></i> <%= occurence.users.count %>/<%= occurence.capacity %>
+                                          <br><i class="fas fa-users"></i> <%= occurence.total_bookings_sum %>/<%= occurence.capacity %>
                                       <div class="links">
                                           <p> <%= link_to "Details", course_occurence_path(occurence.course, occurence), class: "btn btn-ghost" %></p>
                                           <p>
