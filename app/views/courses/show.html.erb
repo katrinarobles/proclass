@@ -12,25 +12,30 @@
         <p> Teacher:
               <% if current_user == @course.user %>
                   You
-                  <p> <%= link_to "Add events for #{@course.name}", new_course_occurence_path(@course.id), class: "btn btn-primary" %></p>
+                  <center>
+                  <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editOccurences<%= @course.id %>">
+                    Add events for <%= @course.name %>
+                  </button></p>
                   <button type="button" class="btn btn-ghost" data-toggle="modal" data-target="#editCourse">
                     Edit <%= @course.name %>
                   </button>
 
-                  <p> <%= link_to "See Past Events", course_occurences_path(@course), class: "btn btn-ghost" %></p>
+                  <br><%= link_to "See Past Events", course_occurences_path(@course), class: "btn btn-ghost" %></p>
               <% else %>
                   <%= link_to @course.teacher, user_path(@course.user.username) %></p>
+                </center>
               <% end %>
     </div>
     <!-- Modal -->
     <%= render partial: 'pages/info_update_modal', locals: {course: @course}  %>
+    <%= render partial: 'edit_occurences_modal.html', locals: {course: @course }  %>
 
     <div class="split-cards2 cards">
     <% if user_signed_in? %>
           <% if current_user == @course.user %>
               <%= form_tag destroy_multiple_course_occurences_path(@course), method: :delete do %>
 
-              <h4> Events </h4> <%= submit_tag "Delete selected", :class => "btn btn-delete", data: { confirm: "Are you sure?" } %>
+              <h4> Events </h4> <%= submit_tag "Delete selected", class: "btn btn-delete", data: { confirm: "Are you sure?" } %>
 
                   <div class="event-main">
                       <% @course.occurences.order(date: :asc).each do |occurence| %>

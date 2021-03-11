@@ -10,7 +10,8 @@ class PagesController < ApplicationController
         lat: occurence.latitude,
         lng: occurence.longitude,
         id: occurence.id,
-        infoWindow: render_to_string(partial: "info_window", locals: { occurence: occurence })
+        infoWindow: render_to_string(partial: "info_window", locals: { occurence: occurence }),
+        image_url: helpers.asset_url('running-solid.svg')
       }
     end
   end

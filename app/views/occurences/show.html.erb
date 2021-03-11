@@ -30,9 +30,9 @@
     <center>
         <p><% if user_signed_in? %>
                 <% if current_user == @course.user %>
-                    <p>
-                      <%= link_to "Edit details of this class", edit_course_occurence_path(@occurence.course, @occurence), class: "btn btn-ghost" %>
-                    </p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editOccurences<%= @course.id %>">
+                      Edit details of this class
+                    </button>
                     <strong> Add a non IndieClasse student </strong>
 
                     <%= render "fake_bookings/form", course: @course, occurence: @occurence %>
@@ -54,6 +54,7 @@
     </center>
   </div>
 
+<%= render partial: 'courses/edit_occurences_modal.html', locals: {course: @course }  %>
 
   <div class="split-cards2 cards">
     <h2> Attendees </h2>
