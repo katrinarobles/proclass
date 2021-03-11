@@ -90,7 +90,6 @@ class OccurencesController < ApplicationController
     end
   end
 
-
   private
 
   def occurence_params

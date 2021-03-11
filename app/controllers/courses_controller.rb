@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @occurence = Occurence.new
   end
 
   def new

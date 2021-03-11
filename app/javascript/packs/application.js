@@ -25,6 +25,7 @@ import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { dynInput } from '../components/dyn_input';
 import { textified } from '../components/textify';
 import { initMapbox } from '../plugins/init_mapbox';
+import { openWeather } from '../plugins/open_weather';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -35,6 +36,10 @@ document.addEventListener('turbolinks:load', () => {
   datePicker();
   initUpdateNavbarOnScroll();
   initMapbox();
+  const report = document.querySelector(".report")
+  if(report) {
+    openWeather();
+  };
 
   const bounce = document.querySelector('.bounce');
   if(bounce) {
