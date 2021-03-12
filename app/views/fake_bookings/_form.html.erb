@@ -1,4 +1,4 @@
-  <%= simple_form_for([ @course, @occurence, @fake_booking ], :html => {:class => 'form-inline' }) do |f| %>
+  <%= simple_form_for([ @course, @occurence, @fake_booking ], remote: true, :html => {:class => 'form-inline' }) do |f| %>
     <%= f.input :fake_first_name, placeholder: 'First Name', label:false %>
     <%= f.input :fake_last_name, placeholder: 'Last Name', label:false %>
     <%= f.input :fake_email, placeholder: 'Contact', label:false %>

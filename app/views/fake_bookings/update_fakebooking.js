@@ -1,0 +1,1 @@
+document.querySelector(`.fake_booking_tr[data-fakebooking='<%= fake_booking.id %>']`).innerHTML = `fake_bookings/tr_fakebooking', locals: {fake_booking: fake_booking, occurence: @occurence, page: 'occurences/show'} %>`
