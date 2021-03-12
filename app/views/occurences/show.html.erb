@@ -33,7 +33,7 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editOccurences<%= @course.id %>">
                       Edit details of this class
                     </button>
-                    <strong> Add a non IndieClasse student </strong>
+                    <p><strong> Add a non IndieClasse student </strong></p>
 
                     <%= render "fake_bookings/form", course: @course, occurence: @occurence %>
 
@@ -74,12 +74,17 @@
                   <td> <%= user.email %> </td>
                 </tr>
               <% end %>
+              <tr>
+                <th></th>
+                <th style="color: grey; font-size: 0.8em; text-align: center;">People You Booked</th>
+                <th></th>
+              </tr>
               <% if @occurence.fake_bookings %>
-              <% @occurence.fake_bookings.order(fake_last_name: 'ASC').each do |fake| %>
-                <tr>
-                  <td> <%= fake.fake_first_name.capitalize %></td>
-                  <td> <%= fake.fake_last_name.capitalize %> </td>
-                  <td> <%= fake.fake_email if fake.fake_email %> </td>
+              <% @occurence.fake_bookings.order(fake_last_name: 'ASC').each do |fake_booking| %>
+                <tr data-fakebooking="<% fake_booking.id %>" class="fake_booking_tr">
+
+                  <%= render partial: 'fake_bookings/tr_fakebooking.html', locals: {fake_booking: fake_booking, occurence: @occurence, page: 'occurences/show' }  %>
+
                 </tr>
               <% end %>
               <% end %>
