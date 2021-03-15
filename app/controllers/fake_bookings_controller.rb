@@ -14,10 +14,10 @@ class FakeBookingsController < ApplicationController
 
   def destroy
     @fake_booking = FakeBooking.find(params[:id])
-    @fake_booking.destroy
+    @fake_booking.destroy!
     if params[:page] == 'occurences/show'
       respond_to do |format|
-        format.js { render template: 'fake_bookings/update_fakebooking' }
+        format.js { render template: 'update_fakebooking' }
       end
     else
       redirect_to course_occurence_path(@fake_booking.occurence.course, @fake_booking.occurence), notice: "Deleted successfully" if @fake_booking.destroy
