@@ -1,3 +1,12 @@
 .weather-icon {
   width: 35px;
 }
+
+.comment-icon {
+  width: 20px;
+}
+
+.comment-icon:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

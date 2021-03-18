@@ -11,7 +11,6 @@
       <p>Phone: <%= current_user.phone %></p>
       <p>Email: <%= current_user.email %></p>
       <p><%= link_to 'Update Your Account', edit_user_registration_path %></p>
-
       <% if current_user.teacher? %>
         <p>Title: <strong>Teacher</strong></p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCourse">

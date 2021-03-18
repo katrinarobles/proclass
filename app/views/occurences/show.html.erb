@@ -51,6 +51,8 @@
                 <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
             <% end %>
         <p> <%= link_to "See more times", course_path(@course), class: "btn btn-ghost" %> </p>
+      <%= link_to "Contact Teacher", course_conversations_new_path(@course), class: 'btn btn-sign-up' unless current_user == @course.user %>
+
     </center>
   </div>
 

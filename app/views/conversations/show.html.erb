@@ -1,0 +1,14 @@
+<% @conversation.receipts_for(current_user).each do |receipt| %>
+  <div style="margin: 2%">
+    <%= cl_image_tag receipt.message.sender.message_photo, class: "avatar" %>
+    <%= receipt.message.body %><%= link_to conversation_message_path(@conversation, receipt),  method: :delete do %>
+        <i class="fas fa-times fa-xs"></i>
+      <% end %>
+  </div>
+<% end %>
+<%= form_tag conversation_messages_path(@conversation), method: :post do %>
+  <div>
+    <%= text_area_tag :body %>
+  </div>
+  <%= submit_tag %>
+<% end %>

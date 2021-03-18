@@ -48,6 +48,13 @@
   }
 }
 
+.conversations-container {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  margin: 0 auto;
+}
+
 .home-container {
     width: 80%;
     height: 70vh;
