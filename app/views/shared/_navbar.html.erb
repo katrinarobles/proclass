@@ -36,7 +36,7 @@
                 <!-- Button trigger modal -->
                 <%= link_to mark_path(conversation.id), method: :post do  %>
                   <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModalLong<%= conversation.id %>">
-                  <%= conversation.subject %>
+                    <%= conversation.subject %>
                   </button>
                 <% end %>
               <% end %>
@@ -91,7 +91,7 @@
                         </button>
                       </div>
                     </div>
-                    <div class="modal-body" id="conversations-nav<%= conversation.id %>">
+                    <div class="messages modal-body" id="conversations-nav<%= conversation.id %>" data-conversation-id="<%= conversation.id %>">
                         <%= render partial: 'conversations/conversations_modal', locals: {conversation: conversation} %>
                     </div>
                   </div>

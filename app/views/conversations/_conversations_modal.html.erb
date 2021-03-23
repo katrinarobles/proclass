@@ -1,5 +1,5 @@
 <% conversation.receipts_for(current_user).each do |receipt| %>
-  <div style="margin: 2%"  data-messages-div="<% receipt.id %>" class="message-list">
+  <div style="margin: 2%" data-messages-div="<% receipt.id %>" class="message-list">
     <%= cl_image_tag receipt.message.sender.message_photo, class: "avatar" %>
     <span id="message-<%= receipt.id %>"><%= receipt.message.body %></span>
     <% if receipt.message.sender == current_user %>
@@ -17,5 +17,5 @@
   <div>
     <%= text_area_tag :body %>
   </div>
-  <%= submit_tag "Submit" %>
+    <%= submit_tag "Submit" %>
 <% end %>
