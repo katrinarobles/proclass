@@ -3,16 +3,11 @@ class MessagesController < ApplicationController
 
   def create
     receipt = current_user.reply_to_conversation(@conversation, params[:body])
-    # redirect_to conversation_path(receipt.conversation)
     receipt.save
-    if params[:page] == "show"
-      redirect_to conversation_path(receipt.conversation)
-    else
-      respond_to do |format|
-        format.js { render partial: 'messages/update_message_card', locals: { receipt: receipt, conversation: receipt.conversation, anchor: "message-#{(receipt.id - 1)}",
-            message: render_to_string(partial: 'conversations/conversations_modal', locals: {receipt: receipt, conversation: receipt.conversation}) } }
-      end
-    end
+    ChatroomChannel.broadcast_to(
+    @conversation,
+       render_to_string(partial: 'conversations/conversations_modal', locals: {receipt: receipt, conversation: receipt.conversation, anchor: "message-#{(receipt.id - 1)}"})
+    )
   end
 
   def destroy
