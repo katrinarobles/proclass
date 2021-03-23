@@ -34,9 +34,11 @@
 
               <% current_user.mailbox.conversations.first(5).each do |conversation| %>
                 <!-- Button trigger modal -->
+                <%= link_to mark_path(conversation.id), method: :post do  %>
                   <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModalLong<%= conversation.id %>">
-                    <%= link_to conversation.subject, mark_path(conversation.id), method: :post  %>
+                  <%= conversation.subject %>
                   </button>
+                <% end %>
               <% end %>
             <p> <%= link_to "See all messages", conversations_path, class: "dropdown-item" %></p>
           </div>
