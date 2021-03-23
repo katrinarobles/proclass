@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'conversations/:id/mark', to: 'conversations#mark', as: :mark
+
 
   get '/:username', to: 'users#show', as: :user
 

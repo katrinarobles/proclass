@@ -51,8 +51,11 @@
 .conversations-container {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 50%;
   margin: 0 auto;
+  .to-do-part {
+    align-self: center;
+  }
 }
 
 .home-container {

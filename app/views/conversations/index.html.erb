@@ -1,9 +1,13 @@
 <div class="m-4">
+Count : <%= current_user.mailbox.inbox(unread: true).count %>
 <% @conversations.each do |conversation| %>
+  <% recipient = conversation.participants.find { |p| p != current_user } %>
+<!--   Subject: <%#= conversation.subject %>
+  <p>From: <%#= recipient.name %></p> -->
   <div class="conversations-container">
     <div class="course-part">
       <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalLong<%= conversation.id %>">
-        <%= conversation.subject %>
+        <%= cl_image_tag recipient.message_photo, class: 'avatar' %> <%= conversation.subject %>
       </button>
 
         <div class="modal fade" id="exampleModalLong<%= conversation.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

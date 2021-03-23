@@ -1,10 +1,15 @@
 <% conversation.receipts_for(current_user).each do |receipt| %>
   <div style="margin: 2%"  data-messages-div="<% receipt.id %>" class="message-list">
     <%= cl_image_tag receipt.message.sender.message_photo, class: "avatar" %>
-    <%= receipt.message.body %> <%= link_to conversation_message_path(conversation, receipt),
-      remote: true, method: :delete do %>
-        <i class="fas fa-times fa-xs"></i>
-      <% end %>
+    <span id="message-<%= receipt.id %>"><%= receipt.message.body %></span>
+    <% if receipt.message.sender == current_user %>
+      <%= link_to conversation_message_path(conversation, receipt),
+        remote: true, method: :delete do %>
+          <i class="fas fa-times fa-xs"></i>
+        <% end %>
+    <% end %>
+      <%= receipt.message.is_read?(current_user) %>
+      <%= receipt.id %>
   </div>
   <% end%>
 
@@ -12,5 +17,5 @@
   <div>
     <%= text_area_tag :body %>
   </div>
-  <%= submit_tag %>
+  <%= submit_tag "Submit" %>
 <% end %>

@@ -1,5 +1,5 @@
 new conversation
-
+<p>
 <%= form_tag course_conversations_create_path(@course), method: :post do %>
   <div>
     To: <%= @to_recipient.username %>
@@ -15,3 +15,4 @@ new conversation
   </div>
 <%= submit_tag %>
 <% end %>
+</p>

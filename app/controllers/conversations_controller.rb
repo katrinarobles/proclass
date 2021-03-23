@@ -8,7 +8,9 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = current_user.mailbox.conversations.find(params[:id])
-
+    # @conversation.mark_as_read(current_user)
+    @recipient = @conversation.participants.find { |p| p != current_user }
+    console
   end
 
   def new
@@ -32,5 +34,10 @@ class ConversationsController < ApplicationController
   def untrash
     conversation.untrash(current_user)
     redirect_to :conversations
+  end
+
+  def mark
+    conversation = current_user.mailbox.conversations.find(params[:id])
+    conversation.mark_as_read(current_user)
   end
 end

@@ -1,4 +1,14 @@
-<div class="header-container">
-  <h2> Add details to create a course</h2>
-  <%= render "form", course: @course %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 m-2">
+      <%= simple_form_for [ @course ] do |f| %>
+        <%= f.input :photo, as: :file %>
+        <%= f.input :name %>
+        <%= f.input :description,
+                    hint: "write all the details needed for your class ex: if price is 0, write the class is Free or Donation in this box"%>
+        <%= f.input :duration, label: "Duration in minutes" %>
+        <%= f.submit "Submit Course", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 </div>
