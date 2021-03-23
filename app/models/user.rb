@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   after_create :after_confirmation
+  acts_as_messageable
 
   has_one_attached :photo
   has_many :courses, dependent: :destroy
@@ -27,6 +28,20 @@ class User < ApplicationRecord
   def after_confirmation
     UserMailer.with(user: self).welcome.deliver_later
   end
+
+  def name
+    self.username
+  end
+
+  def message_photo
+    self.photo.key
+  end
+
+  def mailboxer_email(object)
+    # self.email
+    nil
+  end
+
   private
 
 end

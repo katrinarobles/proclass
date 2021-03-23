@@ -27,6 +27,8 @@ gem 'turbolinks_render'
 gem 'money-rails'
 gem 'stripe'
 
+gem 'mailboxer'
+
 gem 'letter_opener', group: :development
 
 

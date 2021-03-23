@@ -48,6 +48,16 @@
   }
 }
 
+.conversations-container {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+  .to-do-part {
+    align-self: center;
+  }
+}
+
 .home-container {
     width: 80%;
     height: 70vh;

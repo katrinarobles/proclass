@@ -11,12 +11,15 @@
       <p>Phone: <%= current_user.phone %></p>
       <p>Email: <%= current_user.email %></p>
       <p><%= link_to 'Update Your Account', edit_user_registration_path %></p>
-
       <% if current_user.teacher? %>
         <p>Title: <strong>Teacher</strong></p>
+        <% if current_user.courses.exists? %>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCourse">
           Create a Course
         </button>
+        <% else %>
+          <%= link_to "Create a Course", new_course_path, class: "btn btn-primary" %>
+        <% end %>
   </div>
 
   <div class="registered-class cards">
@@ -28,7 +31,7 @@
             <p><%= link_to course.name, course_path(course), class: "btn btn-ghost" %></p>
           </div>
           <div class="to-do-part">
-            <%= link_to new_course_occurence_path(course.id) do %> <i aria-hidden="true" class="far fa-calendar-plus" title="add event"></i> <% end %>
+           <%= link_to new_course_occurence_path(course.id) do %> <i aria-hidden="true" class="far fa-calendar-plus" title="add event"></i> <% end %>
             || <%= link_to course_occurences_path(course) do %> <i class="far fa-folder-open" title="see old records"></i> <% end %>
 
 
@@ -58,6 +61,7 @@
 
           </div>
         </div>
+        <!-- Modal for Create Course -->
         <%= render partial: 'pages/info_modal', locals: {course: @course}  %>
         <% end %>
       <% else %>

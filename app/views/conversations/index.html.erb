@@ -1,0 +1,39 @@
+<div class="m-4">
+Count : <%= current_user.mailbox.inbox(unread: true).count %>
+<% @conversations.each do |conversation| %>
+  <% recipient = conversation.participants.find { |p| p != current_user } %>
+<!--   Subject: <%#= conversation.subject %>
+  <p>From: <%#= recipient.name %></p> -->
+  <div class="conversations-container">
+    <div class="course-part">
+      <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalLong<%= conversation.id %>">
+        <%= cl_image_tag recipient.message_photo, class: 'avatar' %> <%= conversation.subject %>
+      </button>
+
+        <div class="modal fade" id="exampleModalLong<%= conversation.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"> <%= conversation.subject %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="conversations-nav">
+                  <%= render partial: 'conversations/conversations_modal', locals: {conversation: conversation} %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="to-do-part">
+      <%= link_to conversation_path(conversation),
+                method: :delete,
+                data: {confirm: 'Are you sure?'} do %>
+                <i class="fas fa-trash-alt"></i>
+                <% end %>
+    </div>
+  </div>
+
+<% end %>
+</div>

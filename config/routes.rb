@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   authenticated :user do
     root 'pages#dashboard', as: :authenticated_root
     get 'landing', to: 'pages#landing'
+    resources :conversations, only: [:index, :show, :destroy ] do
+        resources :messages, only: [:create, :destroy]
+    end
   end
 
   root to: 'pages#landing'
@@ -14,15 +17,20 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home'
 
   resources :courses  do
+    get 'conversations/new', to: "conversations#new"
+    post 'conversations/create', to: 'conversations#create'
     resources :occurences do
       collection do
         delete 'destroy_multiple'
       end
       resources :fake_bookings, only: [:create, :destroy]
-      resources :bookings, only: [ :create, :destroy ] do
-      end
+      resources :bookings, only: [ :create, :destroy ]
     end
   end
 
+  post 'conversations/:id/mark', to: 'conversations#mark', as: :mark
+
+
   get '/:username', to: 'users#show', as: :user
+
 end

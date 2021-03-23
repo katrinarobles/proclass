@@ -1,0 +1,18 @@
+new conversation
+<p>
+<%= form_tag course_conversations_create_path(@course), method: :post do %>
+  <div>
+    To: <%= @to_recipient.username %>
+  </div>
+
+  <div>
+    <%= text_field_tag :subject, nil, placeholder: "Subject" %>
+  </div>
+
+  <div>
+    <%= text_area_tag :body, nil, placeholder: "Message" %>
+    <%= @course.name %>
+  </div>
+<%= submit_tag %>
+<% end %>
+</p>
