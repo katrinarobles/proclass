@@ -34,9 +34,17 @@
 
               <% current_user.mailbox.conversations.first(5).each do |conversation| %>
                 <!-- Button trigger modal -->
+                <% recipient = conversation.participants.find { |p| p != current_user } %>
                 <%= link_to mark_path(conversation.id), method: :post do  %>
-                  <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModalLong<%= conversation.id %>">
-                    <%= conversation.subject %>
+                  <button type="button" class="dropdown-item"data-toggle="modal" style="display: flex; justify-content: space-between" data-target="#exampleModalLong<%= conversation.id %>">
+                    <% if conversation.is_unread?(current_user) %>
+                      <strong style="color: #167ffb;"><%= conversation.subject %></strong>
+                      <!-- <p style="color: blue;">○</p> -->
+                      <p><%= cl_image_tag recipient.message_photo, class: 'avatar-xxs' %></p>
+                    <% else %>
+                      <%= conversation.subject %>
+                      <p><%= cl_image_tag recipient.message_photo, class: 'avatar-xxs' %></p>
+                    <% end %>
                   </button>
                 <% end %>
               <% end %>
