@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
 const openWeather = () => {
-  const apiKey = "<%= ENV['OPENWEATHER_API_KEY'] %>";
-  const result = document.querySelector(".report");
+  const result = document.querySelector(".report")
+  const apiKey = result.dataset.openweatherApiKey;;
 
   const updateCard = (data) => {
     const temp = Math.round(data.main.temp) - 273;
