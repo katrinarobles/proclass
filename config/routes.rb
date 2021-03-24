@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root 'pages#dashboard', as: :authenticated_root
     get 'landing', to: 'pages#landing'
-    resources :conversations, only: [:index, :show, :destroy ] do
+    resources :conversations, only: [:index, :destroy ] do
         resources :messages, only: [:create, :destroy]
     end
   end

@@ -5,12 +5,6 @@ class ConversationsController < ApplicationController
     @conversations = current_user.mailbox.conversations
   end
 
-  def show
-    @conversation = current_user.mailbox.conversations.find(params[:id])
-    # @conversation.mark_as_read(current_user)
-    @recipient = @conversation.participants.find { |p| p != current_user }
-  end
-
   def new
     @course = Course.find(params[:course_id])
     @to_recipient = User.find(@course.user.id) # User.all - [current_user]
