@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 const openWeather = () => {
-  const apiKey = 'ba5648433b0a1ba944714662688e9ad2';
+  const apiKey = "<%= ENV['OPENWEATHER_API_KEY'] %>";
   const result = document.querySelector(".report");
 
   const updateCard = (data) => {
