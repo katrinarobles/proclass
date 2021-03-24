@@ -3,14 +3,12 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = current_user.mailbox.conversations
-    console
   end
 
   def show
     @conversation = current_user.mailbox.conversations.find(params[:id])
     # @conversation.mark_as_read(current_user)
     @recipient = @conversation.participants.find { |p| p != current_user }
-    console
   end
 
   def new
@@ -22,7 +20,7 @@ class ConversationsController < ApplicationController
     course = Course.find(params[:course_id])
     recipient = User.find(course.user.id)
     receipt = current_user.send_message(recipient, params[:body], params[:subject])
-    redirect_to conversations_path(receipt.conversation)
+    redirect_back(fallback_location: dashboard_path)
   end
 
   def destroy
